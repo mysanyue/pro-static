@@ -6,11 +6,11 @@ $(function() {
   $('body').on('mouseout.grid', target, cursorDefault)
   $('body').on('mouseup.grid', target, function() {
     $('body').on('mousemove.grid', target, openhand)
-    openhand.call($(this))
+    openhand.call(this)
   })
   $('body').on('mousedown.grid', target, function(event) {
     $('body').off('mousemove.grid')
-    closedhand.call($(this), event)
+    closedhand.call(this, event)
   })
 
   function openhand() {
