@@ -1,0 +1,271 @@
+@charset "utf-8";
+@import './var.scss';
+
+/********************************* 样式初始化 ***************************************/
+body {
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum';
+  color: rgba(0, 0, 0, 0.65);
+  background-color: $bgColor;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body,
+ul,
+li,
+img {
+  margin: 0;
+  padding: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h4,
+h6 {
+  margin: 15px 0;
+}
+
+code,
+pre {
+  font-family: Consolas, 'Courier New', monospace;
+  -webkit-font-smoothing: initial;
+  -moz-osx-font-smoothing: initial;
+}
+
+code {
+  border-radius: 4px;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+figcaption {
+  margin: 10px 0;
+}
+
+/********************************* 公共样式 ***************************************/
+/* 清除浮动 */
+.clearfloat:before,
+.clearfloat:after {
+  display: table;
+  content: '';
+  line-height: 0px;
+}
+
+.clearfloat:after {
+  clear: both;
+}
+
+.clearfloat {
+  *zoom: 1;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-corner {
+  background: 0 0;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0 none #fff;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical {
+  background: linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 1px,
+    transparent 2px,
+    rgba(210, 214, 244, 0.7) 3px,
+    rgba(210, 214, 244, 0.7) 9px,
+    transparent 10px,
+    transparent 12px
+  ) !important;
+  border: 0 none #fff;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 1px,
+      transparent 2px,
+      #d2d6e0 3px,
+      #d2d6e0 9px,
+      transparent 10px,
+      transparent 12px
+    ) !important;
+  }
+}
+/* // 水平方向 */
+::-webkit-scrollbar-thumb:horizontal {
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 2px,
+    rgba(210, 214, 244, 0.7) 3px,
+    rgba(210, 214, 244, 0.7) 9px,
+    transparent 10px,
+    transparent 12px
+  ) !important;
+  border: 0 none #fff;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+  &:hover {
+    background: linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 2px,
+      #d2d6e0 3px,
+      #d2d6e0 9px,
+      transparent 10px,
+      transparent 12px
+    ) !important;
+  }
+}
+
+/********************************* elemnet ui 样式覆盖 ***************************************/
+.el-menu--vertical {
+  .el-menu-item {
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background: #f4f4f4 !important;
+}
+
+.el-loading-mask {
+  z-index: 180 !important;
+}
+
+.el-table--small {
+  font-size: 14px !important;
+}
+
+// 自定义表格跟多筛选样式调整
+.tx-table-peannel {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+  .oper-pannel {
+    ul {
+      max-height: 250px;
+      overflow-y: scroll;
+    }
+    ul,
+    li {
+      margin: 4px 0;
+      padding: 0;
+      list-style: none;
+    }
+    ul {
+      margin-top: 6px;
+    }
+    .el-popover__title {
+      font-size: 14px;
+    }
+    .el-checkbox__label {
+      font-size: 12px;
+    }
+    .btn-wrap {
+      text-align: center;
+      margin-top: 20px;
+    }
+  }
+}
+
+/********************************* 公共样式 *******************************************/
+/* 溢出显示省略号 */
+.text-ss {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap !important;
+  outline: 0 !important;
+}
+
+/******************************** css3 animete *****************************************/
+/* fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+.fadeInRight {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: fadeInRight;
+}
+
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
