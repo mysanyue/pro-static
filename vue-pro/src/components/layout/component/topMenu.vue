@@ -2,11 +2,11 @@
   <ul class="tx-right">
     <li :class="$style.infoItem">
       <el-badge :value="12" class="item">
-        <i class="el-icon-bell"></i>
+        <i class="el-icon-bell" />
       </el-badge>
     </li>
     <li :class="$style.infoItem">
-      <i class="el-icon-setting"></i>
+      <i class="el-icon-setting" />
     </li>
     <li :class="[$style.infoItem, $style.noPadding]">
       <el-dropdown placement="bottom" trigger="click" @command="dropdownHandler">

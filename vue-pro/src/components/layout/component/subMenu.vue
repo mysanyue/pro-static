@@ -1,7 +1,7 @@
 <template v-for="item in subMenuList">
   <el-submenu :index="item.link" :key="item.link">
     <template slot="title">
-      <i class="el-icon-location"></i>
+      <i class="el-icon-location" />
       <span slot="title">{{ item.name }}</span>
     </template>
     <el-menu-item v-for="subItem in item.list" :key="subItem.link" :index="subItem.link">

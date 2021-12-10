@@ -4,7 +4,7 @@
       <el-tab-pane v-for="(item, index) in listData" :closable="index !== 0" :key="item.name" :label="item.title" :name="item.name" />
     </el-tabs>
     <el-dropdown :class="$style.operation" class="tx-c gesture">
-      <span class="el-dropdown-link"> 操作<i class="el-icon-arrow-down el-icon--right"></i> </span>
+      <span class="el-dropdown-link"> 操作<i class="el-icon-arrow-down el-icon--right" /> </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item @click.native="operation()">关闭其他</el-dropdown-item>
         <el-dropdown-item @click.native="operation('all')">关闭全部</el-dropdown-item>

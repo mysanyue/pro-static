@@ -6,14 +6,14 @@
     <nav :class="$style.navbar">
       <div :class="$style.showMenu" class="tx-left">
         <span :class="$style.menuChange" @click="changeMenu">
-          <i v-if="isChangeMenu" class="iconfont icon-caidandakai"></i>
-          <i v-else class="iconfont icon-caidanzhedie"></i>
+          <i v-if="isChangeMenu" class="iconfont icon-caidandakai" />
+          <i v-else class="iconfont icon-caidanzhedie" />
         </span>
       </div>
       <div :class="{ [$style.activeSearch]: isSearch, [$style.search]: true }">
         <span :class="$style.searchIcon">
-          <i v-if="isSearch" class="el-icon-bottom" :class="$style.searchGoto"></i>
-          <i v-else class="el-icon-search" :class="$style.searchGo"></i>
+          <i v-if="isSearch" class="el-icon-bottom" :class="$style.searchGoto" />
+          <i v-else class="el-icon-search" :class="$style.searchGo" />
         </span>
         <el-input v-model="search" type="text" placeholder="搜索：组件、文档、工具" @focus="inputChange" @blur="inputChange" />
       </div>
