@@ -1,9 +1,14 @@
 <template>
-  <div class="">
-    <el-tabs v-model="activeMenu" @tab-remove="removeTab" @tab-click="tabClick" :class="$style.navTabs">
+  <div>
+    <el-tabs
+      v-model="activeMenu"
+      @tab-remove="removeTab"
+      @tab-click="tabClick"
+      :class="{ [$style.navTabs]: true, [$style.collapse]: isCollapse }"
+    >
       <el-tab-pane v-for="(item, index) in listData" :closable="index !== 0" :key="item.name" :label="item.title" :name="item.name" />
     </el-tabs>
-    <el-dropdown :class="$style.operation" class="tx-c gesture">
+    <el-dropdown :class="$style.operation">
       <span class="el-dropdown-link"> 操作<i class="el-icon-arrow-down el-icon--right" /> </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item @click.native="operation()">关闭其他</el-dropdown-item>
@@ -15,6 +20,9 @@
 
 <script>
 export default {
+  props: {
+    isCollapse: { type: Boolean, required: true },
+  },
   computed: {
     listData() {
       return this.$store.getters.getMenuList
@@ -73,6 +81,9 @@ export default {
     opacity: 1;
   }
 }
+.collapse {
+  left: 60px;
+}
 .operation {
   position: fixed;
   width: 80px;
@@ -84,6 +95,8 @@ export default {
   line-height: 38px;
   border-bottom: 2px solid #e4e7ed;
   border-left: 1px solid #e4e7ed;
+  text-align: center;
+  cursor: pointer;
   i {
     margin-left: 4px;
   }

@@ -3,7 +3,7 @@
     <layout-header :isCollapse.sync="isCollapse" />
     <layout-aside :class="$style.layoutAside" :isCollapse="isCollapse" />
     <section :class="$style.layoutBody">
-      <nav-bar :class="$style.layoutNavbar" />
+      <nav-bar :isCollapse="isCollapse" :class="$style.layoutNavbar" />
       <section :class="$style.layoutContent">
         <transition name="fade-transform" mode="out-in">
           <keep-alive :include="keepAlive">

@@ -1,5 +1,5 @@
 <template>
-  <ul class="tx-right">
+  <ul>
     <li :class="$style.infoItem">
       <el-badge :value="12" class="item">
         <i class="el-icon-bell" />
@@ -10,7 +10,8 @@
     </li>
     <li :class="[$style.infoItem, $style.noPadding]">
       <el-dropdown placement="bottom" trigger="click" @command="dropdownHandler">
-        <span :class="$style.username">{{ userName }}</span>
+        <!-- <span :class="$style.username">{{ userName }}</span> -->
+        <span :class="$style.username">userName</span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="userinfo">用户信息</el-dropdown-item>
           <el-dropdown-item divided command="unLogin">退出登录</el-dropdown-item>
@@ -49,6 +50,7 @@ export default {
 
 <style lang="scss" module>
 @import '@/assets/scss/mixins.scss';
+
 .info-item {
   display: inline-block;
   line-height: 32px;

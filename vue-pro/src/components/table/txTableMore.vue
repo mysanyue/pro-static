@@ -1,5 +1,5 @@
 <template>
-  <div class="tx-table-moer clearfix">
+  <div class="tx-table-more clearfix">
     <span>{{ label }}</span>
     <el-popover
       v-model="isPannel"
@@ -44,7 +44,7 @@ export default {
     }
   },
   created() {
-    this.list = cloneDeep(this.columns.filter(e => e.more === true))
+    this.list = cloneDeep(this.columns.filter((e) => e.more === true))
     this.itemChange()
   },
   methods: {
@@ -54,15 +54,15 @@ export default {
     allChange(val) {
       this.checkAll = val
       this.isIndeterminate = false
-      this.list.forEach(e => (e.show = val))
+      this.list.forEach((e) => (e.show = val))
     },
     /**
      * @description 单项处理
      */
     itemChange() {
-      this.isIndeterminate = this.list.some(e => e.show === true)
+      this.isIndeterminate = this.list.some((e) => e.show === true)
       !this.isIndeterminate && (this.checkAll = false)
-      if (this.list.every(e => e.show === true)) {
+      if (this.list.every((e) => e.show === true)) {
         this.checkAll = true
         this.isIndeterminate = false
       }
@@ -71,8 +71,8 @@ export default {
      * @description 确定
      */
     confirm() {
-      this.list.forEach(e => {
-        const item = this.columns.find(se => se.attr.label === e.attr.label)
+      this.list.forEach((e) => {
+        const item = this.columns.find((se) => se.attr.label === e.attr.label)
         item.show = e.show
       })
 

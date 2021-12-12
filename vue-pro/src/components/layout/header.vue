@@ -1,5 +1,5 @@
 <template>
-  <header class="tx-c" :class="{ [$style.layoutHeader]: true, [$style.headerCollapse]: isChangeMenu }">
+  <header :class="{ [$style.layoutHeader]: true, [$style.headerCollapse]: isChangeMenu }">
     <section :class="$style.logo">
       <img src="@/assets/logo.png" alt="Logo" />
     </section>
@@ -70,6 +70,7 @@ export default {
     height: 100%;
     width: 200px;
     @include transition;
+    text-align: center;
     img {
       width: 50px;
     }
@@ -103,6 +104,7 @@ export default {
       flex: 1;
       position: relative;
       overflow: hidden;
+      text-align: center;
       .search-icon {
         position: absolute;
         left: 0;
