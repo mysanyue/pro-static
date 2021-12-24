@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>华丽的tabs</title>
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .trigger-menu {
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 0;
+        /*消除li inline-block 为行内元素后的默认间距*/
+        list-style: none;
+      }
+
+      .trigger-menu li {
+        position: relative;
+        /*关键点： 为每个li设置绝对定位*/
+        display: inline-block;
+        /*使li为块级元素，可以横向排列*/
+        padding: 8px 0;
+        border-bottom: 2px solid transparent;
+      }
+
+      .trigger-menu li:after {
+        /*hover状态下时的底部横线*/
+        content: '';
+        position: absolute;
+        /*关键点： 该元素行对定位于 li*/
+        left: 50%;
+        bottom: -2px;
+        width: 100%;
+        opacity: 0;
+        border-bottom: 2px solid #646464;
+        transform: translate(-50%) scaleX(0);
+        transition: 0.2s ease-in-out;
+      }
+
+      .trigger-menu li:hover::after {
+        opacity: 1;
+        transform: translate(-50%) scaleX(1);
+      }
+
+      .trigger-menu a {
+        padding: 13px 20px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #969696;
+        line-height: 25px;
+        text-decoration: none;
+      }
+
+      .trigger-menu a:hover {
+        color: #646464;
+      }
+
+      /*点击后添加 .active 样式*/
+      .trigger-menu li.active {
+        color: #646464;
+        border-bottom: 2px solid #646464;
+      }
+
+      .trigger-menu li.active a {
+        color: #646464;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ul class="trigger-menu">
+      <li><a href="">文章</a></li>
+      <li><a href="">动态</a></li>
+      <li><a href="">最新评论</a></li>
+      <li class="active"><a href="">热门</a></li>
+    </ul>
+  </body>
+</html>

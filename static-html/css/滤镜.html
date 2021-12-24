@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>滤镜</title>
+    <style>
+      html {
+        width: 100%;
+        background: #2f97c1;
+        background: linear-gradient(to bottom right, #fff, #fff);
+      }
+
+      body {
+        width: 90%;
+        margin: auto;
+        text-align: center;
+      }
+
+      img {
+        max-width: 100%;
+        height: 120px;
+      }
+
+      .container {
+        display: inline-block;
+        padding: 20px 10px;
+      }
+
+      h1,
+      p,
+      .hidden {
+        font-family: sans-serif;
+        text-align: center;
+        color: #333;
+        letter-spacing: 0.1em;
+        font-smoothing: antialiased;
+      }
+
+      h1 {
+        font-size: 4em;
+      }
+
+      #grayscale {
+        -webkit-filter: grayscale(1);
+        filter: grayscale(1);
+      }
+
+      #invert {
+        -webkit-filter: invert(0.9);
+        filter: invert(0.9);
+      }
+
+      #brightness {
+        -webkit-filter: brightness(0.5);
+        filter: brightness(0.5);
+      }
+
+      #saturation {
+        -webkit-filter: saturate(6);
+        filter: saturate(6);
+      }
+
+      #sepia {
+        -webkit-filter: sepia(1);
+        filter: sepia(1);
+      }
+
+      #blur {
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+      }
+
+      #contrast {
+        -webkit-filter: contrast(200%);
+        filter: contrast(200%);
+      }
+
+      #hue-rotate {
+        -webkit-filter: hue-rotate(45deg);
+        filter: hue-rotate(45deg);
+      }
+
+      #drop-shadow {
+        -webkit-filter: drop-shadow(16px 16px 20px blue);
+        filter: drop-shadow(16px 16px 20px blue);
+      }
+
+      #opacity {
+        -webkit-filter: opacity(0.5);
+        filter: opacity(0.5);
+      }
+
+      img:hover {
+        cursor: pointer;
+        transition: -webkit-filter 0.5s;
+        transition: filter 0.5s;
+        transition: filter 0.5s, -webkit-filter 0.5s;
+        -webkit-filter: none !important;
+        filter: none !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="title">
+      <h1>CSS3 filters</h1>
+    </div>
+    <div class="container">
+      <img id="no-filter" src="../assets/images/slide1.jpg" />
+      <p>无滤镜</p>
+    </div>
+    <div class="container">
+      <img id="grayscale" src="../assets/images/slide1.jpg" />
+      <p>Grayscale</p>
+    </div>
+    <div class="container">
+      <img id="invert" src="../assets/images/slide1.jpg" />
+      <p>Invert</p>
+    </div>
+    <div class="container">
+      <img id="brightness" src="../assets/images/slide1.jpg" />
+      <p>Brightness</p>
+    </div>
+    <div class="container">
+      <img id="saturation" src="../assets/images/slide1.jpg" />
+      <p>Saturation</p>
+    </div>
+    <div class="container">
+      <img id="sepia" src="../assets/images/slide1.jpg" />
+      <p>Sepia</p>
+    </div>
+    <div class="container">
+      <img id="blur" src="../assets/images/slide1.jpg" />
+      <p>Blur</p>
+    </div>
+    <div class="container">
+      <img id="contrast" src="../assets/images/slide1.jpg" />
+      <p>Opacity</p>
+    </div>
+    <div class="container">
+      <img id="hue-rotate" src="../assets/images/slide1.jpg" />
+      <p>hue-rotate</p>
+    </div>
+    <div class="container">
+      <img id="drop-shadow" src="../assets/images/slide1.jpg" />
+      <p>drop-shadow</p>
+    </div>
+    <div class="container">
+      <img id="opacity" src="../assets/images/slide1.jpg" />
+      <p>opacity</p>
+    </div>
+  </body>
+</html>

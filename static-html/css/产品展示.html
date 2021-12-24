@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .content {
+        width: 100%;
+        font-size: 0;
+        /*消除li inline-block 为行内元素后的默认间距*/
+        list-style: none;
+      }
+
+      .content li {
+        display: inline-block;
+        width: 33.333%;
+        vertical-align: top;
+      }
+
+      .box {
+        height: auto;
+        display: block;
+        position: relative;
+        /*关键点： 设置绝对定位*/
+        overflow: hidden;
+        text-decoration: none;
+        transition: all 0.25s;
+        box-sizing: border-box;
+        /*使盒子边距包含在盒子高度上*/
+        padding-top: 40px;
+        /*上下总共80边距*/
+        padding-bottom: 40px;
+      }
+
+      .box .info {
+        width: 70%;
+        height: 123px;
+        margin: 0 auto;
+        transition: all 0.25s;
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+      }
+
+      .box .text {
+        display: block;
+        position: absolute;
+        /*关键点： 绝对定位于.box*/
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: auto;
+        padding: 20px 0;
+        background-color: rgba(255, 255, 255, 0.4);
+        transition: all 0.25s;
+        transform: translateY(100%);
+        color: #fff;
+        font-size: 17px;
+        text-align: center;
+        font-family: Arial;
+      }
+
+      .box:hover {
+        padding-top: 10px;
+        /*上下总共80边距*/
+        padding-bottom: 70px;
+      }
+
+      .box:hover .text {
+        transform: translateY(0%);
+        transition: all 0.3s;
+      }
+    </style>
+  </head>
+
+  <body style="background: #fcc">
+    <ul class="content">
+      <li class="content" style="background: #38beac">
+        <a href="" class="box">
+          <div class="info">文章</div>
+          <span class="text">here you can check all what i had writed in public</span>
+        </a>
+      </li>
+      <li class="content" style="background: #000">
+        <a href="" class="box">
+          <div class="info">动态</div>
+          <span class="text">you can know more about me in here</span>
+        </a>
+      </li>
+      <li class="content" style="background: #ff5a5f">
+        <a href="" class="box">
+          <div class="info">热门文章</div>
+          <span class="text">the articals i gat likenum heighter</span>
+        </a>
+      </li>
+    </ul>
+  </body>
+</html>

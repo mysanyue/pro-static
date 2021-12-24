@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>炫酷的充电效果3</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background: #000;
+        overflow: hidden;
+      }
+
+      .g-number {
+        position: absolute;
+        width: 300px;
+        top: 27%;
+        text-align: center;
+        font-size: 32px;
+        z-index: 10;
+        color: #fff;
+      }
+
+      .g-container {
+        position: relative;
+        width: 300px;
+        height: 400px;
+        margin: auto;
+      }
+
+      .g-contrast {
+        filter: contrast(15) hue-rotate(0);
+        width: 300px;
+        height: 400px;
+        background-color: #000;
+        overflow: hidden;
+        animation: hueRotate 10s infinite linear;
+      }
+
+      .g-circle {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        box-sizing: border-box;
+        filter: blur(8px);
+      }
+
+      .g-circle:after {
+        content: '';
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(0);
+        width: 200px;
+        height: 200px;
+        background-color: #00ff6f;
+        border-radius: 42% 38% 62% 49% / 45%;
+        animation: rotate 10s infinite linear;
+      }
+
+      .g-circle:before {
+        content: '';
+        position: absolute;
+        width: 176px;
+        height: 176px;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: #000;
+        z-index: 10;
+      }
+
+      .g-bubbles {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 100px;
+        height: 40px;
+        transform: translate(-50%, 0);
+        border-radius: 100px 100px 0 0;
+        background-color: #00ff6f;
+        filter: blur(5px);
+      }
+
+      li {
+        position: absolute;
+        border-radius: 50%;
+        background: #00ff6f;
+      }
+
+      /* @for $i from 0 through 15 {
+      li:nth-child(#{$i}) {
+        $width: 15 + random(15) + px;
+        left: 15 + random(70) + px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: $width;
+        height: $width;
+        animation: moveToTop #{random(6) + 3}s ease-in-out -#{random(5000)/1000}s infinite;
+      }
+    } */
+
+      li:nth-child(0) {
+        left: 84px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 18px;
+        height: 18px;
+        -webkit-animation: moveToTop 5s ease-in-out -2.801s infinite;
+        animation: moveToTop 5s ease-in-out -2.801s infinite;
+      }
+
+      li:nth-child(1) {
+        left: 72px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 21px;
+        height: 21px;
+        -webkit-animation: moveToTop 9s ease-in-out -0.724s infinite;
+        animation: moveToTop 9s ease-in-out -0.724s infinite;
+      }
+
+      li:nth-child(2) {
+        left: 47px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: moveToTop 9s ease-in-out -4.143s infinite;
+        animation: moveToTop 9s ease-in-out -4.143s infinite;
+      }
+
+      li:nth-child(3) {
+        left: 32px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 30px;
+        height: 30px;
+        -webkit-animation: moveToTop 7s ease-in-out -1.587s infinite;
+        animation: moveToTop 7s ease-in-out -1.587s infinite;
+      }
+
+      li:nth-child(4) {
+        left: 33px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 22px;
+        height: 22px;
+        -webkit-animation: moveToTop 4s ease-in-out -1.042s infinite;
+        animation: moveToTop 4s ease-in-out -1.042s infinite;
+      }
+
+      li:nth-child(5) {
+        left: 43px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 26px;
+        height: 26px;
+        -webkit-animation: moveToTop 7s ease-in-out -3.692s infinite;
+        animation: moveToTop 7s ease-in-out -3.692s infinite;
+      }
+
+      li:nth-child(6) {
+        left: 34px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 18px;
+        height: 18px;
+        -webkit-animation: moveToTop 7s ease-in-out -2.183s infinite;
+        animation: moveToTop 7s ease-in-out -2.183s infinite;
+      }
+
+      li:nth-child(7) {
+        left: 41px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 18px;
+        height: 18px;
+        -webkit-animation: moveToTop 8s ease-in-out -2.29s infinite;
+        animation: moveToTop 8s ease-in-out -2.29s infinite;
+      }
+
+      li:nth-child(8) {
+        left: 75px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 16px;
+        height: 16px;
+        -webkit-animation: moveToTop 7s ease-in-out -0.536s infinite;
+        animation: moveToTop 7s ease-in-out -0.536s infinite;
+      }
+
+      li:nth-child(9) {
+        left: 79px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 28px;
+        height: 28px;
+        -webkit-animation: moveToTop 8s ease-in-out -3.18s infinite;
+        animation: moveToTop 8s ease-in-out -3.18s infinite;
+      }
+
+      li:nth-child(10) {
+        left: 74px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 28px;
+        height: 28px;
+        -webkit-animation: moveToTop 6s ease-in-out -3.723s infinite;
+        animation: moveToTop 6s ease-in-out -3.723s infinite;
+      }
+
+      li:nth-child(11) {
+        left: 72px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 26px;
+        height: 26px;
+        -webkit-animation: moveToTop 4s ease-in-out -1.611s infinite;
+        animation: moveToTop 4s ease-in-out -1.611s infinite;
+      }
+
+      li:nth-child(12) {
+        left: 84px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        -webkit-animation: moveToTop 4s ease-in-out -3.579s infinite;
+        animation: moveToTop 4s ease-in-out -3.579s infinite;
+      }
+
+      li:nth-child(13) {
+        left: 65px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 19px;
+        height: 19px;
+        -webkit-animation: moveToTop 5s ease-in-out -3.956s infinite;
+        animation: moveToTop 5s ease-in-out -3.956s infinite;
+      }
+
+      li:nth-child(14) {
+        left: 32px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 25px;
+        height: 25px;
+        -webkit-animation: moveToTop 7s ease-in-out -2.904s infinite;
+        animation: moveToTop 7s ease-in-out -2.904s infinite;
+      }
+
+      li:nth-child(15) {
+        left: 84px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 24px;
+        -webkit-animation: moveToTop 8s ease-in-out -3.573s infinite;
+        animation: moveToTop 8s ease-in-out -3.573s infinite;
+      }
+
+      @keyframes rotate {
+        50% {
+          border-radius: 45% / 42% 38% 58% 49%;
+        }
+
+        100% {
+          transform: translate(-50%, -50%) rotate(720deg);
+        }
+      }
+
+      @keyframes moveToTop {
+        90% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0.1;
+          transform: translate(-50%, -180px);
+        }
+      }
+
+      @keyframes hueRotate {
+        100% {
+          filter: contrast(15) hue-rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="g-container">
+      <div class="g-number">98.7%</div>
+      <div class="g-contrast">
+        <div class="g-circle"></div>
+        <ul class="g-bubbles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

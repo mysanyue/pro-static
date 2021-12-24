@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>斜线导航</title>
+    <style type="text/css">
+      .header-right {
+        height: 40px;
+        line-height: 40px;
+        width: 100%;
+        background: url('../assets/images/bot.jpg');
+      }
+
+      .link:before {
+        content: '/';
+        margin: 0 24px;
+        color: grey;
+      }
+      .link:first-child:before {
+        display: none;
+      }
+      .link a {
+        padding: 5px 25px;
+        /*border: 1px solid red;*/
+        color: #fff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 导航栏begin -->
+    <div class="header-right fr">
+      <span class="link"><a href="#">Home</a></span>
+      <span class="link"><a href="#">About</a></span>
+      <span class="link"><a href="#">Features</a></span>
+      <span class="link"><a href="#">Blog</a></span>
+      <span class="link"><a href="#">Shop</a></span>
+      <div class="alarm fr">
+        <!-- <img src="" alt="alarm" /> -->
+        <!-- <i class="alarm-number">2</i> -->
+      </div>
+    </div>
+    <!-- 导航end -->
+  </body>
+</html>

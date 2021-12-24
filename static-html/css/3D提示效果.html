@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      @keyframes pulse {
+        0% {
+          -moz-box-shadow: 0 0 0 0 rgba(189, 16, 224, 0.8);
+          box-shadow: 0 0 0 0 rgba(189, 16, 224, 0.8);
+        }
+
+        70% {
+          -moz-box-shadow: 0 0 0 5px rgba(189, 16, 224, 0.3);
+          box-shadow: 0 0 0 5px rgba(189, 16, 224, 0.3);
+        }
+
+        100% {
+          -moz-box-shadow: 0 0 0 10px rgba(189, 16, 224, 0);
+          box-shadow: 0 0 0 10px rgba(189, 16, 224, 0);
+        }
+      }
+
+      @keyframes slowpulse1 {
+        0% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(120, 123, 36, 0.4))
+            drop-shadow(0 0 5px rgba(245, 251, 68, 0.4));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(120, 123, 36, 0.4))
+            drop-shadow(0 0 5px rgba(245, 251, 68, 0.4));
+        }
+
+        60% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 1)) drop-shadow(0 0 10px rgba(120, 123, 36, 1))
+            drop-shadow(0 0 5px rgba(245, 251, 68, 1));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 1)) drop-shadow(0 0 10px rgba(120, 123, 36, 1))
+            drop-shadow(0 0 5px rgba(245, 251, 68, 1));
+        }
+
+        100% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(120, 123, 36, 0.4))
+            drop-shadow(0 0 5px rgba(245, 251, 68, 0.4));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(120, 123, 36, 0.4))
+            drop-shadow(0 0 5px rgba(245, 251, 68, 0.4));
+        }
+      }
+
+      @keyframes slowpulse2 {
+        0% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(125, 23, 154, 0.4))
+            drop-shadow(0 0 5px rgba(200, 35, 247, 0.4));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(125, 23, 154, 0.4))
+            drop-shadow(0 0 5px rgba(200, 35, 247, 0.4));
+        }
+
+        60% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 1)) drop-shadow(0 0 10px rgba(125, 23, 154, 36, 1))
+            drop-shadow(0 0 5px rgba(200, 35, 247, 1));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 1)) drop-shadow(0 0 10px rgba(125, 23, 154, 1))
+            drop-shadow(0 0 5px rgba(200, 35, 247, 1));
+        }
+
+        100% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(125, 23, 154, 0.4))
+            drop-shadow(0 0 5px rgba(200, 35, 247, 0.4));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(125, 23, 154, 0.4))
+            drop-shadow(0 0 5px rgba(200, 35, 247, 0.4));
+        }
+      }
+
+      @keyframes slowpulse3 {
+        0% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(17, 124, 95, 0.4))
+            drop-shadow(0 0 5px rgba(45, 254, 197, 0.4));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(17, 124, 95, 0.4))
+            drop-shadow(0 0 5px rgba(45, 254, 197, 0.4));
+        }
+
+        60% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 1)) drop-shadow(0 0 10px rgba(17, 124, 95, 36, 1))
+            drop-shadow(0 0 5px rgba(45, 254, 197, 1));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 1)) drop-shadow(0 0 10px rgba(17, 124, 95, 1))
+            drop-shadow(0 0 5px rgba(45, 254, 197, 1));
+        }
+
+        100% {
+          filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(17, 124, 95, 0.4))
+            drop-shadow(0 0 5px rgba(45, 254, 197, 0.4));
+          -webkit-filter: drop-shadow(0 0 2px rgba(100, 17, 43, 0.4)) drop-shadow(0 0 10px rgba(17, 124, 95, 0.4))
+            drop-shadow(0 0 5px rgba(45, 254, 197, 0.4));
+        }
+      }
+
+      .text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 50%;
+        margin: 20% auto;
+        background: rgb(189, 16, 224) 100%;
+        border-radius: 3px;
+        min-height: 80px;
+      }
+
+      .pulse {
+        animation: pulse 0.75s infinite;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="text pulse">
+      <p>区块链公开可查询无法作弊难得发财机会</p>
+    </div>
+    <script></script>
+  </body>
+</html>
