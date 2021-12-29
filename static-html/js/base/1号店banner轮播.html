@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>1号店banner轮播</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .banner {
+        position: relative;
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .banner-img {
+        height: 398px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .banner-img li {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 398px;
+        list-style: none;
+        text-align: center;
+        display: none;
+      }
+
+      .banner-img li:first-child {
+        display: block;
+      }
+
+      .banner-img a img {
+        max-width: 100%;
+      }
+
+      .banner-btn {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .banner-btn span {
+        display: inline-block;
+        width: 50px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .banner-btn span.active {
+        background: #ff5000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="banner">
+      <ul class="banner-img">
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/slide1.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/slide2.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/slide3.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/slide4.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/t1.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/t6.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/t3.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com">
+            <img src="../../assets/images/t4.jpg" />
+          </a>
+        </li>
+      </ul>
+      <div class="banner-btn">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <script src="../../assets/lib/jquery.min.js"></script>
+    <script>
+      var aLi = $('.banner-img li')
+      var aBtn = $('.banner-btn span')
+      var timer = null
+      var index = 0
+
+      $('.banner').hover(
+        function () {
+          clearInterval(timer)
+        },
+        function () {
+          autoPlay()
+        }
+      )
+
+      aBtn.hover(function () {
+        index = $(this).index()
+        $(this).addClass('active').siblings().removeClass('active')
+        aLi.eq(index).fadeIn().siblings().fadeOut()
+      })
+
+      function autoPlay() {
+        timer = setInterval(function () {
+          index = index > aLi.length - 1 ? 0 : ++index
+          aBtn.eq(index).addClass('active').siblings().removeClass('active')
+          aLi.eq(index).fadeIn().siblings().fadeOut()
+        }, 3000)
+      }
+      autoPlay()
+    </script>
+  </body>
+</html>

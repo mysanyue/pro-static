@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>返回到顶部</title>
+    <style>
+      #back {
+        outline: none;
+        border: none;
+        padding: 6px 20px;
+        background: #eee;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      // 第一种姿势
+      // window.onload = function() {
+      //     var oBtn = document.getElementById("back-top");
+      //     var timer = null;
+      //     var bSys = false;    // 判断是否是用户再操作滚动条
+
+      //     window.onscroll = function() {
+      //         if(bSys) {
+      //             clearInterval(timer);
+      //         }
+      //         bSys = true;
+      //     }
+
+      //     oBtn.onclick = function() {
+      //         timer = setInterval(function() {
+      //             var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+      //             var iSpeed = Math.floor(-scrolltop / 8);
+      //             if(scrolltop == 0) {
+      //                 clearInterval(timer);
+      //             }
+      //             bSys = false;
+      //             document.documentElement.scrollTop = scrolltop + iSpeed;
+      //         }, 30);
+      //     }
+      // }
+
+      // 第二种姿势
+      window.onload = function () {
+        var oBtn = document.getElementById('back')
+        var iTimer = null
+        var bSys = false // 判断是否是用户再操作滚动条
+
+        window.onscroll = function () {
+          setTop()
+
+          if (bSys) {
+            clearInterval(iTimer)
+          }
+          bSys = true
+        }
+
+        oBtn.onclick = function () {
+          clearInterval(iTimer)
+          var iCur = 0
+          var iSpeed = 0
+
+          iTimer = setInterval(function () {
+            iCur = document.documentElement.scrollTop || document.body.scrollTop
+            iSpeed = Math.floor((0 - iCur) / 8)
+            if (iCur == 0) {
+              clearInterval(iTimer)
+            } else {
+              bSys = false
+              document.documentElement.scrollTop = document.body.scrollTop = iCur + iSpeed
+            }
+          }, 30)
+        }
+
+        function setTop() {
+          var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+          oBtn.style.top = scrollTop + document.documentElement.clientHeight - oBtn.clientHeight + 'px'
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <button id="back">返回顶部</button>
+  </body>
+</html>

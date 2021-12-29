@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片切换原理</title>
+    <style>
+      .banner {
+        position: relative;
+        width: 1200px;
+        height: 400px;
+        margin: auto;
+      }
+      .box1 {
+        position: absolute;
+        left: 0;
+        top: 50px;
+        z-index: 1;
+        width: 900px;
+        height: 280px;
+        background: red;
+        opacity: 0.5;
+      }
+      .box2 {
+        position: absolute;
+        left: 100px;
+        top: 10px;
+        z-index: 2;
+        width: 1000px;
+        height: 380px;
+        background: yellow;
+      }
+      .box3 {
+        position: absolute;
+        left: 300px;
+        top: 50px;
+        z-index: 1;
+        width: 900px;
+        height: 280px;
+        background: blue;
+        opacity: 0.5;
+      }
+      .box {
+        overflow: hidden;
+      }
+      .box img {
+        max-width: 100%;
+      }
+    </style>
+    <script src="../startMove.js"></script>
+    <script>
+      window.onload = function() {
+        var aInput = document.getElementsByTagName('input');
+        var aDiv = document.querySelectorAll('.box');
+        var arr = [];
+        for (var i = 0; i < aDiv.length; i++) {
+          arr.push({
+            left: getStyle(aDiv[i], 'left'),
+            top: getStyle(aDiv[i], 'top'),
+            opacity: getStyle(aDiv[i], 'opacity'),
+            height: getStyle(aDiv[i], 'height'),
+            width: getStyle(aDiv[i], 'width'),
+            zIndex: getStyle(aDiv[i], 'zIndex')
+          });
+        }
+        aInput[0].onclick = function() {
+          arr.push(arr[0]);
+          arr.shift();
+          moveChange();
+        };
+
+        aInput[1].onclick = function() {
+          arr.unshift(arr[arr.length - 1]);
+          arr.pop();
+          moveChange();
+        };
+
+        function moveChange() {
+          for (var i = 0; i < aDiv.length; i++) {
+            aDiv[i].style.zIndex = arr[i].zIndex;
+            startMove(aDiv[i], {
+              left: arr[i].left,
+              top: arr[i].top,
+              opacity: arr[i].opacity * 100,
+              height: arr[i].height,
+              width: arr[i].width
+            });
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="<" />
+    <input type="button" value=">" />
+    <div class="banner">
+      <div class="box box1"><img src="../../assets/images/m15.jpg" /></div>
+      <div class="box box2"><img src="../../assets/images/m16.jpg" /></div>
+      <div class="box box3"><img src="../../assets/images/m17.jpg" /></div>
+    </div>
+  </body>
+</html>

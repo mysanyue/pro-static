@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>桌面换肤</title>
+    <style>
+      body {
+        background-image: url('../../assets/images/1.jpg');
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .menu {
+        position: absolute;
+        top: 10px;
+        left: 50px;
+        width: 200px;
+        background-color: #fff;
+        box-shadow: 2px 2px 2px #b3b3b3;
+        display: none;
+      }
+      .menu ul li {
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        list-style: none;
+        cursor: pointer;
+      }
+      .menu ul li.active {
+        background-color: #00cccc;
+      }
+      .menu ul li img {
+        margin: 0 8px 0 30px;
+        vertical-align: middle;
+      }
+      .bg {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        top: 0;
+        width: 730px;
+        height: 356px;
+        margin: auto;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+      .bg h3 {
+        height: 46px;
+        background: url('../../assets/images/title_bg.jpg');
+        color: #fff;
+        line-height: 46px;
+        text-indent: 20px;
+      }
+      .bg h3 img {
+        float: right;
+        margin: 10px 10px 0 0;
+        cursor: pointer;
+      }
+      .bg h3:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+      .bg ul li {
+        list-style: none;
+        width: 200px;
+        height: 125px;
+        border: 5px solid #fff;
+        float: left;
+        margin: 10px 15px;
+        cursor: pointer;
+      }
+      .bg ul:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu">
+      <ul>
+        <li><img src="../../assets/images/ico1.jpg" />添加应用</li>
+        <li><img src="../../assets/images/ico2.jpg" />获取课程</li>
+        <li><img src="../../assets/images/ico3.jpg" />添加笔记</li>
+        <li><img src="../../assets/images/ico4.jpg" />刷新</li>
+        <li><img src="../../assets/images/ico5.jpg" />上传资料</li>
+        <li><img src="../../assets/images/ico6.jpg" />更换背景</li>
+        <li><img src="../../assets/images/ico7.jpg" />注销</li>
+      </ul>
+    </div>
+    <div class="bg">
+      <h3><img src="../../assets/images/close.png" /></h3>
+      <ul>
+        <li><img src="../../assets/images/s_1.jpg" /></li>
+        <li><img src="../../assets/images/s_2.jpg" /></li>
+        <li><img src="../../assets/images/s_3.jpg" /></li>
+        <li><img src="../../assets/images/s_4.jpg" /></li>
+        <li><img src="../../assets/images/s_5.jpg" /></li>
+        <li><img src="../../assets/images/s_6.jpg" /></li>
+      </ul>
+    </div>
+    <script src="../../assets/lib/jquery.min.js"></script>
+    <script>
+      var oMenu = $('.menu')
+      var aMenuList = $('.menu ul li')
+      var oBg = $('.bg')
+      // js 禁止浏览器的右键功能
+      document.oncontextmenu = function () {
+        return false
+      }
+      // 鼠标事件
+      $(document).mousedown(function (e) {
+        var key = e.which // 1左键 2中建 3右键
+        if (key == 3) {
+          oMenu.css({ left: e.offsetX, top: e.offsetY })
+          oMenu.show()
+        }
+      })
+      // 鼠标hover
+      aMenuList.hover(
+        function () {
+          $(this).addClass('active')
+        },
+        function () {
+          $(this).removeClass('active')
+        }
+      )
+      // 显示更换背景
+      aMenuList.click(function () {
+        if ($(this).index() == 5) {
+          oBg.show()
+        }
+      })
+      // 隐藏菜单
+      $(document).click(function () {
+        oMenu.hide()
+      })
+      // 关闭更换背景
+      $('.bg h3 img').click(function () {
+        oBg.hide()
+      })
+      // 更换背景
+      $('.bg ul li').click(function () {
+        $('body').css({ 'background-image': 'url(../../assets/images/' + ($(this).index() + 1) + '.jpg)' })
+      })
+    </script>
+  </body>
+</html>

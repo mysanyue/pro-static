@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D move</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #wrap {
+      position: relative;
+      width: 800px;
+      height: 500px;
+      margin: 30px auto;
+      border: 1px solid #000;
+    }
+
+    #wrap img {
+      position: absolute;
+      max-width: 300px;
+    }
+
+    #wrap img:nth-of-type(1) {
+      left: 120px;
+      top: 10px;
+      z-index: 0;
+    }
+
+    #wrap img:nth-of-type(2) {
+      left: 460px;
+      top: 250px;
+      z-index: 1;
+    }
+
+    #wrap img:nth-of-type(3) {
+      left: 480px;
+      top: 30px;
+      z-index: 2;
+    }
+
+    #wrap img:nth-of-type(4) {
+      left: 20px;
+      top: 250px;
+      z-index: 3;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    <img src="../assets/images/m18.jpg" />
+    <img src="../assets/images/m17.jpg" />
+    <img src="../assets/images/m16.jpg" />
+    <img src="../assets/images/m15.jpg" />
+  </div>
+  <script>
+    window.onload = function() {
+      var oWrap = document.getElementById('wrap');
+      var aImg = oWrap.getElementsByTagName('img');
+      var iMax = 4;
+
+      for (var i = 0; i < aImg.length; i++) {
+        aImg[i].startX = getStyle(aImg[i], 'left');
+      }
+
+      oWrap.onmousemove = function(ev) {
+        var iX = ev.clientX - getX(this) + this.offsetWidth / 2;
+
+        for (var i = 0; i < aImg.length; i++) {
+          var iZindex = getStyle(aImg[i], "zIndex");
+          var iDisL = -parseInt(iX / iMax * (iMax - iZindex) / 5);
+          aImg[i].style.left = aImg[i].startX + iDisL + 'px';
+        }
+      }
+    }
+
+    function getStyle(obj, attr) {
+      if (obj.currentStyle) {
+        return parseFloat(obj.currentStyle[attr]);
+      }
+      return parseFloat(getComputedStyle(obj)[attr]);
+    }
+
+    function getX(obj) {
+      var iLeft = 0;
+      while (obj) {
+        iLeft += obj.offsetLeft;
+        obj = obj.offsetParent;
+      }
+      return iLeft;
+    }
+  </script>
+</body>
+
+</html>

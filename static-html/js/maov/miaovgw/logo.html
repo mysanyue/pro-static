@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logo</title>
+  <style>
+    #logo {
+      position: absolute;
+      left: 50px;
+      top: -50px;
+      transition: all 0.5s;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    #logoImg {
+      width: 204px;
+      height: 80px;
+      margin: 120px auto;
+    }
+
+    #logoImg span {
+      float: left;
+      width: 30px;
+      line-height: 80px;
+      margin: 0 2px;
+      text-align: center;
+    }
+
+    #logoImg span:nth-of-type(1) {
+      background: #9c6;
+      /* animation: move 0.4s infinite alternate; */
+    }
+
+    #logoImg span:nth-of-type(2) {
+      background: #cf6;
+      /* animation: move 0.4s 0.15s infinite alternate; */
+    }
+
+    #logoImg span:nth-of-type(3) {
+      background: #fc6;
+      /* animation: move 0.4s 0.3s infinite alternate; */
+    }
+
+    #logoImg span:nth-of-type(4) {
+      background: #6f9;
+      /* animation: move 0.4s 0.45s infinite alternate; */
+    }
+
+    #logoImg span:nth-of-type(5) {
+      background: #3c9;
+      /* animation: move 0.4s 0.6s infinite alternate; */
+    }
+
+    #logoImg span:nth-of-type(6) {
+      background: #069;
+      /* animation: move 0.4s 0.75s infinite alternate; */
+    }
+
+    /* #logo #logoImg span {
+      animation-play-state: paused;
+    }
+
+    #logo:hover #logoImg span {
+      animation-play-state: running;
+    } */
+
+    #logo:hover {
+      width: 260px;
+      height: 260px;
+      left: 70px;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-12px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="logo">
+    <div id="logoImg">
+      <span>三</span>
+      <span>月</span>
+      <span>风</span>
+      <span>的</span>
+      <span>博</span>
+      <span>客</span>
+    </div>
+  </div>
+  <script>
+    window.onload = function() {
+      var oLogo = document.getElementById('logo');
+      var aText = oLogo.getElementsByTagName('span');
+
+      oLogo.onmouseover = function() {
+        for (var i = 0; i < aText.length; i++) {
+          aText[i].style.animation = 'move 0.3s ' + 0.1 * i + 's infinite alternate';
+        }
+      }
+
+      oLogo.onmouseout = function() {
+        for (var i = 0; i < aText.length; i++) {
+          aText[i].style.animation = '';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

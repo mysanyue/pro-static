@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则表达式</title>
+  </head>
+  <body>
+    <script>
+      // {4,7} 最少出现4次，最多出现7次
+      // {4,} 最少出现4次
+      // {4} 正好出现4次
+
+      // + 出现1次或者多次
+      // ? 出现0次或者2次
+      // * 至少出现0次
+      // ^ 开始位置
+      // $ 结束位置
+
+      // [\u4e00-\u9fa5] 匹配中文
+      // ^\s*|\s*$ 行首行尾空格
+      // ^\w+@[a-z0-9]+(\.[a-z]+){1,3}$ Email
+      // [a-zA-Z]+://[^\s]* 网址
+      // [1-9][0-9]{4,9} 扣扣号
+      // [1-9]\d{5} 邮政编码
+      // [1-9]\d{14}|[1-9]\d{17}|[1-9]\d{16}x 身份证
+
+      var str = 'assssjdsssskssalssdkjsssdss';
+      var arr = str.split('');
+      str = arr.sort().join('');
+      console.log(str);
+
+      var value = '';
+      var index = 0;
+      console.log(str);
+      var re = /(\w)\1+/g;
+
+      str.replace(re, function(string, p1) {
+        if (index < string.length) {
+          index = string.length;
+          value = p1;
+        }
+      });
+      console.log(`最多的字符${value},  重复了${index}次`);
+    </script>
+  </body>
+</html>

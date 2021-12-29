@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>拖放div大小</title>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
+
+      #div1 {
+        position: relative;
+        height: 100%;
+        width: 300px;
+        background: #f8f8f8;
+        min-width: 100px;
+      }
+
+      .bar-left {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background: #eee;
+        cursor: col-resize;
+      }
+
+      .bar-right {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background: #eee;
+        cursor: col-resize;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1">
+      <div class="bar-left"></div>
+      <div class="bar-right"></div>
+    </div>
+    <script>
+      window.onload = function () {
+        var oDiv = document.getElementById('div1')
+        oDiv.onmousedown = function (ev) {
+          var ev = event || ev
+          var b = null
+          var disW = this.offsetWidth
+          var disX = ev.clientX
+          var disL = this.offsetLeft
+
+          if (ev.clientX > disL + this.offsetWidth - 10) {
+            b = 'right'
+          } else if (ev.clientX < disL + 10) {
+            b = 'left'
+          }
+
+          document.onmousemove = function (ev) {
+            switch (b) {
+              case 'left':
+                oDiv.style.width = disW - (ev.clientX - disX) + 'px'
+                oDiv.style.left = disL + (ev.clientX - disX) + 'px'
+                break
+              case 'right':
+                oDiv.style.width = disW + (ev.clientX - disX) + 'px'
+                break
+            }
+          }
+
+          document.onmouseup = function (ev) {
+            document.onmousemove = document.onmouseup = null
+          }
+          return false
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>匀速运动demo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #div1 {
+        position: absolute;
+        left: 0;
+        top: 50px;
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+
+      .col {
+        position: absolute;
+        left: 400px;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background: greenyellow;
+      }
+    </style>
+    <script>
+      var timer = null
+
+      function startMove(target) {
+        var oDiv = document.getElementById('div1')
+        clearInterval(timer)
+        timer = setInterval(function () {
+          var speed = oDiv.offsetLeft < target ? 7 : -7
+          if (Math.abs(oDiv.offsetLeft - target) < 7) {
+            // 距离足够近 到达终点
+            clearInterval(timer)
+            oDiv.style.left = target + 'px' // 足够近直接等于目标点
+          } else {
+            oDiv.style.left = oDiv.offsetLeft + speed + 'px'
+          }
+        }, 30)
+      }
+    </script>
+  </head>
+
+  <body>
+    <button onclick="startMove(300)">开始运动</button>
+    <div class="col"></div>
+    <div id="div1"></div>
+  </body>
+</html>

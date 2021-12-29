@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>妙味课堂-官网</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      float: left;
+      margin-left: 20px;
+      list-style: none;
+    }
+
+    ul:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    div {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+  </style>
+  <script src="./js/sea.js"></script>
+  <script src="./js/move.js"></script>
+  <script>
+    seajs.use('main.js');
+  </script>
+</head>
+
+<body>
+  <ul>
+    <li><a href="javascript:;" data-hash="index">首页</a></li>
+    <li><a href="javascript:;" data-hash="student">学员</a></li>
+    <li><a href="javascript:;" data-hash="message">留言</a></li>
+  </ul>
+  <div data-hash="index" style="background:red;">首页的内容</div>
+  <div data-hash="student" style="background:yellow">学员的内容</div>
+  <div data-hash="message" style="background:blue">留言的内容</div>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D move</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #wrap {
+      position: relative;
+      width: 800px;
+      height: 500px;
+      margin: 30px auto;
+      border: 1px solid #000;
+      perspective: 300px;
+      transform-style: preserve-3d;
+      perspective-origin: center center;
+    }
+
+    #wrap img {
+      position: absolute;
+      max-width: 300px;
+    }
+
+    #wrap img:nth-of-type(1) {
+      left: 120px;
+      top: 10px;
+      transform: translateZ(-25px);
+    }
+
+    #wrap img:nth-of-type(2) {
+      left: 460px;
+      top: 250px;
+      transform: translateZ(-50px);
+    }
+
+    #wrap img:nth-of-type(3) {
+      left: 480px;
+      top: 30px;
+      transform: translateZ(-75px);
+    }
+
+    #wrap img:nth-of-type(4) {
+      left: 20px;
+      top: 250px;
+      transform: translateZ(-100px);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    <img src="../assets/images/m18.jpg" />
+    <img src="../assets/images/m17.jpg" />
+    <img src="../assets/images/m16.jpg" />
+    <img src="../assets/images/m15.jpg" />
+  </div>
+  <script>
+    window.onload = function() {
+      var oWrap = document.getElementById('wrap');
+      oWrap.onmousemove = function(ev) {
+        var iX = parseInt(ev.clientX - getX(this));
+        var iOld = parseInt(getStyle(this, "WebkitPerspectiveOrigin"));
+        var iTimer = Math.abs(iOld - iX);
+        iTimer = iTimer < 30 ? 0 : parseInt(iTimer);
+        this.style.transition = iTimer + 'ms';
+        this.style.WebkitPerspectiveOrigin = iX + 'px center';
+      }
+    }
+
+    function getStyle(obj, attr) {
+      if (obj.currentStyle) {
+        return parseFloat(obj.currentStyle[attr]);
+      }
+      return parseFloat(getComputedStyle(obj)[attr]);
+    }
+
+    function getX(obj) {
+      var iLeft = 0;
+      while (obj) {
+        iLeft += obj.offsetLeft;
+        obj = obj.offsetParent;
+      }
+      return iLeft;
+    }
+  </script>
+</body>
+
+</html>

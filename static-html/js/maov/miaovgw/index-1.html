@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>妙味课堂-官网</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      float: left;
+      margin-left: 20px;
+      list-style: none;
+    }
+
+    ul:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    div {
+      display: none;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      var aA = document.getElementsByTagName('a');
+      var aDiv = document.getElementsByTagName('div');
+
+      for (var i = 0; i < aA.length; i++) {
+        aA[i].onclick = function() {
+          var hash = this.dataset.hash;
+          window.location.hash = hash;
+
+          for (var i = 0; i < aDiv.length; i++) {
+            aDiv[i].style.display = 'none';
+            if (hash == aDiv[i].dataset.hash) {
+              aDiv[i].style.display = 'block';
+            }
+          }
+        }
+      }
+
+      window.onhashchange = function() {
+        window.location.reload();
+      }
+
+      var firstHash = window.location.hash.substring(1) || 'index';
+      for (var i = 0; i < aDiv.length; i++) {
+        if (firstHash == aDiv[i].dataset.hash) {
+          aDiv[i].style.display = 'block';
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <ul>
+    <li><a href="javascript:;" data-hash="index">首页</a></li>
+    <li><a href="javascript:;" data-hash="student">学员</a></li>
+    <li><a href="javascript:;" data-hash="message">留言</a></li>
+  </ul>
+  <div data-hash="index">首页内容</div>
+  <div data-hash="student">学员内容</div>
+  <div data-hash="message">留言内容</div>
+</body>
+
+</html>

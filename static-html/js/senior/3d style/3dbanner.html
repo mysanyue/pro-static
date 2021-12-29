@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3d banner</title>
+    <style>
+      body {
+        background: url('../../../assets/images/bg.jpg');
+      }
+
+      .view {
+        width: 1000px;
+        height: 600px;
+        perspective: 600px;
+        margin: 100px auto;
+      }
+
+      .bigbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+      }
+
+      .box {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+      }
+
+      .box span {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ddd;
+        opacity: 0;
+        transition: 1.5s;
+      }
+
+      .show span {
+        opacity: 1;
+      }
+
+      .box span:nth-child(1) {
+        transform: rotateY(0) translateZ(100px);
+      }
+
+      .box span:nth-child(2) {
+        transform: rotateY(90deg) translateZ(100px);
+      }
+
+      .box span:nth-child(3) {
+        transform: rotateY(180deg) translateZ(100px);
+      }
+
+      .box span:nth-child(4) {
+        transform: rotateY(270deg) translateZ(100px);
+      }
+
+      .box span:nth-child(5) {
+        transform: rotateX(90deg) translateZ(100px);
+      }
+
+      .box span:nth-child(6) {
+        transform: rotateX(-90deg) translateZ(100px);
+      }
+
+      .box[data-z='0'] span:nth-child(1) {
+        background-image: url('../../../assets/images/bg1.png');
+        background-size: 1000px 600px;
+      }
+
+      .box[data-z='1'] span:nth-child(1) {
+        background-image: url('../../../assets/images/bg2.png');
+        background-size: 1000px 600px;
+      }
+
+      .box[data-z='2'] span:nth-child(1) {
+        background-image: url('../../../assets/images/3d-1.jpg');
+        background-size: 1000px 600px;
+      }
+
+      .box[data-z='2'] span:nth-child(2) {
+        background-image: url('../../../assets/images/3d-2.jpg');
+        background-size: 1000px 600px;
+      }
+
+      .box[data-z='2'] span:nth-child(3) {
+        background-image: url('../../../assets/images/3d-3.jpg');
+        background-size: 1000px 600px;
+      }
+
+      .box[data-z='2'] span:nth-child(4) {
+        background-image: url('../../../assets/images/3d-4.jpg');
+        background-size: 1000px 600px;
+      }
+
+      .btn-wrap {
+        width: 400px;
+        margin: 50px auto;
+        opacity: 0;
+        transition: 1s;
+      }
+
+      .btn-wrap button {
+        width: 100px;
+        height: 100px;
+        background: url('../../../assets/images/btn.png');
+        background-size: 100%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .btn-wrap button:nth-child(1) {
+        transform: rotate(180deg);
+      }
+
+      .btn-wrap button:nth-child(2) {
+        float: right;
+      }
+    </style>
+    <script src="./js/mTween.js"></script>
+  </head>
+
+  <body>
+    <div class="view">
+      <div class="bigbox"></div>
+      <div class="btn-wrap">
+        <button></button>
+        <button></button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    let bigbox = document.querySelector('.bigbox')
+    let zSize = 3,
+      rows = 3,
+      ceils = 5,
+      boxw = 200,
+      boxh = 200
+
+    let fragment = document.createDocumentFragment()
+    for (let z = 0; z < zSize; z++) {
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < ceils; x++) {
+          let box = document.createElement('div')
+          box.dataset.x = x
+          box.dataset.y = y
+          box.dataset.z = z
+          box.classList.add('box')
+
+          box.innerHTML = render(boxw, x, boxh, y)
+          box.style.cssText = `
+          top: ${boxh * y}px; 
+          left: ${boxw * x}px;
+        `
+          // transform: translateX(${(x - Math.floor(ceils / 2)) * 200 * (z + 1)}px) translateY(${(y - Math.floor(rows / 2)) * 200 * (z + 1)}px) translateZ(${ z* 200 }px);
+          css(box, 'translateX', (x - Math.floor(ceils / 2)) * 200 * (z + 1))
+          css(box, 'translateY', (y - Math.floor(rows / 2)) * 200 * (z + 1))
+          css(box, 'translateZ', z * 200)
+          css(box, 'rotateY', 0)
+          fragment.appendChild(box)
+        }
+      }
+    }
+
+    bigbox.appendChild(fragment)
+
+    let boxs = document.querySelectorAll('.box')
+    let times = 3000
+    boxs.forEach(item => {
+      let z = item.dataset.z
+      let dely = Math.random() * 500 + z * 700
+
+      setTimeout(() => {
+        item.classList.add('show')
+        mTween({
+          el: item,
+          attrs: {
+            translateX: 0,
+            translateY: 0,
+            translateZ: -100,
+          },
+          duration: times - dely,
+        })
+      }, dely)
+    })
+
+    // 移除节点
+    setTimeout(() => {
+      boxs.forEach(item => {
+        if (item.dataset.z < 2) {
+          item.remove()
+        }
+      })
+
+      let btnWrap = document.querySelector('.btn-wrap')
+      btnWrap.style.opacity = 1
+    }, times)
+
+    // 渲染
+    function render(boxw, x, boxh, y) {
+      let htmlStr = ''
+      for (let i = 0; i < 6; i++) {
+        htmlStr += `
+        <span style="background-position: -${boxw * x}px -${boxh * y}px"></span>
+      `
+      }
+      return htmlStr
+    }
+
+    // 切换
+    let btns = document.querySelectorAll('.btn-wrap button')
+    let isPlay = false
+    let fnArr = []
+    let now = 0
+
+    btns[0].onclick = () => {
+      if (isPlay) return false
+
+      isPlay = true
+      fnArr[now % fnArr.length](90)
+      now++
+    }
+    btns[1].onclick = () => {
+      if (isPlay) return false
+
+      isPlay = true
+      fnArr[now % fnArr.length](-90)
+      now++
+    }
+
+    // 运动一
+    fnArr[0] = deg => {
+      let boxs = document.querySelectorAll('.box')
+      let times = 1000
+
+      boxs.forEach(item => {
+        let dely = Math.random() * 400
+        setTimeout(() => {
+          mTween({
+            el: item,
+            attrs: {
+              rotateY: css(item, 'rotateY') + deg,
+            },
+            duration: times - dely,
+          })
+        }, dely)
+      })
+
+      setTimeout(() => {
+        isPlay = false
+      }, times)
+    }
+
+    // 运动二
+    fnArr[1] = deg => {
+      let boxs = document.querySelectorAll('.box')
+
+      boxs.forEach(item => {
+        let x = item.dataset.x
+        let y = item.dataset.y
+        let dely = x * 80 + y * 80
+        let times = 2300
+
+        setTimeout(() => {
+          mTween({
+            el: item,
+            attrs: {
+              translateZ: css(item, 'translateZ') + 100,
+            },
+            duration: 600,
+            cb: () => {
+              mTween({
+                el: item,
+                attrs: {
+                  rotateY: css(item, 'rotateY') + deg,
+                },
+                duration: 600,
+                cb: () => {
+                  mTween({
+                    el: item,
+                    attrs: {
+                      translateZ: css(item, 'translateZ') - 100,
+                    },
+                    duration: 600,
+                  })
+                },
+              })
+            },
+          })
+        }, dely)
+      })
+
+      setTimeout(() => {
+        isPlay = false
+      }, times)
+    }
+
+    fnArr[2] = deg => {
+      let boxs = document.querySelectorAll('.box')
+
+      boxs.forEach(item => {
+        let dely = Math.random() * 400
+        let x = parseInt(item.dataset.x)
+        let y = parseInt(item.dataset.y)
+        let times = 2200
+        let dir = 1
+
+        if (x % 2) {
+          dir = y % 2 ? -1 : 1
+        } else {
+          dir = y % 2 ? 1 : -1
+        }
+
+        setTimeout(() => {
+          mTween({
+            el: item,
+            attrs: {
+              translateZ: css(item, 'translateZ') + 50 * dir,
+            },
+            duration: 600,
+            cb: () => {
+              mTween({
+                el: item,
+                attrs: {
+                  rotateY: css(item, 'rotateY') + deg,
+                },
+                duration: 600,
+                cb: () => {
+                  mTween({
+                    el: item,
+                    attrs: {
+                      translateZ: css(item, 'translateZ') - 50 * dir,
+                    },
+                    duration: 600,
+                  })
+                },
+              })
+            },
+          })
+        }, dely)
+      })
+
+      setTimeout(() => {
+        isPlay = false
+      }, times)
+    }
+  </script>
+</html>

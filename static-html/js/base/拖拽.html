@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>拖拽</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body,
+      html {
+        background-color: #eef3fa;
+      }
+
+      #box {
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        cursor: move;
+        position: absolute;
+        line-height: 200px;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        var obox = document.getElementById('box')
+        var disX = 0
+        var disY = 0
+
+        obox.onmousedown = function (ev) {
+          var oEvent = ev || event
+          disX = oEvent.clientX - obox.offsetLeft //求在box中的X
+          disY = oEvent.clientY - obox.offsetTop //求在box中的Y
+
+          document.onmousemove = function (ev) {
+            var oEvent = ev || event
+            var vleft = oEvent.clientX - disX //client减去box中的X=当前盒子的left
+            var vtop = oEvent.clientY - disY //client减去box中的Y=当前盒子的top
+            if (vleft < 0) {
+              vleft = 0
+            } else if (vleft > document.documentElement.clientWidth - obox.offsetWidth) {
+              vleft = document.documentElement.clientWidth - obox.offsetWidth
+            }
+            if (vtop < 0) {
+              vtop = 0
+            } else if (vtop > document.documentElement.clientHeight - obox.offsetHeight) {
+              vtop = document.documentElement.clientHeight - obox.offsetHeight
+            }
+
+            obox.style.left = vleft + 'px'
+            obox.style.top = vtop + 'px'
+          }
+
+          document.onmouseup = function () {
+            document.onmousemove = null
+            document.onmouseup = null
+          }
+          return false
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="box">
+      <h1>拖动盒子</h1>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>拖拽的封装</title>
+    <style>
+      #div1 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+
+      #img1 {
+        position: absolute;
+        left: 200px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1"></div>
+    <img src="../../assets/images/t1.jpg" alt="" id="img1" />
+    <script>
+      window.onload = function () {
+        var oDiv = document.getElementById('div1')
+        var oImg = document.getElementById('img1')
+
+        drag(oDiv)
+        drag(oImg)
+
+        function drag(obj) {
+          obj.onmousedown = function (ev) {
+            var ev = ev || event
+            var disX = ev.clientX - this.offsetLeft
+            var disY = ev.clientY - this.offsetTop
+
+            document.onmousemove = function (ev) {
+              var ev = ev || event
+              var l = ev.clientX - disX
+              var t = ev.clientY - disY
+
+              if (l < 100) {
+                l = 0
+              } else if (l > document.documentElement.clientWidth - obj.offsetWidth - 100) {
+                l = document.documentElement.clientWidth - obj.offsetWidth
+              }
+
+              if (t < 100) {
+                t = 0
+              } else if (t > document.documentElement.clientHeight - obj.offsetHeight - 100) {
+                t = document.documentElement.clientHeight - obj.offsetHeight
+              }
+
+              obj.style.left = l + 'px'
+              obj.style.top = t + 'px'
+            }
+            document.onmouseup = function (ev) {
+              document.onmousemove = document.onmouseup = null
+            }
+            return false
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

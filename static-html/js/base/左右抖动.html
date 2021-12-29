@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      img {
+        position: absolute;
+        top: 200px;
+        left: 300px;
+        width: 400px;
+      }
+    </style>
+    <script src="../maov/move.js"></script>
+  </head>
+  <body>
+    <img src="../../assets/images/1.jpg" alt="" id="img" />
+    <script>
+      window.onload = function () {
+        var oImg = document.getElementById('img')
+        oImg.onclick = function () {
+          var arr = []
+          var pos = parseInt(getStyle(oImg, 'left'))
+          var num = 0
+          var timer = null
+          for (var i = 20; i > 0; i -= 2) {
+            arr.push(i, -i)
+          }
+          arr.push(0)
+
+          clearInterval(timer)
+          timer = setInterval(function () {
+            oImg.style.left = pos + arr[num] + 'px'
+            num++
+            if (num === arr.length) {
+              clearInterval(timer)
+            }
+          }, 50)
+        }
+      }
+    </script>
+  </body>
+</html>

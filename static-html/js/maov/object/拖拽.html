@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面向对象拖拽</title>
+    <style>
+      #div1 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        var d1 = new Drag('div1');
+        d1.init();
+      };
+
+      function Drag(id) {
+        this.oDiv = document.getElementById(id);
+        this.disX = 0;
+        this.disY = 0;
+      }
+
+      Drag.prototype.init = function() {
+        var _this = this;
+        _this.oDiv.onmousedown = function(ev) {
+          var evnet = ev || window.event;
+          _this.fnDown(evnet);
+          return false;
+        };
+      };
+
+      Drag.prototype.fnDown = function(ev) {
+        var _this = this;
+        _this.disX = ev.clientX - _this.oDiv.offsetLeft;
+        _this.disY = ev.clientY - _this.oDiv.offsetTop;
+
+        document.onmousemove = function(ev) {
+          var event = ev || window.event;
+          _this.fnMove(event);
+        };
+        document.onmouseup = function() {
+          _this.fnUp();
+        };
+      };
+
+      Drag.prototype.fnMove = function(ev) {
+        this.oDiv.style.left = ev.clientX - this.disX + 'px';
+        this.oDiv.style.top = ev.clientY - this.disY + 'px';
+      };
+
+      Drag.prototype.fnUp = function() {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+    </script>
+  </head>
+  <body>
+    <div id="div1"></div>
+  </body>
+</html>

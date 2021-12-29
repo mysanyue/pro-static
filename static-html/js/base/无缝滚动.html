@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>无缝滚动</title>
+    <style>
+      .roll {
+        position: relative;
+        overflow: hidden;
+        width: 1000px;
+        height: 150px;
+        margin: auto;
+      }
+
+      .wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        margin: 0;
+      }
+
+      .wrapper:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+
+      li {
+        list-style: none;
+        width: 250px;
+        float: left;
+        padding-right: 10px;
+        box-sizing: border-box;
+      }
+
+      li img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      .btn-box {
+        margin-top: 40px;
+        text-align: center;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var oUl = document.querySelector('.wrapper')
+        var aLi = oUl.querySelectorAll('li')
+        var aBtn = document.getElementsByTagName('button')
+        var iSpeed = -2 // 速度 和 方向
+
+        oUl.style.width = aLi[0].offsetWidth * aLi.length + 'px'
+        var timer = null
+        // 初始化
+        move()
+
+        // 向左
+        aBtn[0].onclick = function () {
+          iSpeed = -2
+        }
+        // 向右
+        aBtn[1].onclick = function () {
+          iSpeed = 2
+        }
+
+        // 鼠标移入
+        oUl.onmouseover = function () {
+          clearInterval(timer)
+        }
+        // 鼠标移出
+        oUl.onmouseout = move
+
+        function move() {
+          timer = setInterval(function () {
+            oUl.style.left = oUl.offsetLeft + iSpeed + 'px'
+            if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
+              oUl.style.left = 0
+            } else if (oUl.offsetLeft > 0) {
+              oUl.style.left = -oUl.offsetWidth / 2 + 'px'
+            }
+          }, 30)
+        }
+      }
+
+      // offsetLeft 左边距
+      // offsetTop 上边距
+      // offsetWidth 元素宽度
+      // offsetHeight 元素高度
+    </script>
+  </head>
+
+  <body>
+    <div class="roll">
+      <ul class="wrapper">
+        <li><img src="../../assets/images/wx40.jpeg" /></li>
+        <li><img src="../../assets/images/wx42.jpeg" /></li>
+        <li><img src="../../assets/images/wx43.jpeg" /></li>
+        <li><img src="../../assets/images/wx46.jpeg" /></li>
+
+        <li><img src="../../assets/images/wx40.jpeg" /></li>
+        <li><img src="../../assets/images/wx42.jpeg" /></li>
+        <li><img src="../../assets/images/wx43.jpeg" /></li>
+        <li><img src="../../assets/images/wx46.jpeg" /></li>
+      </ul>
+    </div>
+    <div class="btn-box">
+      <button>向左</button>
+      <button>向右</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>banner-tabs切换</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .banner {
+        position: relative;
+        width: 590px;
+        height: 280px;
+        margin: 100px auto;
+      }
+
+      .pic {
+        position: relative;
+        width: 590px;
+        height: 280px;
+        overflow: hidden;
+      }
+
+      .pic img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        max-width: 100%;
+      }
+
+      .pic img.active {
+        display: block;
+      }
+
+      .tab {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 590px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.8);
+      }
+
+      .tab ul:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+
+      .tab ul li {
+        float: left;
+        width: 117px;
+        height: 40px;
+        list-style: none;
+        line-height: 40px;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background 0.3s linear;
+      }
+
+      .tab ul li.active {
+        background: #ec3200;
+      }
+
+      .tab ul li:last-child {
+        width: 118px;
+        border: none;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var aLi = document.querySelector('.tab').querySelectorAll('li')
+        var aImg = document.querySelector('.pic').querySelectorAll('img')
+        var index = 0,
+          timer = null
+        for (var i = 0; i < aLi.length; i++) {
+          aLi[i].index = i
+          aLi[i].onmouseover = function () {
+            clearInterval(timer)
+            index = this.index
+            auto()
+          }
+          aLi[i].onmouseout = function () {
+            timeInterVal()
+          }
+        }
+
+        function timeInterVal() {
+          timer = setInterval(function () {
+            index++
+            index %= 5
+            auto()
+          }, 3000)
+        }
+
+        timeInterVal()
+
+        function auto() {
+          for (var j = 0; j < aLi.length; j++) {
+            aLi[j].className = ''
+            aImg[j].className = ''
+          }
+          aLi[index].className = 'active'
+          aImg[index].className = 'active'
+        }
+      }
+
+      // 面向对象的姿势
+      // window.onload = function () {
+      //    var tbs = new Tab();
+      //    tbs.init()
+      // }
+
+      // function Tab() {
+      //     this.aLi = document.querySelector('.tab').querySelectorAll('li');
+      //     this.aImg = document.querySelector('.pic').querySelectorAll('img');
+      //     this.index = 0;
+      //     this.timer = null;
+      // }
+      // Tab.prototype.init = function() {
+      //     this.change();
+      //     this.timeInterVal();
+      // }
+      // Tab.prototype.change = function () {
+      //     var _this = this;
+      //     for (var i = 0; i < this.aLi.length; i++) {
+      //         _this.aLi[i].index = i;
+      //         _this.aLi[i].onmouseover = function () {
+      //             _this.index = this.index;
+      //             clearInterval(_this.timer);
+      //             _this.play();
+      //         }
+      //         _this.aLi[i].onmouseout = function () {
+      //             _this.timeInterVal();
+      //         }
+      //     }
+      // }
+
+      // Tab.prototype.timeInterVal = function () {
+      //     var _this = this;
+      //     _this.timer = setInterval(function () {
+      //         _this.index++;
+      //         _this.index %= 5;
+      //         _this.play();
+      //     }, 3000);
+      // }
+
+      // Tab.prototype.play = function () {
+      //     for (var i = 0; i < this.aLi.length; i++) {
+      //         this.aLi[i].className = '';
+      //         this.aImg[i].className = '';
+      //     }
+      //     this.aLi[this.index].className = 'active';
+      //     this.aImg[this.index].className = 'active';
+      // }
+    </script>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="pic">
+        <img class="active" src="../../assets/images/wx20.jpeg" />
+        <img src="../../assets/images/wx22.jpeg" />
+        <img src="../../assets/images/wx26.jpeg" />
+        <img src="../../assets/images/wx34.jpeg" />
+        <img src="../../assets/images/wx43.jpeg" />
+      </div>
+      <div class="tab">
+        <ul>
+          <li class="active">明星之几级前赛</li>
+          <li>赛季奖励及时发放</li>
+          <li>丧尸和杀手U</li>
+          <li>限时折扣销售</li>
+          <li>高校联赛上海区域赛</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

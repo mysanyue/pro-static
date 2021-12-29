@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>transform-demo</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+      padding: 100px;
+    }
+
+    #div {
+      height: 100px;
+      background: red;
+      transition-duration: 0.5s;
+    }
+  </style>
+  <script src="../tween.js"></script>
+  <script>
+    window.onload = function() {
+      var div = document.querySelector('#div');
+      div.addEventListener('touchend', function(ev) {
+        // var deg = cssTransform(this, 'rotate');
+        // deg += 30;
+        // cssTransform(this, 'rotate', deg);
+
+        MTween({
+          el: div,
+          time: 1000,
+          target: { width: 200 },
+          type: 'easeOut',
+          callBack: function() {
+            console.log('动画执行完毕');
+          },
+          callIn: function() {
+            console.log('同步执行');
+            var w = css(this, 'width');
+            console.log(w);
+            css(this, 'height', w);
+          }
+        })
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <div id="box">
+    <div id="div"></div>
+  </div>
+</body>
+
+</html>

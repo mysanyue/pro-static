@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>banner切换</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      img {
+        max-width: 100%;
+      }
+      .banner {
+        width: 100%;
+        height: 360px;
+        overflow: hidden;
+      }
+      .banner ul li {
+        width: 100%;
+        height: 360px;
+        text-align: center;
+      }
+      .banner ul li img {
+        min-width: 100%;
+      }
+      .banner-change {
+        position: relative;
+        top: -54px;
+        left: 0;
+        width: 672px;
+        margin: 0 auto;
+      }
+      .banner-change ul li {
+        float: left;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.5);
+        margin: 0 30px;
+        background-position: 100% 100%;
+        background-size: cover;
+        cursor: pointer;
+        transition: transform 0.3s linear;
+      }
+      .banner-change ul li.active {
+        transform: scale(1.4);
+      }
+      .banner-change ul:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+      .banner-change ul li:nth-child(1) {
+        background-image: url('../../assets/images/t1.jpg');
+      }
+      .banner-change ul li:nth-child(2) {
+        background-image: url('../../assets/images/t2.jpg');
+      }
+      .banner-change ul li:nth-child(3) {
+        background-image: url('../../assets/images/t3.jpg');
+      }
+      .banner-change ul li:nth-child(4) {
+        background-image: url('../../assets/images/t4.jpg');
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="banner">
+      <ul>
+        <li><img src="../../assets/images/t1.jpg" /></li>
+        <li><img src="../../assets/images/t2.jpg" /></li>
+        <li><img src="../../assets/images/t3.jpg" /></li>
+        <li><img src="../../assets/images/t4.jpg" /></li>
+      </ul>
+    </div>
+    <div class="banner-change">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <script src="../../assets/lib/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $('.banner-change li').hover(function () {
+          $(this).addClass('active').siblings().removeClass('active')
+          $('.banner ul li')
+            .eq(0)
+            .stop()
+            .animate({ marginTop: -(360 * $(this).index()) + 'px' }, 500)
+        })
+      })
+    </script>
+  </body>
+</html>

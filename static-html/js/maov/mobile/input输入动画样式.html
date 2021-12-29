@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>input 动画输入</title>
+  <style>
+    input {
+      outline: none;
+    }
+
+    .input1 {
+      height: 30px;
+      padding: 4px;
+      border: none;
+      border-bottom: 2px solid #000;
+      transition: 0.5s;
+    }
+
+    .input1:focus {
+      border-bottom-color: red;
+    }
+
+    .input1::-webkit-input-placeholder {
+      transition: 0.5s;
+      transform-origin: left top;
+    }
+
+    .input1:focus::-webkit-input-placeholder {
+      transform: scale(0.8) translateY(-15px);
+    }
+  </style>
+</head>
+
+<body>
+  <input class="input1" type="text" placeholder="4-12个字符">
+</body>
+
+</html>

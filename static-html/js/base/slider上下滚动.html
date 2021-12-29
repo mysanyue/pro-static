@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>slider上下滚动</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        background-color: #f1f1f1;
+      }
+
+      .container {
+        width: 400px;
+        height: 500px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        background-color: #fff;
+        text-align: center;
+      }
+
+      .container .wrapper {
+        height: 420px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .container .wrapper ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .container .wrapper img {
+        max-width: 100%;
+      }
+
+      .container button {
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        padding: 6px 15px;
+        text-align: center;
+        background-color: yellowgreen;
+        color: #fff;
+        cursor: pointer;
+      }
+      .container .up {
+        margin-bottom: 10px;
+      }
+      .container .down {
+        margin-top: 10px;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var oWrapper = document.querySelector('.wrapper')
+        var oUl = oWrapper.getElementsByTagName('ul')[0]
+        var aLi = oUl.getElementsByTagName('li')
+        var oUp = document.querySelector('.up')
+        var oDown = document.querySelector('.down')
+        var iSpeed = 0 // 运动速度
+        var timer = null
+
+        oUl.innerHTML += oUl.innerHTML
+
+        oUp.onmousedown = function () {
+          iSpeed = -5
+          timer = setInterval(doMove, 30)
+        }
+
+        oDown.onmousedown = function () {
+          iSpeed = 5
+          timer = setInterval(doMove, 30)
+        }
+
+        oUp.onmouseup = oDown.onmouseup = function () {
+          clearInterval(timer)
+        }
+
+        function doMove() {
+          oUl.style.top = oUl.offsetTop + iSpeed + 'px'
+          if (oUl.offsetTop < -oUl.offsetHeight / 2) {
+            oUl.style.top = 0
+          } else if (oUl.offsetTop > 0) {
+            oUl.style.top = -oUl.offsetHeight / 2 + 'px'
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <section class="container">
+      <button class="up">向上</button>
+      <div class="wrapper">
+        <ul>
+          <li><img src="../../assets/images/wx50.jpeg" /></li>
+          <li><img src="../../assets/images/wx58.jpeg" /></li>
+          <li><img src="../../assets/images/wx9.jpeg" /></li>
+          <li><img src="../../assets/images/wx10.jpeg" /></li>
+        </ul>
+      </div>
+      <button class="down">向下</button>
+    </section>
+  </body>
+</html>

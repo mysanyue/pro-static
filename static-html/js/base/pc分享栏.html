@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>分享栏</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .share {
+        position: absolute;
+        top: 35%;
+        left: -100px;
+        width: 100px;
+        height: 200px;
+        background: #ccc;
+      }
+
+      .share h3 {
+        position: absolute;
+        left: 100px;
+        top: 60px;
+        padding: 10px;
+        background: yellow;
+        width: 20px;
+        height: 60px;
+        line-height: 20px;
+        text-align: center;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var timer = null
+        var oShare = document.querySelector('.share')
+
+        oShare.onmouseover = function () {
+          startMove(0)
+        }
+        oShare.onmouseout = function () {
+          startMove(-100)
+        }
+
+        function startMove(target) {
+          // 鼠标移入会调用starMove函数并且会产生一个计时器，所以要先关闭计时器
+          clearInterval(timer)
+          timer = setInterval(function () {
+            var speed = oShare.offsetLeft < target ? 10 : -10
+            if (oShare.offsetLeft == target) {
+              clearInterval(timer)
+            } else {
+              oShare.style.left = oShare.offsetLeft + speed + 'px'
+            }
+          }, 30)
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="share">
+      <h3>分享栏</h3>
+    </div>
+  </body>
+</html>

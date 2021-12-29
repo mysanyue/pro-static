@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>函数节流</title>
+  </head>
+
+  <body>
+    <h1>请看源代码</h1>
+    <script>
+      /**
+       * @description 函数节流
+       * @param { Function } 需要执行的函数
+       * @param { Number } 延迟时间
+       * @param { Number }  最大延迟
+       */
+      function dealWith(fn, delay, mastExec) {
+        var timer;
+        var lastTime = new Date();
+        return function(arg) {
+          var now = new Date();
+          clearTimeout(timer);
+          if (now - lastTime < mastExec) {
+            timer = setTimeout(() => {
+              fn(arg);
+              lastTime = now;
+            }, delay);
+          } else {
+            fn(arg);
+            lastTime = now;
+          }
+        };
+      }
+      var dealFn = dealWith(() => {}, 100, 200);
+
+      /**
+       * @description 防抖动
+       * @param { Function } 需要执行的函数
+       * @param { Number } 延迟时间
+       */
+      function delayWith(fn, delay) {
+        var timer;
+        return function(arg) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn(arg);
+          }, delay);
+        };
+      }
+      var delayFn = delayWith(() => {}, 200);
+    </script>
+  </body>
+</html>

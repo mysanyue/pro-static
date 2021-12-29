@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>倒计时</title>
+    <style>
+      .warp {
+        width: 90%;
+        margin: 10% auto 0;
+        color: #fff;
+        background: rgba(230, 0, 18, 0.6);
+        animation: newsBtn 2s alternate infinite;
+      }
+
+      @-webkit-keyframes newsBtn {
+        0% {
+          box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px 1px rgba(230, 0, 18, 0);
+        }
+
+        10% {
+          box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0), 0px 0px 0px 2px rgba(230, 0, 18, 0.1);
+        }
+
+        20% {
+          box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0), 0px 0px 0px 4px rgba(230, 0, 18, 0.2);
+        }
+
+        40% {
+          box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px 1px rgba(230, 0, 18, 0.1), 0px 0px 0px 4px rgba(0, 0, 0, 0),
+            0px 0px 0px 6px rgba(230, 0, 18, 0.3);
+        }
+
+        50% {
+          box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0), 0px 0px 0px 3px rgba(230, 0, 18, 0.2), 0px 0px 0px 5px rgba(0, 0, 0, 0),
+            0px 0px 0px 8px rgba(230, 0, 18, 0.4);
+        }
+
+        60% {
+          box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0), 0px 0px 0px 5px rgba(230, 0, 18, 0.3), 0px 0px 0px 6px rgba(0, 0, 0, 0),
+            0px 0px 0px 10px rgba(230, 0, 18, 0.5);
+        }
+
+        70% {
+          box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0), 0px 0px 0px 6px rgba(230, 0, 18, 0.4), 0px 0px 0px 7px rgba(0, 0, 0, 0),
+            0px 0px 0px 11px rgba(230, 0, 18, 0.4);
+        }
+
+        80% {
+          box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0), 0px 0px 0px 7px rgba(230, 0, 18, 0.3), 0px 0px 0px 8px rgba(0, 0, 0, 0),
+            0px 0px 0px 12px rgba(230, 0, 18, 0.3);
+        }
+
+        90% {
+          box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 0px 6px rgba(230, 0, 18, 0.2), 0px 0px 0px 9px rgba(0, 0, 0, 0),
+            0px 0px 0px 13px rgba(230, 0, 18, 0.2);
+        }
+
+        100% {
+          box-shadow: 0px 0px 0px 7px rgba(0, 0, 0, 0), 0px 0px 0px 7px rgba(230, 0, 18, 0.1), 0px 0px 0px 10px rgba(0, 0, 0, 0),
+            0px 0px 0px 14px rgba(230, 0, 18, 0);
+        }
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        var oTime = document.getElementById('time')
+        var t = 0,
+          str = ''
+        var iNew = null,
+          iNow = null
+        var timer = null
+
+        iNew = new Date('2021-12-29 18:00')
+        clearInterval(timer)
+
+        timer = setInterval(function () {
+          iNow = new Date()
+          t = Math.floor((iNew - iNow) / 1000) //秒
+          if (t >= 0) {
+            str =
+              Math.floor(t / 86400) +
+              ' 天 ' +
+              Math.floor((t % 86400) / 3600) +
+              ' 时 ' +
+              Math.floor(((t % 86400) % 3600) / 60) +
+              ' 分 ' +
+              (t % 60) +
+              ' 秒'
+            oTime.innerHTML = str
+          } else {
+            clearInterval(timer)
+          }
+        })
+      }
+    </script>
+  </head>
+
+  <body>
+    <p>距离下班，还有</p>
+    <p id="time" class="warp"></p>
+  </body>
+</html>

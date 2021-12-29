@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>tag切换</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 12px;
+        text-decoration: none;
+        color: #333;
+      }
+      html,
+      body {
+        background-color: #eef3fa;
+      }
+      .tab {
+        width: 294px;
+        margin: 100px auto 0;
+        border: 1px solid #eee;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      }
+      .tab-title {
+        position: relative;
+        height: 27px;
+        background: #f7f7f7;
+      }
+      .tab-title ul {
+        width: 301px;
+      }
+      .tab-title li {
+        float: left;
+        width: 59px;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+      }
+      .tab-title li.select {
+        font-weight: 700;
+        background-color: #fff;
+        border-bottom-color: #fff;
+      }
+      .tab .tab-content .tab-list {
+        margin: 10px 10px 10px 19px;
+        display: none;
+      }
+      .tab .tab-content .active {
+        display: block;
+      }
+      .tab .tab-content .tab-list li {
+        height: 25px;
+        overflow: hidden;
+      }
+      .tab .tab-content .tab-list a {
+        color: #666;
+      }
+      .tab .tab-content .tab-list a:hover {
+        color: #f90;
+        text-decoration: underline;
+      }
+    </style>
+    <script type="text/javascript">
+      function $(id) {
+        return typeof id == 'string' ? document.getElementById(id) : id
+      }
+      window.onload = function () {
+        var titleName = $('tab-title').getElementsByTagName('li')
+        var tabContent = $('tab-content').getElementsByTagName('div')
+
+        for (var i = 0; i < titleName.length; i++) {
+          titleName[i].id = i
+          titleName[i].onmouseover = function () {
+            for (var j = 0; j < titleName.length; j++) {
+              titleName[j].className = ''
+              tabContent[j].className = 'tab-list'
+            }
+            this.className = 'select'
+            tabContent[this.id].className = 'tab-list active'
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="tab" id="tab">
+      <div class="tab-title" id="tab-title">
+        <ul>
+          <li class="select"><a href="#">公告</a></li>
+          <li><a href="#">内容</a></li>
+          <li><a href="#">公益</a></li>
+          <li><a href="#">广告</a></li>
+          <li><a href="#">现货</a></li>
+        </ul>
+      </div>
+      <div class="tab-content" id="tab-content">
+        <div class="tab-list active">
+          <ul>
+            <li><a href="">618双丰收赶紧下单</a></li>
+            <li><a href="">618双丰收赶紧下单</a></li>
+            <li><a href="">618双丰收赶紧下单</a></li>
+            <li><a href="">618双丰收赶紧下单</a></li>
+          </ul>
+        </div>
+        <div class="tab-list">
+          <ul>
+            <li><a href="">619最后一天疯狂抢</a></li>
+            <li><a href="">619最后一天疯狂抢</a></li>
+            <li><a href="">619最后一天疯狂抢</a></li>
+            <li><a href="">619最后一天疯狂抢</a></li>
+          </ul>
+        </div>
+        <div class="tab-list">
+          <ul>
+            <li><a href="">620我们都收库了你才来</a></li>
+            <li><a href="">620我们都收库了你才来</a></li>
+            <li><a href="">620我们都收库了你才来</a></li>
+            <li><a href="">620我们都收库了你才来</a></li>
+          </ul>
+        </div>
+        <div class="tab-list">
+          <ul>
+            <li><a href="">621似乎时间过得很快</a></li>
+            <li><a href="">621似乎时间过得很快</a></li>
+            <li><a href="">621似乎时间过得很快</a></li>
+            <li><a href="">621似乎时间过得很快</a></li>
+          </ul>
+        </div>
+        <div class="tab-list">
+          <ul>
+            <li><a href="">期待你的到来还有很多优惠</a></li>
+            <li><a href="">期待你的到来还有很多优惠</a></li>
+            <li><a href="">期待你的到来还有很多优惠</a></li>
+            <li><a href="">期待你的到来还有很多优惠</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>滚动网页标题栏中的文字</title>
+    <script type="text/javascript">
+      var titleWord = '品天下美景-饱您的眼福'
+      var speed = 300
+      var titleChange = ' ' + titleWord
+
+      function titleScroll() {
+        if (titleChange.length < titleWord.length) titleChange += '-' + titleWord
+        titleChange = titleChange.substring(1, titleChange.length)
+        // console.log(titleChange);
+        document.title = titleChange.substring(0, titleWord.length)
+        // console.log(titleChange.substring(0,titleWord.length));
+        window.setTimeout('titleScroll()', speed)
+      }
+    </script>
+  </head>
+
+  <body onload="titleScroll()"></body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>幽灵按钮</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: url('../../assets/images/d1.jpg') no-repeat;
+        background-size: cover;
+      }
+      .box {
+        width: 1000px;
+        height: 280px;
+        margin: 100px auto 0;
+        background: rgba(0, 0, 0, 0.2);
+      }
+      .box .link {
+        width: 205px;
+        height: 280px;
+        margin: 0 20px;
+        float: left;
+        position: relative;
+      }
+      .link .icon {
+        display: inline-block;
+        width: 100%;
+        height: 190px;
+        -webkit-transition: all 0.25s ease;
+        -moz-transition: all 0.25s ease;
+        -ms-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+      }
+      .link-miss .icon {
+        background: url('../../assets/images/mission.png') no-repeat center center;
+      }
+      .link-play .icon {
+        background: url('../../assets/images/play.png') no-repeat center center;
+      }
+      .link-touch .icon {
+        background: url('../../assets/images/touch.png') no-repeat center center;
+      }
+      .link .icon:hover {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+      /*幽灵按钮开始*/
+      .button {
+        display: block;
+        width: 180px;
+        height: 50px;
+        text-decoration: none;
+        line-height: 50px;
+        color: #2dcb70;
+        font-family: '微软雅黑', Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        padding-left: 20px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        background: url('../../assets/images/allow.png') no-repeat 130px center;
+        -webkit-transition: all 0.3s linear;
+        -moz-transition: all 0.3s linear;
+        -ms-transition: all 0.3s linear;
+        -o-transition: all 0.3s linear;
+        transition: all 0.3s linear;
+        position: relative;
+      }
+      .button:hover {
+        border: 2px solid rgba(255, 255, 255, 1);
+        background-position: 140px center;
+      }
+      .button .line {
+        display: block;
+        position: absolute;
+        background: none;
+        -webkit-transition: all 0.3s linear;
+        -moz-transition: all 0.3s linear;
+        -ms-transition: all 0.3s linear;
+        -o-transition: all 0.3s linear;
+        transition: all 0.3s linear;
+      }
+      .button:hover .line {
+        background: #fff;
+      }
+      .button .line-top {
+        height: 2px;
+        width: 0;
+        left: -110%;
+        top: -2px;
+      }
+      .button:hover .line-top {
+        width: 100%;
+        left: -2px;
+      }
+      .button .line-bottom {
+        width: 0px;
+        height: 2px;
+        right: -110%;
+        bottom: -2px;
+      }
+      .button:hover .line-bottom {
+        width: 100%;
+        right: -2px;
+      }
+      .button .line-left {
+        width: 2px;
+        height: 0;
+        left: -2px;
+        bottom: -110%;
+      }
+      .button:hover .line-left {
+        height: 100%;
+        bottom: 2px;
+      }
+      .button .line-right {
+        width: 2px;
+        height: 0;
+        top: -110%;
+        right: -2px;
+      }
+      .button:hover .line-right {
+        height: 100%;
+        top: -2px;
+      }
+      /*幽灵按钮结束*/
+      /*提示开始*/
+      .box .tip {
+        position: absolute;
+        padding: 0 14px;
+        height: 35px;
+        line-height: 35px;
+        background: #2dcb70;
+        color: #fff;
+        top: 160px;
+        font-size: 16px;
+        font-weight: normal;
+        text-transform: none;
+        margin: 0 auto;
+        border-radius: 3px;
+        opacity: 0;
+      }
+      .tip em {
+        font-style: normal;
+      }
+      .tip span {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        border: 7px solid transparent;
+        border-top-color: #2dcb70;
+        left: 50%;
+        margin-left: -3px;
+        bottom: 14px;
+      }
+      /*提示结束*/
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="link link-miss">
+        <span class="icon"></span>
+        <a href="" class="button" data-title="这是一个动画按钮">
+          <span class="line line-top"></span>
+          <span class="line line-left"></span>
+          <span class="line line-right"></span>
+          <span class="line line-bottom"></span>
+          MISSIO
+        </a>
+      </div>
+      <div class="link link-play">
+        <span class="icon"></span>
+        <a href="" class="button" data-title="这是一个幽灵按钮">
+          <span class="line line-top"></span>
+          <span class="line line-left"></span>
+          <span class="line line-right"></span>
+          <span class="line line-bottom"></span>
+          MISSIO
+        </a>
+      </div>
+      <div class="link link-touch">
+        <span class="icon"></span>
+        <a href="" class="button" data-title="这是一个美化的按钮">
+          <span class="line line-top"></span>
+          <span class="line line-left"></span>
+          <span class="line line-right"></span>
+          <span class="line line-bottom"></span>
+          MISSIO
+        </a>
+      </div>
+      <div class="tip">
+        <em></em>
+        <span></span>
+      </div>
+    </div>
+    <script type="text/javascript" src="../../assets/lib/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('.link .button').hover(
+          function () {
+            var title = $(this).attr('data-title')
+            $('.tip em').text(title)
+            var pos = $(this).offset().left
+            var dis = ($('.tip').outerWidth() - $(this).outerWidth()) / 2
+            var f = pos - dis
+            $('.tip')
+              .css({ left: f + 'px' })
+              .animate({ top: 195, opacity: 1 }, 300)
+          },
+          function () {
+            $('.tip').animate({ top: 160, opacity: 0 }, 300)
+          }
+        )
+      })
+    </script>
+  </body>
+</html>

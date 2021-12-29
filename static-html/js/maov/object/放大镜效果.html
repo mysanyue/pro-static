@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>放大镜效果</title>
+  <style>
+    #div1 {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    #div1 span {
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      opacity: 0.5;
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: none;
+    }
+
+    /* 阻止子级影响父级 */
+    #mark {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      background: red;
+      opacity: 0;
+    }
+
+    #div2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      left: 500px;
+      top: 10px;
+      overflow: hidden;
+    }
+
+    #div2 img {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var oDiv = document.getElementById('div1');
+      var oSpan = oDiv.getElementsByTagName('span')[0];
+      var oDiv2 = document.getElementById('div2');
+      var oImg = oDiv2.getElementsByTagName('img')[0];
+
+      oDiv.onmouseover = function () {
+        oSpan.style.display = 'block';
+      };
+
+      oDiv.onmouseout = function () {
+        oSpan.style.display = 'none';
+      };
+
+      oDiv.onmousemove = function (ev) {
+        var ev = ev || window.event;
+        var L = ev.clientX - oDiv.offsetLeft - oSpan.offsetWidth / 2;
+        var T = ev.clientY - oDiv.offsetTop - oSpan.offsetHeight / 2;
+
+        if (L < 0) {
+          L = 0;
+        } else if (L > oDiv.offsetWidth - oSpan.offsetWidth) {
+          L = oDiv.offsetWidth - oSpan.offsetWidth;
+        }
+
+        if (T < 0) {
+          T = 0;
+        } else if (T > oDiv.offsetHeight - oSpan.offsetHeight) {
+          T = oDiv.offsetHeight - oSpan.offsetHeight;
+        }
+
+        oSpan.style.left = L + 'px';
+        oSpan.style.top = T + 'px';
+
+        var scaleX = L / (oDiv.offsetWidth - oSpan.offsetWidth);
+        var scaleY = T / (oDiv.offsetHeight - oSpan.offsetHeight);
+
+        oImg.style.left = -scaleX * (oImg.offsetWidth - oDiv2.offsetWidth) + 'px';
+        oImg.style.top = -scaleY * (oImg.offsetHeight - oDiv2.offsetHeight) + 'px';
+      };
+    };
+  </script>
+</head>
+
+<body>
+  <div id="div1">
+    <img src="../../assets/images/fdjx.jpg" />
+    <span></span>
+    <!-- 阻止子级影响父级 -->
+    <div id="mark"></div>
+  </div>
+  <div id="div2">
+    <img src="../../assets/images/fdj.jpg" />
+  </div>
+</body>
+
+</html>

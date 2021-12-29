@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 状态栏 默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）。 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!-- 在iOS中有两个meta值，apple-mobile-web-app-capable和apple-mobile-web-app-status-bar-style，这两个会让网页内容以应用程序风格显示，并使状态栏透明 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- QQ强制竖屏 -->
+  <meta name="x5-orientation" content="portrait">
+  <!-- QQ强制全屏 -->
+  <meta name="x5-fullscreen" content="true">
+  <!-- uc强制竖屏 -->
+  <meta name="screen-orientation" content="portrait">
+  <!-- UC强制全屏 -->
+  <meta name="full-screen" content="yes">
+  <title>仿探探</title>
+  <style>
+    html {
+      font-size: 4vw;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .card {
+      width: 100vw;
+      height: 100vh;
+      background: pink;
+      perspective: 500px;
+      overflow: hidden;
+      perspective-origin: center 580px;
+    }
+
+    .box {
+      width: 20rem;
+      height: 20rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
+      transition: 1s;
+
+    }
+
+    .box div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform-origin: bottom center;
+    }
+
+    img {
+
+      border: none;
+      width: 100%;
+      border-radius: 2rem;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="box">
+      <div><img src="pics/card1.jpg" alt=""></div>
+      <div><img src="pics/card2.jpg" alt=""></div>
+      <div><img src="pics/card3.jpg" alt=""></div>
+      <div><img src="pics/card4.jpg" alt=""></div>
+      <div><img src="pics/card5.jpg" alt=""></div>
+      <div><img src="pics/card6.jpg" alt=""></div>
+    </div>
+  </div>
+  <script>
+    var cardDiv = document.querySelectorAll('.box div');
+    var positionArr = [];
+    var startpointX = 0;
+    var now = 0;
+    var rotate = 0;
+
+    init();
+
+    function init() {
+      for (let i = 0; i < cardDiv.length; i++) {
+        cardDiv[i].style.transform = 'translateZ(-' + i * 60 + 'px)'
+        positionArr.push(i * 60)
+      }
+    }
+
+    document.addEventListener('touchstart', function(e) {
+      startpointX = e.touches[0].clientX;
+      cardDiv[now].style = '';
+      rotate = 0;
+    })
+
+    document.addEventListener('touchmove', function(e) {
+      let { clientX } = e.touches[0];
+      rotate = (startpointX - clientX) * 0.05 * (-1);
+      cardDiv[now].style.transform = 'rotate(' + rotate + 'deg)'
+    })
+
+
+    document.addEventListener('touchend', function(e) {
+      if (rotate < -10) {
+        cardDiv[now].style.transform = 'rotate(' + rotate + 'deg) translateX(-500px)';
+        cardDiv[now].style.transition = '.3s,opacity 0.1s .3s';
+      } else if (rotate > 10) {
+        cardDiv[now].style.transform = 'rotate(' + rotate + 'deg) translateX(500px)';
+        cardDiv[now].style.transition = '.3s,opacity 0.1s .3s';
+      } else {
+        cardDiv[now].style.transform = 'rotate(0deg)';
+        return;
+      }
+      move();
+      now++;
+      if (now == cardDiv.length) {
+        now = 0;
+      }
+    })
+
+    function move() {
+      cardDiv[now].style.opacity = 0;
+      positionArr.unshift(positionArr.pop());
+      cardDiv.forEach((item, index) => {
+        if (now == index) {
+          return;
+        }
+        item.style.opacity = 1;
+        item.style.transition = '.3s,opacity .1s .3s';
+        item.style.transform = 'translateZ(-' + positionArr[index] + 'px)';
+      })
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>多级菜单</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #f1f1f1;
+      }
+
+      li {
+        list-style: none;
+      }
+
+      .header {
+        height: 50px;
+        background-color: #303643;
+      }
+
+      .header .nav-bar {
+        width: 1200px;
+        margin: auto;
+      }
+
+      .header .nav-bar:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+
+      .header .title {
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        width: 100%;
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .header .menu-item.active .title {
+        color: #fff;
+        background-color: #40485b;
+      }
+
+      .header .menu-item {
+        position: relative;
+        float: left;
+        width: 100px;
+        text-align: center;
+      }
+
+      .header .child-menu {
+        display: none;
+      }
+
+      .header .menu-item.active .child-menu {
+        display: block;
+      }
+
+      .header .child-menu {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        background-color: #40485b;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        text-align: left;
+      }
+
+      .header .child-menu .sub-menu {
+        position: relative;
+        padding: 8px 10px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        font-size: 16px;
+      }
+
+      .header .child-menu .sub-menu:after {
+        display: block;
+        content: '';
+        position: absolute;
+        right: 7px;
+        top: 15px;
+        width: 5px;
+        height: 5px;
+        border-top: 2px solid #ffffff;
+        border-right: 2px solid #ffffff;
+        transform: rotate(45deg);
+        transition: transform 0.2s ease-in;
+      }
+
+      .header .child-menu .sub-menu.active {
+        background-color: #343b4e;
+      }
+
+      .header .child-menu .sub-menu.active .sub-title {
+        color: #fff;
+      }
+
+      .header .child-menu .sub-menu.active:after {
+        transform: rotate(135deg);
+      }
+
+      .header .child-menu .sub-title {
+        color: #d8dade;
+      }
+
+      .header .last-child-menu {
+        display: none;
+      }
+
+      .header .sub-menu.active .last-child-menu {
+        display: block;
+        position: absolute;
+        left: 100px;
+        top: 0;
+        width: 100px;
+        background-color: #40485b;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .header .last-child-menu .last-sub-menu a {
+        display: block;
+        padding: 8px 10px;
+        text-decoration: none;
+        color: #d8dade;
+      }
+
+      .header .last-child-menu .last-sub-menu a:hover {
+        background-color: #343b4e;
+        color: #fff;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var oNavBar = document.querySelector('.nav-bar')
+        var aItem = oNavBar.querySelectorAll('.menu-item')
+        var aSubItem = oNavBar.querySelectorAll('.sub-menu')
+
+        for (var i = 0; i < aItem.length; i++) {
+          aItem[i].onmouseover = function () {
+            this.className = 'menu-item active'
+          }
+          aItem[i].onmouseout = function () {
+            this.className = 'menu-item'
+          }
+        }
+
+        for (var i = 0; i < aSubItem.length; i++) {
+          aSubItem[i].onmouseover = function () {
+            this.className = 'sub-menu active'
+          }
+          aSubItem[i].onmouseout = function () {
+            this.className = 'sub-menu'
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <header class="header">
+      <ul class="nav-bar">
+        <li class="menu-item">
+          <span class="title">商户入驻</span>
+          <ul class="child-menu">
+            <li class="sub-menu">
+              <span class="sub-title">商户中心</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">商户中心1</a></li>
+                <li class="last-sub-menu"><a href="">商户中心2</a></li>
+                <li class="last-sub-menu"><a href="">商户中心3</a></li>
+                <li class="last-sub-menu"><a href="">商户中心4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">商户营业</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">商户营业1</a></li>
+                <li class="last-sub-menu"><a href="">商户营业2</a></li>
+                <li class="last-sub-menu"><a href="">商户营业3</a></li>
+                <li class="last-sub-menu"><a href="">商户营业4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">商户审核</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">商户审核1</a></li>
+                <li class="last-sub-menu"><a href="">商户审核2</a></li>
+                <li class="last-sub-menu"><a href="">商户审核3</a></li>
+                <li class="last-sub-menu"><a href="">商户审核4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">联系商户</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">联系商户1</a></li>
+                <li class="last-sub-menu"><a href="">联系商户2</a></li>
+                <li class="last-sub-menu"><a href="">联系商户3</a></li>
+                <li class="last-sub-menu"><a href="">联系商户4</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="title">买家入口</span>
+          <ul class="child-menu">
+            <li class="sub-menu">
+              <span class="sub-title">社会买家</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">社会买家1</a></li>
+                <li class="last-sub-menu"><a href="">社会买家2</a></li>
+                <li class="last-sub-menu"><a href="">社会买家3</a></li>
+                <li class="last-sub-menu"><a href="">社会买家4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">企业买家</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">企业买家1</a></li>
+                <li class="last-sub-menu"><a href="">企业买家2</a></li>
+                <li class="last-sub-menu"><a href="">企业买家3</a></li>
+                <li class="last-sub-menu"><a href="">企业买家4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">买家规则</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">买家规则1</a></li>
+                <li class="last-sub-menu"><a href="">买家规则2</a></li>
+                <li class="last-sub-menu"><a href="">买家规则3</a></li>
+                <li class="last-sub-menu"><a href="">买家规则4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">VIP买家</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">VIP买家1</a></li>
+                <li class="last-sub-menu"><a href="">VIP买家2</a></li>
+                <li class="last-sub-menu"><a href="">VIP买家3</a></li>
+                <li class="last-sub-menu"><a href="">VIP买家4</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="title">测试阶段</span>
+          <ul class="child-menu">
+            <li class="sub-menu">
+              <span class="sub-title">青铜阶段</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">青铜阶段1</a></li>
+                <li class="last-sub-menu"><a href="">青铜阶段2</a></li>
+                <li class="last-sub-menu"><a href="">青铜阶段3</a></li>
+                <li class="last-sub-menu"><a href="">青铜阶段4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">白银阶段</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">白银阶段1</a></li>
+                <li class="last-sub-menu"><a href="">白银阶段2</a></li>
+                <li class="last-sub-menu"><a href="">白银阶段3</a></li>
+                <li class="last-sub-menu"><a href="">白银阶段4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">黄金阶段</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">黄金阶段1</a></li>
+                <li class="last-sub-menu"><a href="">黄金阶段2</a></li>
+                <li class="last-sub-menu"><a href="">黄金阶段3</a></li>
+                <li class="last-sub-menu"><a href="">黄金阶段4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">钻石阶段</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">钻石阶段1</a></li>
+                <li class="last-sub-menu"><a href="">钻石阶段2</a></li>
+                <li class="last-sub-menu"><a href="">钻石阶段3</a></li>
+                <li class="last-sub-menu"><a href="">钻石阶段4</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="title">最后阶段</span>
+          <ul class="child-menu">
+            <li class="sub-menu">
+              <span class="sub-title">理清需求</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">理清需求1</a></li>
+                <li class="last-sub-menu"><a href="">理清需求2</a></li>
+                <li class="last-sub-menu"><a href="">理清需求3</a></li>
+                <li class="last-sub-menu"><a href="">理清需求4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">发布原型</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">发布原型1</a></li>
+                <li class="last-sub-menu"><a href="">发布原型2</a></li>
+                <li class="last-sub-menu"><a href="">发布原型3</a></li>
+                <li class="last-sub-menu"><a href="">发布原型4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">开始代码</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">开始代码1</a></li>
+                <li class="last-sub-menu"><a href="">开始代码2</a></li>
+                <li class="last-sub-menu"><a href="">开始代码3</a></li>
+                <li class="last-sub-menu"><a href="">开始代码4</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <span class="sub-title">发布系统</span>
+              <ul class="last-child-menu">
+                <li class="last-sub-menu"><a href="">发布系统1</a></li>
+                <li class="last-sub-menu"><a href="">发布系统2</a></li>
+                <li class="last-sub-menu"><a href="">发布系统3</a></li>
+                <li class="last-sub-menu"><a href="">发布系统4</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>不重复的随机数</title>
+    <script>
+      window.onload = function () {
+        var oInput = document.getElementById('input1')
+        var oDiv = document.getElementById('div1')
+        oInput.onclick = function () {
+          oDiv.innerHTML = randomNum(40, 10)
+        }
+
+        function randomNum(iAll, iNow) {
+          var arr = []
+          var newArr = []
+          for (var i = 1; i <= iAll; i++) {
+            arr.push(i)
+          }
+
+          for (var i = 0; i < iNow; i++) {
+            newArr.push(arr.splice(Math.floor(Math.random() * arr.length), 1))
+          }
+          return newArr
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" id="input1" value="生成随机数" />
+    <div id="div1"></div>
+  </body>
+</html>

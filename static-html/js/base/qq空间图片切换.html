@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>qq空间图片切换效果</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      .img-list {
+        width: 900px;
+        margin: auto;
+        padding: 10px;
+      }
+
+      .img-list:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+
+      .img-list li {
+        float: left;
+        width: 300px;
+        box-sizing: border-box;
+        list-style: none;
+        overflow: hidden;
+      }
+
+      .img-list li img {
+        transition: transform 0.3s linear;
+        cursor: pointer;
+      }
+
+      .img-list li img:hover {
+        transform: scale(1.4);
+      }
+
+      .model {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+
+      .model .img-look {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 1000px;
+        height: 600px;
+        background: #fff;
+        padding: 10px;
+      }
+
+      .model .img-box {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .model .img-look .next,
+      .model .img-look .pre {
+        position: absolute;
+        display: block;
+        content: '';
+        top: 50%;
+        width: 15px;
+        height: 15px;
+        border-top: 4px solid #ffffff;
+        border-right: 4px solid #ffffff;
+        cursor: pointer;
+      }
+
+      .model .img-look .next {
+        right: -40px;
+        transform: rotate(45deg) translateY(-50%);
+      }
+
+      .model .img-look .pre {
+        left: -40px;
+        transform: rotate(-135deg) translateY(-50%);
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="container">
+      <ul class="img-list">
+        <li><img src="../../assets/images/wx46.jpeg" /></li>
+        <li><img src="../../assets/images/wx53.jpeg" /></li>
+        <li><img src="../../assets/images/wx58.jpeg" /></li>
+        <li><img src="../../assets/images/wx56.jpeg" /></li>
+        <li><img src="../../assets/images/wx5.jpeg" /></li>
+        <li><img src="../../assets/images/wx6.jpeg" /></li>
+      </ul>
+    </section>
+    <div class="model">
+      <div class="img-look">
+        <div class="img-box">
+          <img src="../../assets/images/wx46.jpeg" />
+        </div>
+        <div class="pre"></div>
+        <div class="next"></div>
+      </div>
+      <button class="close">关闭</button>
+    </div>
+    <script src="../../assets/lib/jquery.min.js"></script>
+    <script>
+      var model = $('.model')
+      var lookImg = $('.model img')
+      var imgList = $('.img-list img')
+      var index = 0
+
+      $('.img-list li').click(function () {
+        index = $(this).index()
+        model.fadeIn()
+        lookImg.prop('src', $(this).find('img').prop('src'))
+      })
+      $('.close').click(function (e) {
+        model.fadeOut()
+      })
+      $('.model .pre').click(function () {
+        console.log(index)
+        index--
+        index = index < 0 ? imgList.length - 1 : index
+        lookImg.prop('src', $(imgList[index]).prop('src'))
+      })
+      $('.model .next').click(function () {
+        index++
+        index = index > imgList.length - 1 ? 0 : index
+        lookImg.prop('src', $(imgList[index]).prop('src'))
+      })
+    </script>
+  </body>
+</html>

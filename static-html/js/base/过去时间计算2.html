@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过去时间计算</title>
+  </head>
+
+  <body>
+    <time class="time"></time>
+    <script>
+      !(function (win, doc) {
+        var value = getDate(new Date('2021-12-28 13:40'))
+        doc.querySelector('.time').textContent = value
+
+        function getDate(dateTime) {
+          var now = new Date()
+          var last = new Date(dateTime)
+          var nowMin = now.getTime() / 1000 / 60
+          var lastMin = last.getTime() / 1000 / 60
+          var day = 1000 * 60 * 60 * 24
+          var lastDate = last.getFullYear() + '-' + toDB(last.getMonth()) + '-' + toDB(last.getDate())
+          var weebText = ['日', '一', '二', '三', '四', '五', '六']
+          if (now.getFullYear() > last.getFullYear()) {
+            return lastDate
+          }
+          if (now.getMonth() > last.getMonth()) {
+            return lastDate
+          }
+          if (now.getTime() - last.getTime() > day * (now.getDay() + 1)) {
+            return lastDate
+          }
+          if (now.getDate() - 1 > last.getDate()) {
+            return '星期' + weebText[last.getDay()]
+          }
+          if (now.getDate() > last.getDate()) {
+            return '昨天'
+          }
+          if (nowMin - lastMin < 1) {
+            return '刚刚'
+          }
+          if (nowMin - lastMin < 60) {
+            return Math.floor(nowMin - lastMin) + '分钟前'
+          }
+          return toDB(last.getHours()) + ':' + toDB(last.getMinutes())
+        }
+
+        function toDB(nub) {
+          return nub < 10 ? '0' + nub : '' + nub
+        }
+      })(window, document)
+    </script>
+  </body>
+</html>

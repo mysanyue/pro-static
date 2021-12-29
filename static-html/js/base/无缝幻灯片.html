@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>slide</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .banner {
+        height: 520px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .banner ul {
+        width: 500%;
+        position: relative;
+      }
+
+      .banner ul:after {
+        clear: both;
+      }
+
+      .banner ul > li {
+        /*width: 25%;*/
+        height: 520px;
+        float: left;
+      }
+
+      .banner ul > li:nth-child(1) {
+        background: url('../../assets/images/slide1.jpg') no-repeat center center;
+      }
+
+      .banner ul > li:nth-child(2) {
+        background: url('../../assets/images/slide2.jpg') no-repeat center center;
+      }
+
+      .banner ul > li:nth-child(3) {
+        background: url('../../assets/images/slide3.jpg') no-repeat center center;
+      }
+
+      .banner ul > li:nth-child(4) {
+        background: url('../../assets/images/slide4.jpg') no-repeat center center;
+      }
+
+      .banner ul > li:nth-child(5) {
+        background: url('../../assets/images/slide1.jpg') no-repeat center center;
+      }
+
+      .banner ol {
+        width: 88px;
+        height: 22px;
+        position: absolute;
+        left: 50%;
+        margin-left: -64px;
+        bottom: 18px;
+        padding: 0 20px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+      }
+
+      .banner ol {
+        clear: both;
+      }
+
+      .banner ol > li {
+        height: 12px;
+        width: 12px;
+        background: rgba(255, 255, 255, 0.5);
+        float: left;
+        margin: 5px;
+        border-radius: 51%;
+        cursor: pointer;
+      }
+
+      .banner ol > li.active {
+        background: #fff;
+      }
+
+      .banner span {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 50%;
+        margin-top: -30px;
+        cursor: pointer;
+        display: none;
+      }
+
+      .banner span.btn-left {
+        left: 20px;
+        background: url('../../assets/images/banner-left.png');
+      }
+
+      .banner span.btn-right {
+        right: 20px;
+        background: url('../../assets/images/banner-right.png');
+      }
+
+      .banner span.btn-left:hover,
+      .banner span.btn-right:hover {
+        background-position: bottom;
+      }
+    </style>
+    <script type="text/javascript" src="../../assets/lib/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        slide()
+      })
+
+      function slide() {
+        var oli = $('.banner ol>li')
+        var i = 0
+        var oul = $('.banner ul')
+        var timer = null
+        var obtn = $('.banner span')
+
+        // 设置li的宽度
+        var bannerWidth = $(window).width()
+        $('.banner ul>li').width(bannerWidth)
+
+        // 点击轮播
+        oli.click(function () {
+          i = $(this).index()
+          $(this).addClass('active').siblings().removeClass('active')
+          oul.stop().animate(
+            {
+              left: -i * bannerWidth + 'px',
+            },
+            500
+          )
+        })
+
+        // 自动轮播
+        function autoPlay() {
+          i++
+          if (i == 4) {
+            oli.eq(0).addClass('active').siblings().removeClass('active')
+          }
+          if (i == 5) {
+            i = 0
+            oul
+              .css('left', '0')
+              .stop()
+              .animate(
+                {
+                  left: -bannerWidth + 'px',
+                },
+                500
+              )
+            i = 1
+            oli.eq(1).addClass('active').siblings().removeClass('active')
+          } else {
+            oli.eq(i).addClass('active').siblings().removeClass('active')
+            oul.stop().animate(
+              {
+                left: -i * bannerWidth + 'px',
+              },
+              500
+            )
+          }
+        }
+
+        function autoPlayUp() {
+          i--
+          if (i < 0) {
+            i = 4
+            oul
+              .css('left', -i * bannerWidth)
+              .stop()
+              .animate(
+                {
+                  left: -bannerWidth * 3 + 'px',
+                },
+                500
+              )
+            i = 3
+            oli.eq(3).addClass('active').siblings().removeClass('active')
+          } else {
+            oli.eq(i).addClass('active').siblings().removeClass('active')
+            oul.stop().animate(
+              {
+                left: -i * bannerWidth + 'px',
+              },
+              500
+            )
+          }
+        }
+
+        timer = setInterval(autoPlay, 3000)
+
+        // 鼠标经过停止播放离开播放
+        $('.banner')
+          .mouseenter(function () {
+            clearInterval(timer)
+            obtn.fadeIn()
+          })
+          .mouseleave(function () {
+            timer = setInterval(autoPlay, 3000)
+            obtn.fadeOut()
+          })
+
+        // 左右播放
+        $('.banner .btn-right').click(function () {
+          autoPlay()
+        })
+
+        $('.banner .btn-left').click(function () {
+          autoPlayUp()
+        })
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="banner">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <ol>
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ol>
+      <span class="btn-left"></span>
+      <span class="btn-right"></span>
+    </div>
+  </body>
+</html>

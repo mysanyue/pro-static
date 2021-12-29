@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>banner 切换</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .banner {
+      position: relative;
+      width: 100vw;
+      height: 120px;
+      overflow: hidden;
+    }
+
+    .banner-list {
+      width: 500vw;
+      height: 100%;
+    }
+
+    .banner-list:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    .banner-list li {
+      float: left;
+      width: 100vw;
+      height: 100%;
+    }
+
+    .banner-list img {
+      height: 100%;
+      width: 100%;
+      /* max-width: 100%; */
+      vertical-align: middle;
+    }
+
+    .banner nav {
+      height: 10px;
+      right: 10px;
+      bottom: 10px;
+      position: absolute;
+    }
+
+    .banner nav a {
+      float: left;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background: #fff;
+      opacity: 0.5;
+      margin-left: 12px;
+    }
+
+    .banner nav a.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="banner">
+    <ul class="banner-list">
+      <li><img src="pics/b1.jpg" /></li>
+      <li><img src="pics/b2.jpg" /></li>
+      <li><img src="pics/b3.jpg" /></li>
+      <li><img src="pics/b4.jpg" /></li>
+      <li><img src="pics/b1.jpg" /></li>
+    </ul>
+    <nav>
+      <a href="javascript:;" class="active"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+    </nav>
+  </section>
+  <script src="./js/tool.js"></script>
+  <script>
+    window.onload = function() {
+      var oBanner = document.querySelector('.banner');
+      var oList = oBanner.querySelector('.banner-list');
+      var aNav = oBanner.querySelectorAll('nav a');
+      var iNow = 0;
+      var iX = 0;
+      var iW = _.view().w;
+      var iTimer = 0;
+      var iStartTouchX = 0;
+      var iStartX = 0;
+
+      _.bind(oBanner, 'touchstart', fnStart);
+      _.bind(oBanner, 'touchmove', fnMove);
+      _.bind(oBanner, 'touchend', fnEnd);
+      // auto();
+
+      function auto() {
+        iTimer = setInterval(function() {
+          iNow++;
+          iNow = iNow % aNav.length;
+          tab();
+        }, 2000);
+      }
+
+      function fnStart(ev) {
+        oList.style.transition = 'none';
+        ev = ev.changedTouches[0];
+        iStartTouchX = ev.pageX;
+        iStartX = iX;
+        clearInterval(iTimer);
+      }
+
+      function fnMove(ev) {
+        ev = ev.changedTouches[0];
+        var iDis = ev.pageX - iStartTouchX;
+        iX = iStartX + iDis;
+        oList.style.WebkitTransform = oList.style.transition = 'translateX(' + iX + 'px)';
+      }
+
+      function fnEnd() {
+        iNow = iX / iW;
+        iNow = -Math.round(iNow);
+        if (iNow < 0) {
+          iNow = 0;
+        }
+
+        if (iNow > aNav.length - 1) {
+          iNow = aNav.length - 1;
+        }
+        tab();
+        auto();
+      }
+
+      function tab() {
+        iX = -iNow * iW;
+        oList.style.transition = '0.5s';
+        oList.style.WebkitTransform = oList.style.transform = 'translateX(' + iX + 'px)';
+        for (var i = 0; i < aNav.length; i++) {
+          _.removeClass(aNav[i], 'active');
+        }
+        _.addClass(aNav[iNow], 'active');
+      }
+    }
+  </script>
+</body>
+
+</html>

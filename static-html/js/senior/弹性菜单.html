@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>弹性菜单</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: '微软雅黑';
+      }
+      .nav-bar {
+        background: #333;
+      }
+      ul {
+        width: 1200px;
+        height: 45px;
+        line-height: 45px;
+        margin: auto;
+        position: relative;
+      }
+      li {
+        width: 100px;
+        list-style: none;
+        float: left;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        text-align: center;
+      }
+      ul:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+      li.bg {
+        position: absolute;
+        height: 4px;
+        background: #ff6700;
+        left: 0;
+        bottom: 0;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var oUl = document.getElementById('ul')
+        var aLi = oUl.getElementsByTagName('li')
+        var oBg = aLi[aLi.length - 1]
+
+        for (var i = 0; i < aLi.length - 1; i++) {
+          aLi[i].onmouseover = function () {
+            startMove(oBg, this.offsetLeft)
+          }
+          aLi[i].onmouseout = function () {
+            startMove(oBg, 0)
+          }
+        }
+      }
+
+      // 第一种方式
+      // var iSpeed = 0;
+      // var left = 0;
+
+      // function startMove(obj, iTarget) {
+      //   clearInterval(obj.timer);
+      //   obj.timer = setInterval(function() {
+      //     iSpeed += (iTarget - obj.offsetLeft) / 5;
+      //     iSpeed *= 0.7;
+      //     left += iSpeed;
+      //     if (Math.abs(iSpeed) < 1 && Math.abs(left - iTarget) < 1) {
+      //       clearInterval(obj.timer);
+      //       obj.style.left = iTarget + 'px';
+      //     } else {
+      //       obj.style.left = left + 'px';
+      //     }
+      //   }, 30);
+      // }
+
+      // 第二种方式
+      var iSpeed = 0
+
+      function startMove(obj, iTarget) {
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function () {
+          iSpeed += (iTarget - obj.offsetLeft) / 5
+          iSpeed *= 0.7
+          if (Math.abs(iSpeed) < 1 && Math.abs(iTarget - obj.offsetLeft) <= 1) {
+            clearInterval(obj.timer)
+            obj.style.left = iTarget + 'px'
+            iSpeed = 0
+          } else {
+            obj.style.left = obj.offsetLeft + iSpeed + 'px'
+          }
+        }, 30)
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <ul id="ul">
+        <li>首页</li>
+        <li>软件介绍</li>
+        <li>流程演示</li>
+        <li>视觉体验</li>
+        <li>申请试用</li>
+        <li class="bg"></li>
+      </ul>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 状态栏 默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）。 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!-- 在iOS中有两个meta值，apple-mobile-web-app-capable和apple-mobile-web-app-status-bar-style，这两个会让网页内容以应用程序风格显示，并使状态栏透明 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- QQ强制竖屏 -->
+  <meta name="x5-orientation" content="portrait">
+  <!-- QQ强制全屏 -->
+  <meta name="x5-fullscreen" content="true">
+  <!-- uc强制竖屏 -->
+  <meta name="screen-orientation" content="portrait">
+  <!-- UC强制全屏 -->
+  <meta name="full-screen" content="yes">
+  <title>移动端滑屏交互</title>
+  <style id="css">
+    html {
+      height: 100%;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    header,
+    footer {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      line-height: 40px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.2);
+      font-size: 16px;
+      text-align: center;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+      z-index: 3;
+    }
+
+    footer {
+      bottom: 0;
+      top: auto;
+    }
+
+    #wrap {
+      position: absolute;
+      width: 16rem;
+      left: 0;
+      top: 40px;
+      bottom: 40px;
+      perspective: 1200px;
+      z-index: 1;
+    }
+
+    #imgList {
+      position: relative;
+      width: 16rem;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #imgList li {
+      width: 4rem;
+      float: left;
+      perspective: 300px;
+    }
+
+    #navs {
+      position: absolute;
+      width: 100%;
+      height: 12px;
+      padding: 10px 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+      text-align: center;
+      z-index: 5;
+    }
+
+    #navs a {
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      display: inline-block;
+      margin: 0 8px;
+      vertical-align: top;
+    }
+
+    #navs .active {
+      background: #f90;
+    }
+
+    .div {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      position: relative;
+      transform-origin: center center -2rem;
+    }
+
+    .div div {
+      width: 4rem;
+      height: 100%;
+      position: absolute;
+      left: 4rem;
+      top: 0;
+      transform-origin: left;
+      transform-style: preserve-3d;
+      transform: rotateY(90deg);
+    }
+
+    .div>div {
+      left: 0;
+      transform: rotateY(0deg);
+    }
+
+    .div span {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-size: 16rem auto;
+    }
+  </style>
+  <script src="js/fontSize.js"></script>
+</head>
+
+<body>
+  <header>3D场景切换</header>
+  <div id="wrap">
+    <ul id="imgList">
+    </ul>
+    <nav id="navs">
+      <a href="javascript:;" class="active"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+    </nav>
+  </div>
+  <footer>锤子手机交互</footer>
+  <script src="js/startMove.js"></script>
+  <script src="js/touch.js"></script>
+  <script>
+    var imgUrls = ['pics/img1.jpeg', 'pics/img2.jpeg', 'pics/img3.jpeg', 'pics/img4.jpeg'];
+
+    function id(idName) {
+      return document.getElementById(idName);
+    }
+
+    function setLayout() {
+      var list = id("imgList");
+      var li = list.getElementsByTagName("li");
+      var css = id("css");
+      var str = '';
+      var listH = list.clientHeight;
+      var liH = listH / 4;
+      for (var i = 0; i < 16; i++) {
+        str += `
+        <li>
+          <div class="div">
+            <div>
+              <span></span>
+              <div>
+                <span></span>
+                  <div>
+                    <span></span>
+                      <div>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </li>`;
+      }
+      list.innerHTML = str;
+      css.innerHTML += "#imgList li{height:" + liH + "px}";
+      for (var i = 0; i < li.length; i++) {
+        var span = li[i].getElementsByTagName("span");
+        for (var j = 0; j < span.length; j++) {
+          span[j].style.backgroundImage = "url(" + imgUrls[j] + ")";
+          span[j].style.backgroundPosition = -(i % 4) * 4 + "rem -" + parseInt(i / 4) * liH + "px";
+        }
+      }
+    }
+
+    window.onload = function() {
+      setLayout();
+      var list = id("imgList");
+      var boxs = list.getElementsByClassName("div");
+      var now = 0;
+      var timer = 0;
+      var off = false;
+      $(list).swipeLeft(function() {
+        if (off) {
+          return;
+        }
+        off = true;
+        now++;
+        var i = 0;
+        clearInterval(timer);
+        timer = setInterval(
+          function() {
+            if (i == 3) {
+              clearInterval(timer);
+            }
+            tabImg(i, -1);
+            i++;
+          }, 30);
+        tabNav();
+      });
+      $(list).swipeRight(function() {
+        if (off) {
+          return;
+        }
+        off = true;
+        now--;
+        var i = 0;
+        clearInterval(timer);
+        timer = setInterval(
+          function() {
+            if (i == 3) {
+              clearInterval(timer);
+            }
+            tabImg(i, 1);
+            i++;
+          }, 30);
+        tabNav();
+      });
+
+      function tabImg(rows, dis) {
+        var timer2 = 0;
+        var start = dis > 0 ? rows * 4 : (rows + 1) * 4 - 1;
+        var end = dis > 0 ? (rows + 1) * 4 - 1 : rows * 4;
+        timer2 = setInterval(function() {
+          if (start == end) {
+            clearInterval(timer2);
+          }
+          if (rows == 3 && start == end) {
+            mTween(boxs[start], { rotateY: -90 * now }, 3000, "backBoth",
+              function() {
+                off = false;
+              }
+            );
+          } else {
+            mTween(boxs[start], { rotateY: -90 * now }, 3000, "backBoth");
+          }
+          start += dis;
+        }, 60);
+      }
+
+      function tabNav() {
+        var navs = id("navs").children;
+        var nub = now % navs.length;
+        if (nub < 0) { nub += navs.length; }
+        for (var i = 0; i < navs.length; i++) { navs[i].className = ""; } navs[nub].className = "active";
+      }
+    }
+  </script>
+</body>
+
+</html>

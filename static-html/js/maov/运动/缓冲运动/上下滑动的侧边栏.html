@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>上下滑动的侧边栏</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        height: 2000px;
+      }
+
+      .aside {
+        position: absolute;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        background: #7f3cd6;
+        color: #fff;
+      }
+    </style>
+    <script>
+      window.onscroll = function () {
+        var oAside = document.querySelector('.aside')
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        // oAside.style.top = (document.documentElement.clientHeight - oAside.offsetHeight) / 2 + scrollTop + 'px';
+        var target = (document.documentElement.clientHeight - oAside.offsetHeight) / 2 + scrollTop
+        startMove(parseInt(target))
+      }
+
+      var timer = null
+
+      function startMove(target) {
+        var oAside = document.querySelector('.aside')
+        clearInterval(timer)
+        timer = setInterval(function () {
+          var speed = (target - oAside.offsetTop) / 8
+          speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+          if (oAside.offsetTop == target) {
+            clearInterval(timer)
+          } else {
+            oAside.style.top = oAside.offsetTop + speed + 'px'
+          }
+        }, 30)
+      }
+    </script>
+  </head>
+
+  <body>
+    <aside class="aside">侧边栏</aside>
+  </body>
+</html>

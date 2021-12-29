@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>延迟菜单</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        font-family: '微软雅黑';
+      }
+      nav {
+        background: #ddd;
+      }
+      ul {
+        width: 50%;
+        margin: auto;
+      }
+      ul:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+      li {
+        float: left;
+        width: 25%;
+        padding: 10px 0;
+        list-style: none;
+        text-align: center;
+        position: relative;
+      }
+      li:after {
+        display: block;
+        content: '';
+        position: absolute;
+        height: 18px;
+        width: 1px;
+        left: 0;
+        top: 14px;
+        background: #f8f8f8;
+      }
+      li:last-child:before {
+        display: block;
+        content: '';
+        position: absolute;
+        height: 18px;
+        width: 1px;
+        right: 0;
+        top: 14px;
+        background: #f8f8f8;
+      }
+      li > a {
+        display: block;
+        color: #333;
+        font-size: 18px;
+      }
+      .float-layer {
+        position: absolute;
+        width: 100%;
+        display: none;
+        top: 55px;
+        left: 0;
+        padding: 10px;
+        background: #ddd;
+        box-sizing: border-box;
+      }
+      .active {
+        display: block;
+      }
+      .float-layer a {
+        display: block;
+        color: #666;
+        padding: 8px 0;
+        transition: all 0.3s linear;
+        -webkit-transition: all 0.3s linear;
+      }
+      .float-layer a:hover {
+        background: #f8f8f8;
+      }
+      .float-layer:before {
+        position: absolute;
+        display: block;
+        top: -10px;
+        left: 50%;
+        margin-left: -10px;
+        content: '';
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 14px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="#" class="onrmal">首页</a>
+          <div class="float-layer">
+            <a href="#">最新活动</a>
+            <a href="#">活动</a>
+            <a href="#">报名试听</a>
+            <a href="#">学员反馈</a>
+          </div>
+        </li>
+        <li>
+          <a href="#" class="onrmal">关于我们</a>
+          <div class="float-layer">
+            <a href="#">TWB成员</a>
+            <a href="#">简历</a>
+            <a href="#">招聘</a>
+            <a href="#">公司</a>
+          </div>
+        </li>
+        <li>
+          <a href="#" class="onrmal">学习</a>
+          <div class="float-layer">
+            <a href="#">Angluar</a>
+            <a href="#">vue</a>
+            <a href="#">zepoto</a>
+            <a href="#">swiper</a>
+          </div>
+        </li>
+        <li>
+          <a href="#" class="onrmal">文章</a>
+          <div class="float-layer">
+            <a href="#">官方发布</a>
+            <a href="#">话题</a>
+            <a href="#">成员发布</a>
+            <a href="#">bug纠正</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <script type="text/javascript">
+      window.onload = function () {
+        var aA = getByClass(document, 'onrmal')
+        var menuBox = getByClass(document, 'float-layer')
+        var timer = null
+
+        console.log(aA.length)
+        console.log(menuBox.length)
+
+        for (var i = 0; i < aA.length; i++) {
+          aA[i].index = i
+          aA[i].onmouseover = function () {
+            for (var i = 0; i < menuBox.length; i++) {
+              menuBox[i].style.display = 'none'
+            }
+            menuBox[this.index].style.display = 'block'
+            clearTimeout(timer)
+          }
+
+          aA[i].onmouseout = function () {
+            var _this = this
+            timer = setTimeout(function () {
+              menuBox[_this.index].style.display = 'none'
+            }, 1e3)
+          }
+
+          menuBox[i].onmouseover = function () {
+            clearTimeout(timer)
+          }
+
+          menuBox[i].onmouseout = function () {
+            var _this = this
+            timer = setTimeout(function () {
+              _this.style.display = 'none'
+            }, 1e3)
+          }
+        }
+
+        function getByClass(oparent, sClass) {
+          var aEle = oparent.getElementsByTagName('*')
+          var result = []
+          var re = new RegExp('\\b' + sClass + '\\b', 'i')
+
+          for (var i = 0; i < aEle.length; i++) {
+            if (re.test(aEle[i].className)) {
+              result.push(aEle[i])
+            }
+          }
+
+          return result
+        }
+      }
+    </script>
+  </body>
+</html>

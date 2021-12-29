@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>拖拽+运动+重力</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      background-color: #eef3fa;
+    }
+
+    #box {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      cursor: move;
+      background: url('../../assets/images/wx36.jpeg');
+      background-position: 33% 0;
+      background-size: cover;
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function() {
+      var oBox = document.getElementById('box');
+      var lastX = 0; //前一个X坐标
+      var lastY = 0; //前一个Y坐标
+
+      oBox.onmousedown = function(ev) {
+        var oEvent = ev || event;
+        var disX = oEvent.clientX - oBox.offsetLeft;
+        var disY = oEvent.clientY - oBox.offsetTop;
+
+        document.onmousemove = function(ev) {
+          var oEvent = ev || event;
+          var l = oEvent.clientX - disX;
+          var t = oEvent.clientY - disY;
+
+          if (l < 0) {
+            l = 0;
+          } else if (l > document.documentElement.clientWidth - oBox.offsetWidth) {
+            l = document.documentElement.clientWidth - oBox.offsetWidth;
+          }
+
+          if (t < 0) {
+            t = 0;
+          } else if (t > document.documentElement.clientHeight - oBox.offsetHeight) {
+            t = document.documentElement.clientHeight - oBox.offsetHeight;
+          }
+
+          oBox.style.left = l + 'px';
+          oBox.style.top = t + 'px';
+
+          iSpeedX = l - lastX; //left-lastX 当前X-前一个X 得到X轴速度
+          iSpeedY = t - lastY; //left-lastY 当前Y-前一个Y 得到Y轴速度
+          lastX = l; //更新X
+          lastY = t; //更新Y
+        };
+
+        document.onmouseup = function() {
+          document.onmousemove = null;
+          document.onmouseup = null;
+          startMove();
+        };
+        // return false;
+        clearInterval(timer);
+      };
+    };
+
+    var timer = null;
+    var iSpeedX = 0;
+    var iSpeedY = 0;
+
+    function startMove() {
+      clearInterval(timer);
+      var oBox = document.getElementById('box');
+      timer = setInterval(function() {
+        iSpeedY += 3; // 重力加速度
+        var l = oBox.offsetLeft + iSpeedX; //增加left
+        var t = oBox.offsetTop + iSpeedY; //增加top
+
+        if (t >= document.documentElement.clientHeight - oBox.offsetHeight) {
+          //当盒子top>=页面高度-盒子高度
+          iSpeedY *= -0.8; //到达地面Y轴弹力
+          iSpeedX *= 0.8; //到达地面X轴弹力
+          t = document.documentElement.clientHeight - oBox.offsetHeight; //瞬间拉回盒子=页面高度-盒子高度
+        } else if (t <= 0) {
+          //当页面高度<=0
+          iSpeedY *= -1; //到达顶点按原速度垂直下落
+          iSpeedX *= 0.8; //到达顶点X轴弹力
+          t = 0; //则top = 0
+        }
+        if (l >= document.documentElement.clientWidth - oBox.offsetWidth) {
+          //当盒子left>=页面宽度-盒子宽度
+          iSpeedX *= -0.8; //到达右边 X轴弹力
+          l = document.documentElement.clientWidth - oBox.offsetWidth; //瞬间拉回盒子=页面宽度-盒子宽度
+        } else if (l <= 0) {
+          iSpeedX *= -0.8; //左边X轴弹力
+          l = 0; //则left = 0
+        }
+
+        //以下两个if解决速度不为0 产生抖动或移动问题
+        if (Math.abs(iSpeedX) < 1) {
+          iSpeedX = 0;
+        }
+        if (Math.abs(iSpeedY) < 1) {
+          iSpeedY = 0;
+        }
+
+        //停止运动
+        if (iSpeedX == 0 && iSpeedY == 0 && t == document.documentElement.clientHeight - oBox.offsetHeight) {
+          clearInterval(timer);
+        }
+
+        oBox.style.left = l + 'px';
+        oBox.style.top = t + 'px';
+      }, 30);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="box"></div>
+</body>
+
+</html>

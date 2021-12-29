@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3d banner</title>
+    <style>
+      .view {
+        perspective: 600px;
+      }
+
+      .box {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 100px auto;
+        transform-style: preserve-3d;
+        transition: 2s;
+      }
+
+      .box span {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .box span:nth-child(1) {
+        transform: rotateY(0) translateZ(100px);
+        background: #ba2;
+      }
+
+      .box span:nth-child(2) {
+        transform: rotateY(90deg) translateZ(100px);
+        background: #acc;
+      }
+
+      .box span:nth-child(3) {
+        transform: rotateY(180deg) translateZ(100px);
+        background: #b23;
+      }
+
+      .box span:nth-child(4) {
+        transform: rotateY(270deg) translateZ(100px);
+        background: #cff;
+      }
+
+      .box span:nth-child(5) {
+        transform: rotateX(90deg) translateZ(100px);
+        background: #eaa;
+      }
+
+      .box span:nth-child(6) {
+        transform: rotateX(-90deg) translateZ(100px);
+        background: #ecc;
+      }
+
+      .box:hover {
+        transform: rotateY(360deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="view">
+      <div class="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+      </div>
+    </div>
+  </body>
+</html>

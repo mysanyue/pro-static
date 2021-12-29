@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>esa.js</title>
+    <style>
+      #div1 {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: red;
+        display: none;
+      }
+      #div2 {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 30px;
+        height: 30px;
+        background: yellow;
+      }
+      #div3 {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+    </style>
+    <script src="../../assets/lib/sea.js"></script>
+    <script>
+      seajs.use('./main.js');
+    </script>
+  </head>
+  <body>
+    <input type="button" value="点击" id="input1" />
+    <div id="div1">
+      <div id="div2"></div>
+    </div>
+    <div id="div3"></div>
+  </body>
+</html>

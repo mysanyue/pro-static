@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雪花效果</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    #snowMask {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background: url(../../assets/images/fy.png), url(../../assets/images/fy2.png);
+      animation: snow 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes snow {
+      0% {
+        background-position: 0 0, 0 0;
+      }
+
+      100% {
+        background-position: 500px 500px, 0 1000px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <img src="../../assets/images/bg.jpg" />
+  <img src="../../assets/images/bg.jpg" />
+  <div id="snowMask"></div>
+  <a href="http://www.baidu.com">百度</a>
+</body>
+
+</html>

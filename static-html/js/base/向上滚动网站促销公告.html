@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>向上滚动网站公告</title>
+    <style type="text/css">
+      .notelist {
+        border: 1px solid #e5e5e5;
+        height: 150px;
+        overflow: hidden;
+      }
+      .note ul {
+        margin: 0 15px;
+        padding: 0;
+        font-size: 12px;
+        line-height: 30px;
+      }
+      .note ul li {
+        height: 30px;
+        white-space: nowrap;
+        width: 200px;
+        overflow: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="../../assets/lib/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        note()
+      })
+
+      function note() {
+        var fns = {
+          _up: function () {
+            $('.note ul')
+              .stop()
+              .animate({ marginTop: '-30px' }, 500, function () {
+                // 将第一行移动到最后
+                $('.note li:nth-child(1)').appendTo($('.note ul'))
+                $('.note ul').css('marginTop', '0')
+              })
+          },
+        }
+
+        var _autoUp = null
+        $('.note').mouseover(function () {
+          //鼠标移入停止播放
+          autoStop2()
+        })
+
+        $('.note').mouseout(function () {
+          //鼠标移出开始播放
+          _autoUp = setInterval(function () {
+            fns._up()
+          }, 1500)
+        })
+
+        var autoPlay2 = function () {
+          //自动播放
+          _autoUp = setInterval(function () {
+            fns._up()
+          }, 1500)
+        }
+
+        var autoStop2 = function () {
+          clearInterval(_autoUp)
+          _autoUp = null
+        }
+        autoPlay2()
+      }
+    </script>
+  </head>
+  <body>
+    <div class="note">
+      <h3>促销公告</h3>
+      <div class="notelist">
+        <ul>
+          <li><a href="#">地狱火鼠标垫，一酷到底！</a></li>
+          <li><a href="#" class="red">戴尔直销引爆足球盛宴</a></li>
+          <li><a href="#">力胜 超值超爽手表 防水键盘 热卖！</a></li>
+          <li><a href="#" class="red">触动带给你无限音乐！小米5</a></li>
+          <li><a href="#" class="red">小米5！小米5</a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

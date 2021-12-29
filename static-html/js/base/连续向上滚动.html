@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>连续向上滚动</title>
+    <script type="text/javascript" src="../../assets/lib/jquery.min.js"></script>
+    <script type="text/javascript">
+      var delay = 2000
+      var count = 9
+      var showing = 5
+      var i = 5
+
+      function move(i) {
+        $('#recent' + i)
+          .remove()
+          .hide()
+          .prependTo('#item')
+      }
+
+      function slide() {
+        var toShow = (i + showing) % count
+        $('#recent' + toShow).fadeIn(1000, move(i))
+        $('#recent' + i).fadeOut(1000, move(i))
+        i = (i + 1) % count
+        setTimeout('slide()', delay)
+      }
+
+      //遍历li < 4 隐藏
+      function setDisplay() {
+        $('#item>li').each(function (index) {
+          var obj = $(this)
+          if (index < 4) {
+            obj.css({
+              display: 'none',
+            })
+          }
+        })
+      }
+      $(function () {
+        setDisplay()
+        slide()
+      })
+    </script>
+  </head>
+
+  <body>
+    <div id="trends" class="style1">
+      <ul class="main" id="item">
+        <li id="recent8" style="color: #06f">托普学院出版社1</li>
+        <li id="recent7" style="color: #fc9">托普学院出版社2</li>
+        <li id="recent6" style="color: #06f">托普学院出版社3</li>
+        <li id="recent5" style="color: #fc9">托普学院出版社4</li>
+        <li id="recent4" style="color: #06f">托普学院出版社5</li>
+        <li id="recent3" style="color: #fc9">托普学院出版社6</li>
+        <li id="recent2" style="color: #06f">托普学院出版社7</li>
+        <li id="recent1" style="color: #fc9">托普学院出版社8</li>
+        <li id="recent0" style="color: #06f">托普学院出版社9</li>
+      </ul>
+    </div>
+  </body>
+</html>

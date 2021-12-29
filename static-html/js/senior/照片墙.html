@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>照片墙</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #ul {
+        width: 1200px;
+        margin: auto;
+        position: relative;
+      }
+      #ul:after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+      #ul li {
+        width: 380px;
+        height: 150px;
+        float: left;
+        list-style: none;
+        margin: 10px;
+        overflow: hidden;
+        z-index: 1;
+      }
+      img {
+        max-width: 100%;
+      }
+      #ul .active {
+        border: 1px dashed red;
+      }
+    </style>
+    <script type="text/javascript" src="../maov/startMove.js"></script>
+    <script>
+      window.onload = function () {
+        var oUl = document.getElementById('ul')
+        var aLi = oUl.getElementsByTagName('li')
+        var oBtn = document.getElementsByTagName('input')[0]
+        var aPos = []
+        var iMinZindex = 2
+
+        // 布局转换
+        for (var i = 0; i < aLi.length; i++) {
+          aPos[i] = { left: aLi[i].offsetLeft, top: aLi[i].offsetTop }
+        }
+
+        for (var i = 0; i < aLi.length; i++) {
+          aLi[i].style.position = 'absolute'
+          aLi[i].style.left = aPos[i].left + 'px'
+          aLi[i].style.top = aPos[i].top + 'px'
+          aLi[i].style.margin = '0'
+          aLi[i].index = i
+        }
+
+        // 加上拖拽
+        for (var i = 0; i < aLi.length; i++) {
+          setDrag(aLi[i])
+        }
+
+        // 拖拽
+        function setDrag(obj) {
+          obj.onmousedown = function (ev) {
+            var oEvent = ev || event
+
+            obj.style.zIndex = iMinZindex++
+            var disX = oEvent.clientX - obj.offsetLeft
+            var disY = oEvent.clientY - obj.offsetTop
+
+            document.onmousemove = function (ev) {
+              var oEvent = ev || event
+
+              obj.style.left = oEvent.clientX - disX + 'px'
+              obj.style.top = oEvent.clientY - disY + 'px'
+
+              for (var i = 0; i < aLi.length; i++) {
+                aLi[i].className = ''
+              }
+
+              var oNear = findNearest(obj)
+
+              if (oNear) {
+                oNear.className = 'active'
+              }
+            }
+
+            document.onmouseup = function () {
+              document.onmousemove = null
+              document.onmouseup = null
+
+              var oNear = findNearest(obj)
+
+              if (oNear) {
+                oNear.className = ''
+                oNear.style.zIndex = iMinZindex++
+                obj.style.zIndex = iMinZindex++
+
+                startMove(oNear, aPos[obj.index])
+                startMove(obj, aPos[oNear.index])
+
+                var tmp = 0
+                tmp = obj.index
+                obj.index = oNear.index
+                oNear.index = tmp
+              } else {
+                startMove(obj, aPos[obj.index])
+              }
+            }
+
+            clearInterval(obj.timer)
+            return false
+          }
+        }
+
+        //碰撞检测
+        function cdTest(obj1, obj2) {
+          var l1 = obj1.offsetLeft
+          var r1 = obj1.offsetLeft + obj1.offsetWidth
+          var t1 = obj1.offsetTop
+          var b1 = obj1.offsetTop + obj1.offsetHeight
+
+          var l2 = obj2.offsetLeft
+          var r2 = obj2.offsetLeft + obj1.offsetWidth
+          var t2 = obj2.offsetTop
+          var b2 = obj2.offsetTop + obj1.offsetHeight
+
+          if (r1 < l2 || l1 > r2 || b1 < t2 || t1 > b2) {
+            return false
+          } else {
+            return true
+          }
+        }
+
+        // 勾股定律计算最近的元素
+        function getDis(obj1, obj2) {
+          var a = obj1.offsetLeft - obj2.offsetLeft
+          var b = obj1.offsetTop - obj2.offsetTop
+
+          return Math.sqrt(a * a + b * b)
+        }
+
+        // 找最近的元素
+        function findNearest(obj) {
+          var iMin = 10000
+          var iMinIndex = -1
+
+          for (var i = 0; i < aLi.length; i++) {
+            if (obj == aLi[i]) continue
+
+            if (cdTest(obj, aLi[i])) {
+              var dis = getDis(obj, aLi[i])
+              document.title = iMin + '>' + dis
+              if (iMin > dis) {
+                iMin = dis
+                iMinIndex = i
+              }
+            }
+          }
+
+          if (iMinIndex == -1) {
+            return null
+          } else {
+            return aLi[iMinIndex]
+          }
+        }
+
+        // 随机生成
+        oBtn.onclick = function () {
+          var randomArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+          randomArr.sort(function (n1, n2) {
+            return Math.random() - 0.5
+          })
+          console.log(randomArr)
+
+          for (var i = 0; i < aLi.length; i++) {
+            startMove(aLi[i], { left: aPos[randomArr[i]].left, top: aPos[randomArr[i]].top })
+            aLi[i].index = randomArr[i]
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="随机" />
+    <ul id="ul">
+      <li><img src="../../assets/images/wx43.jpeg" /></li>
+      <li><img src="../../assets/images/wx45.jpeg" /></li>
+      <li><img src="../../assets/images/wx47.jpeg" /></li>
+      <li><img src="../../assets/images/wx48.jpeg" /></li>
+      <li><img src="../../assets/images/wx9.jpeg" /></li>
+      <li><img src="../../assets/images/wx8.jpeg" /></li>
+      <li><img src="../../assets/images/wx7.jpeg" /></li>
+      <li><img src="../../assets/images/wx6.jpeg" /></li>
+      <li><img src="../../assets/images/wx58.jpeg" /></li>
+      <li><img src="../../assets/images/wx50.jpeg" /></li>
+    </ul>
+  </body>
+</html>

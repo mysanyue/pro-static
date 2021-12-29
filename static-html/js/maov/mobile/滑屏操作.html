@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端滑屏操作</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 13.333333vw;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .swiper {
+      position: relative;
+      width: 100%;
+      height: 4.7rem;
+      overflow: hidden;
+    }
+
+    .swiper:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    .swiper-list {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+    }
+
+    .swiper-list li {
+      float: left;
+      width: 100vw;
+      height: 100%;
+    }
+
+    .swiper-list li img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="swiper">
+    <ul class="swiper-list">
+      <li><img src="../../assets/images/m14.jpg" alt=""></li>
+      <li><img src="../../assets/images/m15.jpg" alt=""></li>
+      <li><img src="../../assets/images/m16.jpg" alt=""></li>
+      <li><img src="../../assets/images/m17.jpg" alt=""></li>
+      <li><img src="../../assets/images/m18.jpg" alt=""></li>
+    </ul>
+  </section>
+  <script src="../move.js"></script>
+  <script>
+    window.onload = function() {
+      // 阻止浏览器默认行为
+      document.ontouchmove = function(ev) {
+        ev.preventDefault();
+      }
+
+      var oSwiper = document.querySelector('.swiper');
+      var oSwiperList = oSwiper.querySelector('.swiper-list');
+      var aLi = oSwiperList.querySelectorAll('li');
+
+      var w = aLi[0].offsetWidth;
+      oSwiperList.style.width = aLi.length * w + 'px';
+
+
+      var downX = 0;
+      var downLeft = 0;
+      var iNow = 0;
+      var downTime = 0;
+
+      oSwiperList.ontouchstart = function(ev) {
+        var touchs = ev.changedTouches[0];
+        var bBtn = true;
+        downX = touchs.pageX;
+        downLeft = this.offsetLeft;
+        downTime = Date.now();
+
+        oSwiperList.ontouchmove = function(ev) {
+          var touchs = ev.changedTouches[0];
+          if (this.offsetLeft >= 0) {
+            // 解决跳跃感问题
+            if (bBtn) {
+              bBtn = false;
+              downX = touchs.pageX;
+            }
+            this.style.left = (touchs.pageX - downX) / 3 + 'px';
+          } else if (this.offsetLeft <= oSwiper.offsetWidth - oSwiperList.offsetWidth) {
+            // 解决跳跃感问题
+            if (bBtn) {
+              bBtn = false;
+              downX = touchs.pageX;
+            }
+            this.style.left = (touchs.pageX - downX) / 3 + (oSwiper.offsetWidth - oSwiperList.offsetWidth) + 'px';
+          } else {
+            this.style.left = touchs.pageX - downX + downLeft + 'px';
+          }
+        }
+
+        oSwiperList.ontouchend = function(ev) {
+          var touchs = ev.changedTouches[0];
+          if (touchs.pageX < downX) { // 向左滑动
+            if (iNow != aLi.length - 1) {
+              if (downX - touchs.pageX > aLi[0].offsetWidth / 2 || Date.now() - downTime < 300 && downX - touchs.pageX > 30) {
+                iNow++;
+              }
+            }
+            startMove(oSwiperList, { left: -iNow * w }, 400, 'easeOut');
+          } else { // 向右滑动
+            if (iNow != 0) {
+              if (touchs.pageX - downX > aLi[0].offsetWidth / 2 || Date.now() - downTime < 300 && touchs.pageX - downX > 30) {
+                iNow--;
+              }
+            }
+            startMove(oSwiperList, { left: -iNow * w }, 400, 'easeOut');
+          }
+          this.ontouchmove = null;
+          this.ontouchend = null;
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
