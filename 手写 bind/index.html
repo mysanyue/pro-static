@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function func(...arg) {
+      console.log(this);
+      console.log(arg)
+    }
+    let newFunc = func.bind({
+      a: 1
+    }, 1, 2, 3, 4);
+    let f1 = new newFunc(5, 6, 7, 8);
+    console.log(f1);
+
+    console.log('-----------------  -----------------------')
+
+    Function.prototype.customeBind = function (thisArg, ...list) {
+      let self = this;
+      // 自己实现的bind函数，如果把返回的新函数当成了构造函数，此时会遇到问题，就是找不到目标函数原型上的方法
+      // 解决方法：新函数继承目标函数的原型
+
+
+      // 返回新函数
+      let bound = function (...arg2) {
+        // 如果这个函数作为了构造函数，那么目标函数的this，应该执行的是实例对象
+        // 如果这个函数不是作为构造函数，目标函数中的this还指向thisArg
+        let thisArgSelf = this instanceof bound ? this : thisArg;
+        self.apply(thisArg, [...list, ...arg2])
+      }
+      // 原型对象
+      // Object.create 用来创建以某一个对象作为原型的对象
+      bound.prototype = Object.create(self.prototype);
+      bound.prototype.constructor = self;
+
+      return bound;
+    }
+
+    let newFn = func.customeBind({
+      a: 1
+    }, 1, 2, 3, 4);
+
+    let f2 = new newFn(5, 6, 7, 8);
+    console.log(f2);
+  </script>
+</body>
+
+</html>

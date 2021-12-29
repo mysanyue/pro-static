@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>发布/订阅模式</title>
+</head>
+
+<body>
+  <h2>发布/订阅模式</h2>
+  <ul>
+    <li>订阅者</li>
+    <li>发布者</li>
+    <li>信号中心</li>
+  </ul>
+  <p>假定，存在一个新号中信，某个任务执行完成，就向信号中心“发布”（publish）一个信号，其他任务可以向信号中心“订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行。<strong>这就叫“发布/订阅模式”(publish-subscribe pattern)</strong></p>
+  <script>
+    // 事件触发器
+    class EventEmitter {
+      constructor() {
+        this.subs = Object.create(null);
+      }
+
+      // 注册事件
+      $on(eventType, handler) {
+        this.subs[eventType] = this.subs[eventType] || [];
+        this.subs[eventType].push(handler);
+      }
+
+      // 触发事件
+      $emit(eventType) {
+        if (this.subs[eventType]) {
+          this.subs[eventType].forEach(handler => {
+            handler();
+          });
+        }
+      }
+    }
+
+    // 测试
+    let em = new EventEmitter();
+    em.$on('click', _ => {
+      console.log('click1');
+    });
+
+    em.$on('click', _ => {
+      console.log('click2');
+    });
+
+    em.$emit('click');
+  </script>
+</body>
+
+</html>

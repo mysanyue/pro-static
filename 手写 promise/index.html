@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: red;
+    }
+  </style>
+  <script src="./promise-move.js"></script>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script>
+    var box = document.querySelector('.box');
+    movePromise(box, 'width', 200, 1000)
+      .then(() => movePromise(box, 'height', 300, 1000))
+      .then(() => movePromise(box, 'left', 300, 1000))
+      .then(() => movePromise(box, 'top', 300, 1000))
+      .then(() => console.info('ent move'));
+  </script>
+</body>
+
+</html>

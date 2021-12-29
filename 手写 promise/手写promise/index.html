@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>promise</title>
+  <script src="./KPromise.js"></script>
+</head>
+
+<body>
+  <script>
+    KPromise.resolve('zhangwei').then(val => {
+      console.log('val', val);
+    });
+
+    console.log(Promise.resolve())
+  </script>
+</body>
+
+</html>

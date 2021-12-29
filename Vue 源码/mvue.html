@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mVue</title>
+  <script src="./mvue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{message}}
+    <strong>{{data}}</strong>
+  </div>
+  <script>
+    let vm = new mVue({
+      el: '#app',
+      data: {
+        message: '测试数据',
+        data: 'YES'
+      }
+    });
+  </script>
+</body>
+
+</html>
