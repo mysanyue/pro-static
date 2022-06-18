@@ -1,9 +1,9 @@
 <template>
   <section :class="{ [$style.layout]: true, [$style.layoutCollapse]: isCollapse }">
-    <layout-header :isCollapse.sync="isCollapse" />
-    <layout-aside :class="$style.layoutAside" :isCollapse="isCollapse" />
+    <LayoutHeader :isCollapse.sync="isCollapse" />
+    <LayoutAside :class="$style.layoutAside" :isCollapse="isCollapse" />
     <section :class="$style.layoutBody">
-      <nav-bar :isCollapse="isCollapse" :class="$style.layoutNavbar" />
+      <NavBar :isCollapse="isCollapse" :class="$style.layoutNavbar" />
       <section :class="$style.layoutContent">
         <transition name="fade-transform" mode="out-in">
           <keep-alive :include="keepAlive">
@@ -11,7 +11,7 @@
           </keep-alive>
         </transition>
       </section>
-      <layout-footer />
+      <LayoutFooter />
     </section>
   </section>
 </template>
@@ -34,16 +34,15 @@ export default {
     },
   },
   components: {
-    'layout-header': Header,
-    'layout-footer': Footer,
-    'layout-aside': Aside,
+    LayoutHeader: Header,
+    LayoutFooter: Footer,
+    LayoutAside: Aside,
     NavBar,
   },
 }
 </script>
 
 <style lang="scss" module>
-@import '@/assets/scss/mixins.scss';
 .layout {
   display: block;
   position: relative;

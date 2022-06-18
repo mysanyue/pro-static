@@ -8,7 +8,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
-    'vue/html-self-closing': ['warn', { html: { void: 'never', normal: 'always', component: 'always' }, svg: 'always', math: 'always' }],
+    'vue/html-self-closing': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/max-attributes-per-line': [2, { singleline: 10, multiline: { max: 1, allowFirstLine: false } }],

@@ -53,7 +53,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '@/assets/scss/mixins.scss';
 .nav-tabs {
   position: fixed;
   top: 60px;

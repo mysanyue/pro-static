@@ -1,11 +1,22 @@
 <template>
   <footer :class="$style.footer">
     <el-row>
-      <el-col :span="12">Copyright ©2014-2019 myzony@qq.com, version 1.0.0</el-col>
+      <el-col :span="12">Copyright ©2021-{{ date }} myzony@qq.com, version 1.0.0</el-col>
       <el-col :span="12" />
     </el-row>
   </footer>
 </template>
+
+<script>
+import moment from 'moment'
+export default {
+  data() {
+    return {
+      date: moment(new Date()).format('YYYY'),
+    }
+  },
+}
+</script>
 
 <style lang="scss" module>
 .footer {

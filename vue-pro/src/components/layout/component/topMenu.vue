@@ -49,8 +49,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '@/assets/scss/mixins.scss';
-
 .info-item {
   display: inline-block;
   line-height: 32px;

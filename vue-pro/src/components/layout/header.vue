@@ -53,7 +53,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '@/assets/scss/mixins.scss';
 .layout-header {
   position: fixed;
   top: 0;
