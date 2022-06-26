@@ -1,6 +1,17 @@
 <template>
   <div :class="$style.homeContainer">
-    <h1>封装的分页组件</h1>
+    <h3>示例：</h3>
+    <tx-table :data="tableData" :columns="columns" border>
+      <el-table-column fixed="right">
+        <template #header>
+          <tx-table-more label="操作" :columns="columns" />
+        </template>
+        <template>
+          <el-button type="text" size="small">查看</el-button>
+          <el-button type="text" size="small">编辑</el-button>
+        </template>
+      </el-table-column>
+    </tx-table>
     <h3>tx-table 配置说明</h3>
     <el-table :data="detialTabel">
       <el-table-column prop="name" label="事件名" />
@@ -27,18 +38,6 @@
       <p>2. 定义 columns 必须采用函数方式，并且把当前组件的 this 传入，方便在 render 函数中使用访问组件内的方法和属性</p>
       <p>3. columns: cloumns(this) // 设置列</p>
     </el-alert>
-    <h3>示例：</h3>
-    <tx-table :data="tableData" :columns="columns" border>
-      <el-table-column fixed="right">
-        <template #header>
-          <tx-table-more label="操作" :columns="columns" />
-        </template>
-        <template>
-          <el-button type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">编辑</el-button>
-        </template>
-      </el-table-column>
-    </tx-table>
   </div>
 </template>
 
@@ -46,7 +45,7 @@
 import txTable from '@/components/table'
 import txTableMore from '@/components/table/txTableMore'
 
-const columns = that => {
+const columns = (that) => {
   return [
     { show: true, attr: { type: 'selection', width: 50, fixed: 'left', align: 'center' } },
     { show: true, attr: { type: 'index', width: 50, label: '序号', fixed: 'left', align: 'center' } },
