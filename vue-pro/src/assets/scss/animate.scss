@@ -1,0 +1,216 @@
+@charset "utf-8";
+/******************************** css3 animete *****************************************/
+/* fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+.fadeInRight {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: fadeInRight;
+}
+
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+/*滑入——从顶部*/
+@keyframes slideIn_top {
+  0% {
+    top: -100%;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+/*滑入——从底部*/
+@keyframes slideIn_bottom {
+  0% {
+    top: 100%;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+/*滑入——从左侧*/
+@keyframes slideIn_left {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+/*滑入——从右侧*/
+@keyframes slideIn_right {
+  0% {
+    left: 100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+/*滑出——从顶部*/
+@keyframes slideOut_top {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -100%;
+  }
+}
+
+/*滑出——从底部*/
+@keyframes slideOut_bottom {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+/*滑出——从左侧*/
+@keyframes slideOut_left {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+/*滑出——从右侧*/
+@keyframes slideOut_right {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/*(滑入)——从顶部滑入,从顶部滑出*/
+.topToTop-enter-active {
+  animation: slideIn_top 1s;
+}
+/*(滑出)——从顶部滑入,从顶部滑出*/
+.topToTop-leave-active {
+  animation: slideOut_top 1s;
+}
+
+/*(滑入)——从顶部滑入,从底部滑出*/
+.topToBottom-enter-active {
+  animation: slideIn_top 1s;
+}
+/*(滑出)——从顶部滑入,从底部滑出*/
+.topToBottom-leave-active {
+  animation: slideOut_bottom 1s;
+}
+
+/*(滑入)——从底部滑入,从顶部滑出*/
+.bottomToTop-enter-active {
+  animation: slideIn_bottom 1s;
+}
+/*(滑出)——从底部滑入,从顶部滑出*/
+.bottomToTop-leave-active {
+  animation: slideOut_top 1s;
+}
+
+/*(滑入)——从底部滑入,从底部滑出*/
+.bottomToBottom-enter-active {
+  animation: slideIn_bottom 1s;
+}
+/*(滑出)——从底部滑入,从底部滑出*/
+.bottomToBottom-leave-active {
+  animation: slideOut_bottom 1s;
+}
+
+/*(滑入)——从左侧滑入,从右侧滑出*/
+.leftToRight-enter-active {
+  animation: slideIn_left 1s;
+}
+/*(滑出)——从左侧滑入,从右侧滑出*/
+.leftToRight-leave-active {
+  animation: slideOut_right 1s;
+}
+
+/*(滑入)——从左侧滑入,从左侧滑出*/
+.leftToLeft-enter-active {
+  animation: slideIn_left 1s;
+}
+/*(滑出)——从左侧滑入,从左侧滑出*/
+.leftToLeft-leave-active {
+  animation: slideOut_left 1s;
+}
+
+/*(滑入)——从右侧滑入,从左侧滑出*/
+.rightToLeft-enter-active {
+  animation: slideIn_right 1s;
+}
+/*(滑出)——从右侧滑入,从左侧滑出*/
+.rightToLeft-leave-active {
+  animation: slideOut_left 1s;
+}
+
+/*(滑入)——从右侧滑入,从右侧滑出*/
+.rightToRight-enter-active {
+  animation: slideIn_right 1s;
+}
+/*(滑出)——从右侧滑入,从右侧滑出*/
+.rightToRight-leave-active {
+  animation: slideOut_right 1s;
+}
