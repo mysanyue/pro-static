@@ -3,12 +3,9 @@
     <LayoutHeader :isCollapse.sync="isCollapse" />
     <LayoutAside :class="$style.layoutAside" :isCollapse="isCollapse" />
     <section :class="$style.layoutBody">
-      <NavBar :isCollapse="isCollapse" :class="$style.layoutNavbar" />
       <section :class="$style.layoutContent">
         <transition name="fade-transform" mode="out-in">
-          <keep-alive :include="keepAlive">
-            <router-view :key="$route.fullPath" />
-          </keep-alive>
+          <router-view :key="$route.fullPath" />
         </transition>
       </section>
       <LayoutFooter />
@@ -20,7 +17,6 @@
 import Header from './header.vue'
 import Footer from './footer.vue'
 import Aside from './aside.vue'
-import NavBar from './component/navBar.vue'
 export default {
   name: 'Layout',
   data() {
@@ -28,16 +24,10 @@ export default {
       isCollapse: false,
     }
   },
-  computed: {
-    keepAlive() {
-      return this.$store.getters.getKeepAlive
-    },
-  },
   components: {
     LayoutHeader: Header,
     LayoutFooter: Footer,
     LayoutAside: Aside,
-    NavBar,
   },
 }
 </script>
@@ -64,10 +54,10 @@ export default {
   }
   .layout-body {
     overflow: hidden;
-    margin: 100px 0 0 201px;
+    margin: 60px 0 0 201px;
   }
   .layout-content {
-    padding: 15px 24px;
+    padding: 15px;
     min-height: calc(100vh - 171px);
   }
 }
@@ -77,9 +67,6 @@ export default {
   }
   .layout-body {
     margin-left: 65px;
-  }
-  .layout-navbar {
-    left: 65px;
   }
 }
 </style>

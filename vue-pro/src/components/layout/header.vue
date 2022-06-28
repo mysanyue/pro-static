@@ -18,23 +18,33 @@
         <el-input v-model="search" type="text" placeholder="搜索：组件、文档、工具" @focus="inputChange" @blur="inputChange" />
       </div>
       <div :class="$style.userinfo">
-        <top-menu />
+        <span @click="drawer = true">三月风</span>
       </div>
     </nav>
+    <el-drawer title="作者说" :visible.sync="drawer" direction="rtl" append-to-body>
+      <div :class="$style.drawerContent">
+        <h2>{{ hello }}</h2>
+        <p>{{ content }}</p>
+      </div>
+    </el-drawer>
   </header>
 </template>
 
 <script>
-import TopMenu from './component/topMenu'
+import { hello, content } from './data'
 export default {
   props: {
     isCollapse: Boolean,
   },
   data() {
+    this.hello = hello
+    this.content = content
+
     return {
       search: '',
       isSearch: false,
       isChangeMenu: this.isCollapse,
+      drawer: false,
     }
   },
   methods: {
@@ -45,9 +55,6 @@ export default {
     inputChange() {
       this.isSearch = !this.isSearch
     },
-  },
-  components: {
-    TopMenu,
   },
 }
 </script>
@@ -64,7 +71,7 @@ export default {
   align-items: center;
   background: $themeColor;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
-  z-index: 200;
+  z-index: 1000;
   .logo {
     height: 100%;
     width: 200px;
@@ -147,12 +154,43 @@ export default {
     .userinfo {
       height: 100%;
       padding: 0 30px 0 10px;
+      span {
+        display: inline-block;
+        line-height: 32px;
+        margin-left: 10px;
+        vertical-align: middle;
+        color: #fff;
+        padding: 0 15px;
+        cursor: pointer;
+        @include transition;
+        &:hover {
+          border-radius: 4px;
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+        :global(.el-dropdown) {
+          line-height: 32px;
+          color: #fff;
+        }
+        .username {
+          display: block;
+          padding: 0 15px;
+        }
+      }
     }
   }
 }
 .header-collapse {
   .logo {
     width: 64px;
+  }
+}
+.drawer-content {
+  padding: 0 20px;
+  h2 {
+    font-size: 16px;
+  }
+  p {
+    font-size: 14px;
   }
 }
 </style>

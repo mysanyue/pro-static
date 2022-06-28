@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import index from './module'
+import menu from './module/menu'
 
 Vue.use(VueRouter)
 
@@ -9,7 +9,7 @@ const routes = [
     path: '/',
     redirect: '/page',
   },
-  index,
+  menu,
   {
     path: '*',
     redirect: '/',

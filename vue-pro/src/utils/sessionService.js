@@ -10,7 +10,7 @@ class SessionService {
   }
 
   /**
-   * @description 设置sessionStorage
+   * @description 设置 sessionStorage
    * @param {String} key
    * @param {Any} value
    */
@@ -19,16 +19,23 @@ class SessionService {
   }
 
   /**
-   * @description 获取sessionStorage
+   * @description 获取 sessionStorage
    * @param {String} key
    * @returns {Any}
    */
   get(key) {
-    return this.storage.getItem(key) || false
+    let ret = {}
+    try {
+      const value = this.storage.getItem(key)
+      value && (ret = JSON.parse(value))
+    } catch (err) {
+      console.error('读取 sessionStorage 出错：', err)
+    }
+    return ret
   }
 
   /**
-   * @description 删除sessionStorage
+   * @description 删除 sessionStorage
    * @param {String} key
    */
   remove(key) {
@@ -36,7 +43,7 @@ class SessionService {
   }
 
   /**
-   * @description 清除所有sessionStorage
+   * @description 清除所有 sessionStorage
    */
   removeAll() {
     this.storage.clear()

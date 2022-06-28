@@ -10,7 +10,7 @@ class LocalService {
   }
 
   /**
-   * @description 设置localStorage
+   * @description 设置 localStorage
    * @param {String} key
    * @param {Any} value
    */
@@ -19,16 +19,23 @@ class LocalService {
   }
 
   /**
-   * @description 获取localStorage
+   * @description 获取 localStorage
    * @param {String} key
    * @returns {Any}
    */
   get(key) {
-    return this.storage.getItem(key) || false
+    let ret = {}
+    try {
+      const value = this.storage.getItem(key)
+      value && (ret = JSON.parse(value))
+    } catch (err) {
+      console.error('读取 localStorage 出错：', err)
+    }
+    return ret
   }
 
   /**
-   * @description 删除localStorage
+   * @description 删除 localStorage
    * @param {String} key
    */
   remove(key) {
@@ -36,7 +43,7 @@ class LocalService {
   }
 
   /**
-   * @description 清除所有localStorage
+   * @description 清除所有 localStorage
    */
   removeAll() {
     this.storage.clear()

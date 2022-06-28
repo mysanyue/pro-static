@@ -20,7 +20,7 @@
   </aside>
 </template>
 <script>
-import { menuList } from './component/menuData'
+import { menuList } from './data'
 
 export default {
   props: {

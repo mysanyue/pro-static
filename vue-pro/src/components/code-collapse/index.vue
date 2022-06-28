@@ -1,22 +1,25 @@
 <template>
   <div :class="$style.codeCollapse">
     <div :class="$style.exampleBox">
-      <slot name="example" />
+      <slot />
     </div>
-    <transition name="topToTop">
+    <AnimateTransition>
       <div :class="$style.codeBox" v-show="isShow">
         <slot name="code" />
       </div>
-    </transition>
+    </AnimateTransition>
     <div :class="$style.previewControl" @click="handClick">
-      <i class="el-icon-caret-bottom" />
-      <span>显示代码</span>
+      <i :class="isShow ? 'el-icon-caret-top' : 'el-icon-caret-bottom'" />
+      <span>{{ isShow ? '隐藏代码' : '显示代码' }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import AnimateTransition from './animate'
+
 export default {
+  components: { AnimateTransition },
   name: 'CodeCollapse',
   data() {
     return {
@@ -45,7 +48,6 @@ export default {
     border-top: 1px solid #eaeefb;
     overflow: hidden;
     height: 100%;
-    transition: all 0.2s ease-in;
     :global(.desc) {
       margin: 10px;
       padding: 20px;
@@ -75,6 +77,10 @@ export default {
     color: #d3dce6;
     cursor: pointer;
     position: relative;
+    &:hover {
+      color: #409eff;
+      background-color: #f9fafc;
+    }
     i {
       font-size: 16px;
       line-height: 44px;

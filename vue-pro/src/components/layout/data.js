@@ -19,3 +19,7 @@ export const menuList = [
   // { name: '友情链接', link: '/friendLink', icon: 'el-icon-link' },
   // { name: '留言管理', link: '/leaveword', icon: 'el-icon-s-promotion' },
 ]
+
+export const hello = 'Hello 大家好，我是一名前端开发工作者，这里是我工作中自定义封装的组件'
+export const content =
+  '很荣幸这里的组件能够受到大家的青睐，在后续的工作中我会继续更新更多，工作业务中自定义实现的组件，如有问题的地方欢迎大家提 issue，我会抽时间解决组件的问题。这里的组件仅供学习和参考，暂不提供 npm 安装。如需要使用请自己找到 components 里面的组件 copy 使用 ~ 谢谢。'
