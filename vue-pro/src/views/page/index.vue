@@ -1,19 +1,23 @@
 <template>
-  <div :class="$style.homeContainer">
-    <h3>示例：</h3>
+  <section class="g-container">
+    <h3>分页组件简单封装</h3>
     <CodeCollapse>
       <TxPage :params="params" :total="total" @change="fetchData" />
       <template #code>
         <MarkdownView :initialValue="markdownCode" />
       </template>
     </CodeCollapse>
-    <h3>tx-page 配置说明：</h3>
+
+    <!-- 分割线 -->
+    <el-divider />
+
+    <h3>Attributes</h3>
     <el-table :data="detialTabel">
       <el-table-column prop="name" label="事件名" />
       <el-table-column prop="type" label="类型" />
       <el-table-column prop="desc" label="说明" />
     </el-table>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -36,12 +40,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" module>
-.home-container {
-  @include container;
-  h1 {
-    font-size: 18px;
-  }
-}
-</style>

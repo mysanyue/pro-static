@@ -67,7 +67,7 @@ export default {
   width: 100%;
   display: flex;
   height: 60px;
-  @include box-shadow;
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
   align-items: center;
   background: $themeColor;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
@@ -75,7 +75,7 @@ export default {
   .logo {
     height: 100%;
     width: 200px;
-    @include transition;
+    transition: all 0.2s linear;
     text-align: center;
     img {
       width: 50px;
@@ -95,7 +95,7 @@ export default {
         display: block;
         color: #fff;
         cursor: pointer;
-        @include transition;
+        transition: all 0.2s linear;
         text-align: center;
         &:hover {
           border-radius: 4px;
@@ -117,7 +117,7 @@ export default {
         width: 40px;
         line-height: 32px;
         z-index: 1;
-        @include transition;
+        transition: all 0.2s linear;
         transform: rotate(0);
         .search-go {
           color: #fff;
@@ -132,7 +132,7 @@ export default {
         color: #fff;
         border: none;
         line-height: 1.5;
-        @include transition;
+        transition: all 0.2s linear;
       }
       :global(.el-input input::-webkit-input-placeholder) {
         color: #fff;
@@ -162,7 +162,7 @@ export default {
         color: #fff;
         padding: 0 15px;
         cursor: pointer;
-        @include transition;
+        transition: all 0.2s linear;
         &:hover {
           border-radius: 4px;
           background-color: rgba(255, 255, 255, 0.2);

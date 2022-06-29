@@ -40,6 +40,30 @@ h6 {
   margin: 15px 0;
 }
 
+h1 {
+  font-size: 26px;
+  font-weight: 400;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+h3 {
+  font-size: 22px;
+  font-weight: 400;
+}
+h4 {
+  font-size: 20px;
+  font-weight: 400;
+}
+h5 {
+  font-size: 18px;
+  font-weight: 400;
+}
+h6 {
+  font-size: 16px;
+  font-weight: 400;
+}
 code,
 pre {
   font-family: Consolas, 'Courier New', monospace;
@@ -61,22 +85,6 @@ figcaption {
 }
 
 /********************************* 公共样式 ***************************************/
-/* 清除浮动 */
-.clearfloat:before,
-.clearfloat:after {
-  display: table;
-  content: '';
-  line-height: 0px;
-}
-
-.clearfloat:after {
-  clear: both;
-}
-
-.clearfloat {
-  *zoom: 1;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
@@ -175,6 +183,22 @@ input[type='number'] {
   font-size: 14px !important;
 }
 
+.el-alert {
+  margin-top: 10px;
+  .el-alert__description {
+    font-size: 14px;
+  }
+}
+
+/********************************* 公共样式 *******************************************/
+/* 溢出显示省略号 */
+.text-ss {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap !important;
+  outline: 0 !important;
+}
+
 // 自定义表格跟多筛选样式调整
 .tx-table-pannel {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
@@ -205,11 +229,41 @@ input[type='number'] {
   }
 }
 
-/********************************* 公共样式 *******************************************/
-/* 溢出显示省略号 */
-.text-ss {
-  text-overflow: ellipsis;
+.g-container {
+  position: relative;
+  min-height: calc(100vh - 171px);
+  background: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  border-radius: 4px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+// 清除浮动
+.g-clearfix {
+  &:after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
+// transition
+.g-transition {
+  transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+}
+
+// box-shadow
+.g-shadow {
+  -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+  background-color: #fff;
+}
+
+// text-nowrap
+.g-line {
   overflow: hidden;
-  white-space: nowrap !important;
-  outline: 0 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -1,7 +1,7 @@
 export const menuList = [
+  { name: '下拉全选', link: '/select', icon: 'el-icon-reading' },
   { name: '分页', link: '/page', icon: 'el-icon-menu' },
   { name: '表格二次封装', link: '/table', icon: 'el-icon-user-solid' },
-  // { name: '表格二次封装', link: '/table', icon: 'el-icon-user-solid' },
   // {
   //   name: '文章管理',
   //   link: '/article',

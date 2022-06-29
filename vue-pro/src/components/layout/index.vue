@@ -50,7 +50,7 @@ export default {
     overflow-x: hidden;
     background: #ffff;
     border-right: solid 1px #e6e6e6;
-    @include transition;
+    transition: all 0.2s linear;
   }
   .layout-body {
     overflow: hidden;
