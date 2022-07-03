@@ -1,5 +1,5 @@
 <template>
-  <el-select v-bind="$attrs" v-model="selectVal" placeholder="请选择" multiple collapse-tags @remove-tag="e => (e.isCheck = false)">
+  <el-select v-bind="$attrs" v-model="selectVal" placeholder="请选择" multiple collapse-tags @remove-tag="(e) => (e.isCheck = false)">
     <div :class="$style.allBox">
       <el-checkbox v-if="oldOptions.length" v-model="isSelectAll" :indeterminate="isIndeterminate" @change="allSelectChange">
         全选
@@ -7,7 +7,7 @@
     </div>
     <el-option v-for="(item, index) in oldOptions" :key="index" :label="item[setting.label]" :value="item">
       <div style="display: flex; align-items: center" @click.stop>
-        <el-checkbox v-model="item.isCheck" @change="checkChange(item)"> {{ item[setting.label] }} </el-checkbox>
+        <el-checkbox v-model="item.isCheck" @change="checkChange"> {{ item[setting.label] }} </el-checkbox>
       </div>
     </el-option>
   </el-select>
@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      oldOptions: this.options.map(e => ({ ...e, isCheck: false })),
+      oldOptions: this.options.map((e) => ({ ...e, isCheck: false })),
       isIndeterminate: false,
       selectVal: this.value,
       isSelectAll: false,
@@ -34,7 +34,7 @@ export default {
      * @description 处理选项是异步的情况
      */
     options(val) {
-      this.oldOptions = val.map(e => ({ ...e, isCheck: false }))
+      this.oldOptions = val.map((e) => ({ ...e, isCheck: false }))
     },
     /**
      * @description  异步数据双向绑定
@@ -63,13 +63,30 @@ export default {
      */
     allSelectChange(val) {
       this.isIndeterminate = false
-      this.oldOptions.forEach(e => (e.isCheck = val))
-      val ? this.checkChange() : (this.selectVal = [])
+      this.oldOptions.forEach((e) => (e.isCheck = val))
+
+      if (val) {
+        this.isSelectAll = true
+        this.selectVal = this.oldOptions.map((item) => {
+          const { isCheck, ...args } = item
+          return args
+        })
+      } else {
+        this.selectVal = []
+      }
     },
     /**
      * @description 状态和绑定值处理
+     * @param 是否全选
      */
     checkChange() {
+      const ret = []
+      this.oldOptions.forEach((item) => {
+        const { isCheck, ...args } = item
+        if (isCheck) ret.push({ ...args })
+      })
+      this.selectVal = ret
+
       const selectLen = this.selectVal.length
       const optionLen = this.oldOptions.length
       if (!selectLen) {
@@ -82,21 +99,14 @@ export default {
         this.isIndeterminate = false
         this.isSelectAll = true
       }
-
-      const ret = []
-      this.oldOptions.forEach(item => {
-        const { isCheck, ...args } = item
-        if (isCheck) ret.push({ ...args })
-      })
-      this.selectVal = ret
     },
     /**
      * @description 双向绑定初始化值选中处理
      */
     changeValue(val) {
       if (val.length) {
-        val.forEach(item => {
-          const fItem = this.oldOptions.find(e => e[this.setting.value] === item[this.setting.value])
+        val.forEach((item) => {
+          const fItem = this.oldOptions.find((e) => e[this.setting.value] === item[this.setting.value])
           fItem && (fItem.isCheck = true)
         })
       }
