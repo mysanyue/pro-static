@@ -1,18 +1,18 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <section class="home"></section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'HomeView',
-  components: {
-    HelloWorld,
+  name: 'Home',
+  // setup 是组合式 API 的入口函数
+  setup() {
+    const count = ref(0)
+    function updateCount() {
+      count.value++
+    }
   },
-});
+})
 </script>
