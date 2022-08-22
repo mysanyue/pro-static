@@ -1,0 +1,49 @@
+{
+  "name": "shop-admin",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tsc": "vue-tsc --noEmit",
+    "lint": "eslint ./src/**/*.ts ./src/**/*.vue --cache --fix",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "vue": "^3.2.37",
+    "@form-create/element-ui": "^2.5.7",
+    "axios": "^0.21.1",
+    "element-plus": "^1.0.2-beta.48",
+    "nprogress": "^0.2.0",
+    "path-to-regexp": "^6.2.0",
+    "utility-types": "^3.10.0",
+    "vue-router": "^4.0.8",
+    "vuex": "^4.0.1",
+    "vxe-table": "^4.0.22",
+    "xe-utils": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.2",
+    "@types/nprogress": "^0.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^4.27.0",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "@vue/compiler-sfc": "^3.1.1",
+    "eslint": "^8.22.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.7",
+    "vue-tsc": "^0.39.5",
+    "eslint-plugin-node": "^11.1.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "sass": "^1.34.1"
+  }
+}
