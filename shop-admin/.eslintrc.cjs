@@ -16,5 +16,7 @@ module.exports = {
     'vue/max-attributes-per-line': [1, { singleline: 10, multiline: { max: 1 } }],
     'vue/singleline-html-element-content-newline': 0,
     'vue/html-self-closing': 0,
+    'vue/multi-word-component-names': 0,
+    'space-before-function-paren': 0,
   },
 }
