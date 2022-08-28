@@ -12,13 +12,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "vue": "^3.2.37",
     "@form-create/element-ui": "^2.5.7",
     "axios": "^0.21.1",
-    "element-plus": "^1.0.2-beta.48",
+    "element-plus": "^2.2.15",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.2.0",
     "utility-types": "^3.10.0",
+    "vue": "^3.2.37",
     "vue-router": "^4.0.8",
     "vuex": "^4.0.1",
     "vxe-table": "^4.0.22",
@@ -36,14 +36,14 @@
     "eslint-config-standard-with-typescript": "^22.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.3.0",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.7",
-    "vue-tsc": "^0.39.5",
-    "eslint-plugin-node": "^11.1.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "sass": "^1.34.1"
+    "sass": "^1.34.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.7",
+    "vue-tsc": "^0.39.5"
   }
 }

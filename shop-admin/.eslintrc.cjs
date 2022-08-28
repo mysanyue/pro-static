@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
   },
   extends: ['plugin:vue/vue3-strongly-recommended', 'standard'],
-  overrides: [],
+  overrides: [
+    {
+      files: ['src/api/**/*.ts'],
+      rules: { camelcase: 'off' },
+    },
+  ],
   parserOptions: {
     ecmaVersion: 12,
     parser: '@typescript-eslint/parser',
@@ -18,5 +23,6 @@ module.exports = {
     'vue/html-self-closing': 0,
     'vue/multi-word-component-names': 0,
     'space-before-function-paren': 0,
+    'no-dupe-keys': 0,
   },
 }
