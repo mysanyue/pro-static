@@ -24,5 +24,6 @@ module.exports = {
     'vue/multi-word-component-names': 0,
     'space-before-function-paren': 0,
     'no-dupe-keys': 0,
+    'vue/html-closing-bracket-newline': 0,
   },
 }

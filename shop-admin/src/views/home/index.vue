@@ -10,7 +10,7 @@
   </el-row>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import User from '@/api/common'
 
 console.log(User)
