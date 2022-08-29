@@ -4,6 +4,8 @@ import productRoutes from './modules/product'
 import mediaRoutes from './modules/media'
 import orderRoutes from './modules/order'
 import permissionRoutes from './modules/permission'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -13,6 +15,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'home',
+        meta: { name: '首页' },
         component: () => import('@/views/home/index.vue'),
       },
       // 商品模块
@@ -35,6 +38,14 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+})
+
+// 路由守卫 - 进度条配置
+router.beforeEach(() => {
+  nprogress.start()
+})
+router.afterEach(() => {
+  nprogress.done()
 })
 
 export default router

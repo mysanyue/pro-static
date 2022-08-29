@@ -1,0 +1,15 @@
+<template>
+  <el-breadcrumb separator="/">
+    <el-breadcrumb-item v-for="item in routes" :key="item.path">{{ item.meta.name }}</el-breadcrumb-item>
+  </el-breadcrumb>
+</template>
+
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const routes = computed(() => {
+  return router.currentRoute.value.matched.filter(item => item.meta.name)
+})
+</script>

@@ -1,21 +1,26 @@
-import { InjectionKey } from 'vue'
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
+import { InjectionKey } from 'vue'
 
-export interface State {
-  count: number
-  foo: string
+const state = {
+  isCollapse: false,
 }
 
+export type State = typeof state
+
+// 定义 injection key
 export const key: InjectionKey<Store<State>> = Symbol('store')
 
+// 创建一个新的 store 实例
 export const store = createStore<State>({
-  state: {
-    count: 0,
-    foo: 'hell',
+  state,
+  mutations: {
+    setIsCollapse(state, payload) {
+      state.isCollapse = payload
+    },
   },
-  modules: {},
 })
 
+// 定义自己的 useStore 组合函数
 export function useStore() {
   return baseUseStore(key)
 }
