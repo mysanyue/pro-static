@@ -1,13 +1,9 @@
 import ElementPlus from 'element-plus'
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import 'element-plus/dist/index.css'
+import 'element-plus/lib/theme-chalk/index.css'
 import { App } from 'vue'
 
 export default {
-  install(app: App) {
-    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-      app.component(key, component)
-    }
-    app.use(ElementPlus)
-  },
+  install (app: App) {
+    app.use(ElementPlus, { size: 'small', zIndex: 2000 })
+  }
 }

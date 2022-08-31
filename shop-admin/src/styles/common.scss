@@ -1,91 +1,12 @@
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  line-height: 24px;
-  font-weight: 500;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-  &:hover {
-    color: #535bf2;
-  }
-}
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
 }
 
-// 滚动条
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-::-webkit-scrollbar-corner {
-  background: 0 0;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-  border: 0 none #fff;
-  border-radius: 6px;
-}
-::-webkit-scrollbar-thumb:vertical {
-  background: linear-gradient(
-    90deg,
-    transparent 0,
-    transparent 1px,
-    transparent 2px,
-    rgba(210, 214, 244, 0.7) 3px,
-    rgba(210, 214, 244, 0.7) 9px,
-    transparent 10px,
-    transparent 12px
-  ) !important;
-  border: 0 none #fff;
-  border-radius: 50px;
-  transition: all 0.2s ease;
-  &:hover {
-    background: linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 1px,
-      transparent 2px,
-      #d2d6e0 3px,
-      #d2d6e0 9px,
-      transparent 10px,
-      transparent 12px
-    ) !important;
-  }
-}
-/* // 水平方向 */
-::-webkit-scrollbar-thumb:horizontal {
-  background: linear-gradient(
-    180deg,
-    transparent 0,
-    transparent 2px,
-    rgba(210, 214, 244, 0.7) 3px,
-    rgba(210, 214, 244, 0.7) 9px,
-    transparent 10px,
-    transparent 12px
-  ) !important;
-  border: 0 none #fff;
-  border-radius: 50px;
-  transition: all 0.2s ease;
-  &:hover {
-    background: linear-gradient(
-      180deg,
-      transparent 0,
-      transparent 2px,
-      #d2d6e0 3px,
-      #d2d6e0 9px,
-      transparent 10px,
-      transparent 12px
-    ) !important;
-  }
-}
+// .el-space {
+//   display: flex;
+// }
+
+// ::-webkit-scrollbar {
+//   display: none;
+// }

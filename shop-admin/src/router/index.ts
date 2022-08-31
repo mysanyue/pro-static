@@ -1,51 +1,62 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import AppLayout from '@/layout/index.vue'
-import productRoutes from './modules/product'
-import mediaRoutes from './modules/media'
-import orderRoutes from './modules/order'
-import permissionRoutes from './modules/permission'
-import nprogress from 'nprogress'
+import AppLayout from '@/layout/AppLayout.vue'
+import productRouter from './modules/product'
+import settingRouter from './modules/setting'
+import systemRouter from './modules/system'
+import nprogress from 'nprogress' // @types/nprogress
 import 'nprogress/nprogress.css'
+import { store } from '@/store'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: AppLayout,
-    children: [
-      {
-        path: '',
-        name: 'home',
-        meta: { name: '首页' },
-        component: () => import('@/views/home/index.vue'),
-      },
-      // 商品模块
-      ...productRoutes,
-      // 媒体模块
-      ...mediaRoutes,
-      // 订单模块
-      ...orderRoutes,
-      // 权限模块
-      ...permissionRoutes,
-    ],
+    redirect: '/admin/home'
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login/index.vue'),
+    path: '/admin',
+    component: AppLayout,
+    meta: {
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: 'home', // 默认子路由
+        name: 'home',
+        component: () => import('../views/home/index.vue'),
+        meta: { title: '首页' }
+      },
+      productRouter,
+      settingRouter,
+      systemRouter
+    ]
   },
+  {
+    path: '/admin/login',
+    name: 'login',
+    component: () => import('../views/login/index.vue')
+  }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
+  history: createWebHashHistory(), // 路由模式
+  routes // 路由规则
 })
 
-// 路由守卫 - 进度条配置
-router.beforeEach(() => {
-  nprogress.start()
+router.beforeEach((to, from) => {
+  nprogress.start() // 开始加载进度条
+  if (to.meta.requiresAuth && !store.state.user) {
+    // 此路由需要授权，请检查是否已登录
+    // 如果没有，则重定向到登录页面
+    return {
+      path: '/admin/login',
+      // 保存我们所在的位置，以便以后再来
+      query: { redirect: to.fullPath }
+    }
+  }
 })
+
 router.afterEach(() => {
-  nprogress.done()
+  nprogress.done() // 加载进度条
 })
 
 export default router

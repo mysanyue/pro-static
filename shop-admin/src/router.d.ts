@@ -3,8 +3,7 @@ import 'vue-router'
 declare module 'vue-router' {
   // eslint-disable-next-line no-unused-vars
   interface RouteMeta {
-    name: string
-    isAdmin?: boolean
+    title?: string
     requiresAuth?: boolean
   }
 }
