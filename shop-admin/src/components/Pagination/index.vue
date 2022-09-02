@@ -7,30 +7,31 @@
     :total="listCount"
     :page-sizes="[10, 20, 30, 40, 50, 100]"
     @current-change="handleCurrentChange"
-    @size-change="handleSizeChange"
-  />
+    @size-change="handleSizeChange" />
 </template>
 
 <script lang="ts" setup>
 import type { PropType } from '@vue/runtime-core'
 
 const props = defineProps({
-  page: { // 页码
+  page: {
+    // 页码
     type: Number,
-    default: 1
+    default: 1,
   },
-  limit: { // 每页大小
+  limit: {
+    // 每页大小
     type: Number,
-    default: 10
+    default: 10,
   },
   listCount: {
     type: Number,
-    default: 0
+    default: 0,
   },
   loadList: {
     type: Function as PropType<(...args: any[]) => void>,
-    default: () => {}
-  }
+    default: () => {},
+  },
 })
 
 interface EmitsType {

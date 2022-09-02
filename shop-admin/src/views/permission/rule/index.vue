@@ -1,58 +1,26 @@
 <template>
   <page-container>
     <app-card>
-      <template #header>
-        数据筛选
-      </template>
-      <el-form
-        :inline="true"
-        ref="form"
-        :model="listParams"
-        :disabled="listLoading"
-        @submit.prevent="handleQuery"
-      >
+      <template #header> 数据筛选 </template>
+      <el-form :inline="true" ref="form" :model="listParams" :disabled="listLoading" @submit.prevent="handleQuery">
         <el-form-item label="状态">
-          <el-select
-            v-model="listParams.is_show"
-            placeholder="请选择"
-            clearable
-          >
-            <el-option
-              label="全部"
-              value=""
-            />
-            <el-option
-              label="显示"
-              :value="1"
-            />
-            <el-option
-              label="不显示"
-              :value="0"
-            />
+          <el-select v-model="listParams.is_show" placeholder="请选择" clearable>
+            <el-option label="全部" value="" />
+            <el-option label="显示" :value="1" />
+            <el-option label="不显示" :value="0" />
           </el-select>
         </el-form-item>
         <el-form-item label="规则名称">
-          <el-input
-            v-model="listParams.keyword"
-            clearable
-            placeholder="请输入规则名称"
-          />
+          <el-input v-model="listParams.keyword" clearable placeholder="请输入规则名称" />
         </el-form-item>
         <el-form-item>
-          <el-button native-type="submit">
-            查询
-          </el-button>
+          <el-button native-type="submit"> 查询 </el-button>
         </el-form-item>
       </el-form>
     </app-card>
     <app-card>
       <template #header>
-        <el-button
-          type="primary"
-          @click="formVisible = true"
-        >
-          添加规则
-        </el-button>
+        <el-button type="primary" @click="formVisible = true"> 添加规则 </el-button>
       </template>
       <!--
         启用树菜单：
@@ -60,36 +28,16 @@
           2. 给 vxe-table 组件设置 row-id
           3. 给 vxe-column 设置 tree-node
        -->
-      <vxe-table
-        :data="list"
-        row-id="id"
-        :tree-config="{ children: 'children' }"
-        v-loading="listLoading"
-      >
-        <vxe-column
-          field="id"
-          title="ID"
-        />
-        <vxe-column
-          field="menu_name"
-          title="名称"
-          tree-node
-        />
-        <vxe-column
-          title="接口路径"
-        >
+      <vxe-table :data="list" row-id="id" :tree-config="{ children: 'children' }" v-loading="listLoading">
+        <vxe-column field="id" title="ID" />
+        <vxe-column field="menu_name" title="名称" tree-node />
+        <vxe-column title="接口路径">
           <template #default="{ row }">
             {{ row.api_url ? `[${row.methods}] ${row.api_url}` : '' }}
           </template>
         </vxe-column>
-        <vxe-column
-          field="unique_auth"
-          title="前端权限"
-        />
-        <vxe-column
-          field="menu_path"
-          title="页面路由"
-        />
+        <vxe-column field="unique_auth" title="前端权限" />
+        <vxe-column field="menu_path" title="页面路由" />
         <vxe-column title="状态">
           <template #default="{ row }">
             <el-switch
@@ -99,35 +47,16 @@
               :active-value="1"
               :inactive-value="0"
               :loading="row.statusLoading"
-              @change="handleStatusChange(row)"
-            />
+              @change="handleStatusChange(row)" />
           </template>
         </vxe-column>
-        <vxe-column
-          title="操作"
-          min-width="100"
-        >
+        <vxe-column title="操作" min-width="100">
           <template #default="scope">
-            <el-button
-              type="text"
-              @click="handleCreate(scope.row.id)"
-            >
-              添加规则
-            </el-button>
-            <el-button
-              type="text"
-              @click="handleUpdate(scope.row.id)"
-            >
-              编辑
-            </el-button>
-            <el-popconfirm
-              title="确认删除吗？"
-              @confirm="handleDelete(scope.row.id)"
-            >
+            <el-button type="text" @click="handleCreate(scope.row.id)"> 添加规则 </el-button>
+            <el-button type="text" @click="handleUpdate(scope.row.id)"> 编辑 </el-button>
+            <el-popconfirm title="确认删除吗？" @confirm="handleDelete(scope.row.id)">
               <template #reference>
-                <el-button type="text">
-                  删除
-                </el-button>
+                <el-button type="text"> 删除 </el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -135,12 +64,7 @@
       </vxe-table>
     </app-card>
   </page-container>
-  <rule-form
-    v-model="formVisible"
-    v-model:rule-id="ruleId"
-    v-model:pid="pid"
-    @success="handleFormSuccess"
-  />
+  <rule-form v-model="formVisible" v-model:rule-id="ruleId" v-model:pid="pid" @success="handleFormSuccess" />
 </template>
 
 <script lang="ts" setup>
@@ -152,9 +76,10 @@ import RuleForm from './RuleForm.vue'
 
 const list = ref<Menu[]>([]) // 列表数据
 const listLoading = ref(true)
-const listParams = reactive({ // 列表数据查询参数
+const listParams = reactive({
+  // 列表数据查询参数
   keyword: '',
-  is_show: '' as 0 | 1 | ''
+  is_show: '' as 0 | 1 | '',
 })
 const formVisible = ref(false)
 const ruleId = ref<number | null>(null)
@@ -207,7 +132,6 @@ const handleCreate = (id: number) => {
   pid.value = id
   formVisible.value = true
 }
-
 </script>
 
 <style lang="scss" scoped></style>

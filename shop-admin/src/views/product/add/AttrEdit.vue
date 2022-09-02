@@ -1,44 +1,28 @@
 <template>
-  <el-form
-    label-position="left"
-    label-width="50px"
-  >
+  <el-form label-position="left" label-width="50px">
     <app-draggable
       v-model="props.modelValue"
       :options="{
-        handle: '.el-icon-menu'
-      }"
-    >
-      <el-form-item
-        v-for="(item, index) in props.modelValue"
-        :key="item.value"
-        :label="item.value"
-      >
+        handle: '.el-icon-menu',
+      }">
+      <el-form-item v-for="(item, index) in props.modelValue" :key="item.value" :label="item.value">
         <template #label>
           <i class="el-icon-menu" />
         </template>
         <div>
-          <el-tag
-            closable
-            effect="dark"
-            @close="props.modelValue.splice(index, 1)"
-          >
+          <el-tag closable effect="dark" @close="props.modelValue.splice(index, 1)">
             {{ item.value }}
           </el-tag>
         </div>
         <div>
-          <app-draggable
-            style="display: inline-block;"
-            v-model="item.detail"
-          >
+          <app-draggable style="display: inline-block" v-model="item.detail">
             <el-tag
               class="detail-item"
               v-for="(detail, detailIndex) in item.detail"
               :key="detail"
               closable
               effect="plain"
-              @close="item.detail.splice(detailIndex, 1)"
-            >
+              @close="item.detail.splice(detailIndex, 1)">
               {{ detail }}
             </el-tag>
           </app-draggable>
@@ -49,62 +33,26 @@
             ref="saveTagInput"
             size="small"
             @keyup.enter.prevent="handleInputConfirm(item)"
-            @blur.prevent="handleInputConfirm(item)"
-          />
-          <el-button
-            v-else
-            class="button-new-tag"
-            size="small"
-            @click="showInput(item)"
-          >
-            + New Tag
-          </el-button>
+            @blur.prevent="handleInputConfirm(item)" />
+          <el-button v-else class="button-new-tag" size="small" @click="showInput(item)"> + New Tag </el-button>
         </div>
       </el-form-item>
     </app-draggable>
     <el-form-item v-if="!isAdd">
-      <el-button
-        type="primary"
-        @click="isAdd = true"
-      >
-        添加新规格
-      </el-button>
-      <el-button
-        type="success"
-        @click="handleGenerate"
-      >
-        立即生成
-      </el-button>
+      <el-button type="primary" @click="isAdd = true"> 添加新规格 </el-button>
+      <el-button type="success" @click="handleGenerate"> 立即生成 </el-button>
     </el-form-item>
     <el-form-item v-else>
-      <el-form
-        :model="attrForm"
-        :rules="formRules"
-        ref="form"
-        inline
-      >
-        <el-form-item
-          label="规格名称"
-          prop="value"
-        >
+      <el-form :model="attrForm" :rules="formRules" ref="form" inline>
+        <el-form-item label="规格名称" prop="value">
           <el-input v-model="attrForm.value" />
         </el-form-item>
-        <el-form-item
-          label="规格值"
-          prop="detail"
-        >
+        <el-form-item label="规格值" prop="detail">
           <el-input v-model="attrForm.detail[0]" />
         </el-form-item>
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="handleAddAttr"
-          >
-            确认
-          </el-button>
-          <el-button @click="isAdd = false">
-            取消
-          </el-button>
+          <el-button type="primary" @click="handleAddAttr"> 确认 </el-button>
+          <el-button @click="isAdd = false"> 取消 </el-button>
         </el-form-item>
       </el-form>
     </el-form-item>
@@ -123,33 +71,29 @@ const emit = defineEmits(['confirm', 'update:model-value'])
 const props = defineProps({
   modelValue: {
     type: Array as PropType<AttrRuleValue[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 })
 
 const saveTagInput = ref<HTMLInputElement | null>(null)
 
 const attrForm = ref({
   value: '',
-  detail: ['']
+  detail: [''],
 })
 
 const isAdd = ref(false)
 
 const formRules = {
-  value: [
-    { required: true, message: '请输入规则名称', trigger: 'change' }
-  ],
-  detail: [
-    { required: true, message: '请输入规则值', trigger: 'change' }
-  ]
+  value: [{ required: true, message: '请输入规则名称', trigger: 'change' }],
+  detail: [{ required: true, message: '请输入规则值', trigger: 'change' }],
 }
 
 const form = ref<IElForm | null>(null)
 
 const handleGenerate = async () => {
   const data = await generateAttr(0, 1, {
-    attrs: props.modelValue
+    attrs: props.modelValue,
   })
   emit('confirm', data.info)
 }
@@ -175,7 +119,7 @@ const handleAddAttr = async () => {
     value: attrForm.value.value,
     detail: attrForm.value.detail,
     inputVisible: false,
-    inputValue: ''
+    inputValue: '',
   })
   isAdd.value = false
   form.value?.resetFields()
@@ -183,7 +127,6 @@ const handleAddAttr = async () => {
 </script>
 
 <style lang="scss" scoped>
-
 .el-icon-menu {
   font-size: 20px;
   cursor: move;

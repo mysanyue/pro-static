@@ -1,22 +1,9 @@
 <template>
   <el-space>
-    <el-select
-      v-model="value"
-      placeholder="请选择"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.id"
-        :label="item.rule_name"
-        :value="item.id"
-      />
+    <el-select v-model="value" placeholder="请选择">
+      <el-option v-for="item in options" :key="item.id" :label="item.rule_name" :value="item.id" />
     </el-select>
-    <el-button
-      type="primary"
-      @click="handleConfirm"
-    >
-      确定
-    </el-button>
+    <el-button type="primary" @click="handleConfirm"> 确定 </el-button>
     <el-button>添加规格模板</el-button>
   </el-space>
 </template>
@@ -31,9 +18,7 @@ interface EmitsType {
 }
 
 const emit = defineEmits<EmitsType>()
-
 const value = ref<number | null>(null)
-
 const options = ref<ProductAttrTpl[]>([])
 
 onMounted(() => {
