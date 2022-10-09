@@ -1,5 +1,5 @@
 {
-  "pages": ["pages/contact/contact", "pages/home/home", "pages/message/message"],
+  "pages": ["pages/home/home", "pages/contact/contact", "pages/message/message", "pages/shoplist/shoplist"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2b4b6b",
