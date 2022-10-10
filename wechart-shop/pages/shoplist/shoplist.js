@@ -15,15 +15,33 @@ Page({
     wx.setNavigationBarTitle({ title: this.data.query.title })
   },
   onReachBottom() {
-    if (this.data.isLoading) return
-    this.setData({ page: this.data.page + 1 })
+    const { page, pageSize, isLoading, total } = this.data
+
+    // 数据加载完成
+    if (page * pageSize >= total) {
+      wx.showToast({
+        title: '没有更多数据啦 ～',
+        icon: 'none',
+      })
+      return
+    }
+
+    if (isLoading) return 
+    this.setData({ page: page + 1 })
     this.getShopList()
+  },
+  onPullDownRefresh() {
+    console.log('refresh')
+    this.setData({ page: 1, pageSize: 10, shopList: [], total: 0 })
+    this.getShopList(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
   /**
    * @description 获取商户列表
    */
-  getShopList() {
+  getShopList(callback) {
     this.setData({ isLoading: true })
     wx.showLoading({ title: '数据加载中...' })
     wx.request({
@@ -39,12 +57,8 @@ Page({
       complete: () => {
         wx.hideLoading()
         this.setData({ isLoading: false })
+        callback && callback()
       },
     })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
 })
